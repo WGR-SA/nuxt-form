@@ -1,6 +1,6 @@
 {
-  "name": "nuxt-form",
-  "version": "0.0.1",
+  "name": "@wgr-sa/nuxt-form",
+  "version": "0.0.0",
   "license": "MIT",
   "type": "module",
   "exports": {
