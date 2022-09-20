@@ -1,9 +1,9 @@
 import { defineNuxtConfig } from 'nuxt'
-import MyModule from '..'
+import NuxtForm from '..'
 
 export default defineNuxtConfig({
   modules: [
-    MyModule
+    NuxtForm
   ],
   myModule: {
     addPlugin: true
