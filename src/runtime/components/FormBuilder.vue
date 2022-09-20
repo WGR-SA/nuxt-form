@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, reactive } from 'vue'
+import { reactive } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { useReCaptcha } from 'vue-recaptcha-v3'
 

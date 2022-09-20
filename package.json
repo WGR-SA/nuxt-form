@@ -25,11 +25,13 @@
     "@nuxt/module-builder": "latest",
     "@nuxt/schema": "^3.0.0-rc.9",
     "@nuxtjs/eslint-config-typescript": "latest",
-    "@vuelidate/core": "^2.0.0-alpha.44",
-    "@vuelidate/validators": "^2.0.0-alpha.31",
     "eslint": "latest",
     "nuxt": "^3.0.0-rc.9",
-    "vue": "^3.2.39",
+    "vue": "^3.2.39"
+  },
+  "dependencies": {
+    "@vuelidate/core": "^2.0.0-alpha.44",
+    "@vuelidate/validators": "^2.0.0-alpha.31",
     "vue-recaptcha-v3": "^2.0.1"
   }
 }
