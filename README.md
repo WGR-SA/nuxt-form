@@ -17,7 +17,8 @@ export default defineNuxtConfig({
 ### Import validators from Vuelidate see [Vuelidate docs](https://vuelidate-next.netlify.app/validators.html) for details
 `import { required, email, ... } from '@vuelidate/validators'`
 
-### Set FormData `[name, value, validators {}, label, type (default 'input')]`
+### Set FormData 
+`[name, value, validators {}, label, type (default 'input')]`
 
 #### Exemple
 ```
