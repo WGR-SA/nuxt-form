@@ -32,7 +32,7 @@ interface FormInputs { [key: string]: any }
 
 const getFormOptions = (data: any, outputKey: number) => {
   const options = {}
-  data.forEach((item) => {
+  data.forEach((item: any) => {
     options[item[0]] = item[outputKey] ?? null
   })
   return options
