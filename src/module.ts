@@ -1,11 +1,20 @@
 import { defineNuxtModule, createResolver, addComponent } from '@nuxt/kit'
 
-export default defineNuxtModule({
+export interface ModuleOptions {
+  recaptchaSiteKey: string | null
+}
+
+export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'nuxt-form',
     configKey: 'nuxtForm'
   },
-  setup () {
+  defaults: {
+    recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY ?? null
+  },
+  setup (inlineOptions, nuxt) {
+    nuxt.options.publicRuntimeConfig.nuxtForm = inlineOptions
+
     const resolver = createResolver(import.meta.url)
 
     addComponent({

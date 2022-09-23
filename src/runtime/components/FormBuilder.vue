@@ -1,7 +1,15 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
-import { useReCaptcha } from 'vue-recaptcha-v3'
+import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3'
+import { useNuxtApp, useRuntimeConfig } from '#app'
+
+const config = useRuntimeConfig()
+const app = useNuxtApp()
+
+if (config.nuxtForm.recaptchaSiteKey) {
+  app.vueApp.use(VueReCaptcha, { siteKey: config.nuxtForm.recaptchaSiteKey })
+}
 
 const props = defineProps({
   method: { type: String, default: 'POST' },

@@ -14,6 +14,6 @@ const recaptcha = true
 
 <template>
   <section>
-    <FormBuilder :form-data="formData" :fetch-url="fetchUrl" :recaptcha="false" />
+    <FormBuilder :form-data="formData" :fetch-url="fetchUrl" :recaptcha="true" />
   </section>
 </template>

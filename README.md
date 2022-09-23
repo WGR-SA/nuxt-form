@@ -1,7 +1,7 @@
 # Form Builder Nuxt 3 Module
 
 ## Install
-- Run `npm i @wgr-sa/nuxt-form` to generate type stubs.
+- Run `npm i @wgr-sa/nuxt-form`
 
 ### Add Module in NuxtConfig
 ```
@@ -11,6 +11,9 @@ export default defineNuxtConfig({
   ],
 })	
 ```
+
+### Add Recaptcha siteKey in .env if using recaptcha
+`RECAPTCHA_SITE_KEY=KEY`
 
 ## Setup
 

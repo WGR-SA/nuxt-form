@@ -1,4 +1,6 @@
 {
   "extends": "./playground/.nuxt/tsconfig.json",
-  "moduleResolution": "node"
+  "compilerOptions": {
+    "moduleResolution": "node"
+  }
 }
