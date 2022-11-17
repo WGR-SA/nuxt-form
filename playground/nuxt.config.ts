@@ -1,11 +1,16 @@
-import { defineNuxtConfig } from 'nuxt'
+import { defineNuxtConfig } from 'nuxt/config'
 import NuxtForm from '..'
 
 export default defineNuxtConfig({
   modules: [
     NuxtForm
   ],
-  myModule: {
-    addPlugin: true
+  runtimeConfig: {
+    public: {
+      recaptchaSitekey: ''
+    }
+  },
+  form: {
+    recaptcha: true
   }
 })

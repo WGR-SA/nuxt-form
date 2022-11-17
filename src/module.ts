@@ -1,25 +1,46 @@
-import { defineNuxtModule, createResolver, addComponent } from '@nuxt/kit'
+import { fileURLToPath } from 'url'
+import { defineNuxtModule, createResolver, addPlugin, addImports, addComponent } from '@nuxt/kit'
 
-export interface ModuleOptions {
-  recaptchaSiteKey: string | null
-}
+import type { ModuleOptions } from './types'
+export * from './types'
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'nuxt-form',
-    configKey: 'nuxtForm'
+    name: '@wgr-sa/nuxt-form',
+    configKey: 'form'
   },
   defaults: {
-    recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY ?? null
+    recaptcha: true
   },
-  setup (inlineOptions, nuxt) {
-    nuxt.options.publicRuntimeConfig.nuxtForm = inlineOptions
+  setup (options, nuxt) {
+    const { resolve } = createResolver(import.meta.url)
+    const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
 
-    const resolver = createResolver(import.meta.url)
+    nuxt.options.build.transpile.push(runtimeDir)
+    nuxt.options.runtimeConfig.public.form = options
+
+    if (options.recaptcha) {
+      addPlugin(resolve(runtimeDir, 'recaptcha'))
+    }
 
     addComponent({
       name: 'FormBuilder',
-      filePath: resolver.resolve('./runtime/components/FormBuilder')
+      filePath: resolve(runtimeDir, 'components', 'FormBuilder.vue')
+    })
+
+    addComponent({
+      name: 'FormInput',
+      filePath: resolve(runtimeDir, 'components', 'FormInput.vue')
+    })
+
+    addImports({
+      name: 'useFormBuilder',
+      from: resolve(runtimeDir, 'composable', 'builder.ts')
+    })
+
+    addImports({
+      name: 'useFormData',
+      from: resolve(runtimeDir, 'composable', 'data.ts')
     })
   }
 })
