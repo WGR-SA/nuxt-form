@@ -1,43 +1,79 @@
-import { ref } from 'vue'
 import { useReCaptcha } from 'vue-recaptcha-v3'
-import { useRuntimeConfig } from '#app'
+import { useRuntimeConfig, useState } from '#app'
 import { useFormData } from '../composables/data'
 
-import type { FormStatus } from '../../types'
+import type { FormStatus, FormErrorType, FormMessages } from '../../types'
+import { FormMessageDefaults } from '../../types'
 
 export const useFormBuilder = () => {
-  const { state, validateFields } = useFormData()
-  const labels = ref({ submit: 'Send', alert: { submitting: 'Sending', submitted: 'Success', error: 'Error' } })
-  const status = ref<FormStatus>('idle')
+  const { state, flushState, addCustomData, validateFields } = useFormData()
+
+  const method = useState<string>('form_methods', () => 'POST')
+  const action = useState<URL>('form_action')
+  const headers = useState<Object>('form_headers', () => ({ 'Content-Type': 'application/json', 'Accept': 'application/json' }))
+  const messages = useState<FormMessages>('form_messages', () => FormMessageDefaults)
+  const status = useState<FormStatus>('form_status', () => 'idle')   
+  const errorType = useState<FormErrorType>('form_error_type', () => false)
   const recaptcha = useRuntimeConfig().public.form.recaptcha ? useReCaptcha() : null
 
-  const setLabel = (key: string, value: string) => {
-    labels.value[key] = value
+  const mutateStatus = (newStatus: FormStatus, newErrorType?: FormErrorType) => {
+    status.value = newStatus
+    errorType.value = newErrorType ?? false
   }
 
-  const mutateStatus = (newStatus: FormStatus) => {
-    status.value = newStatus
+  const setMessage = (key: string, value: string) => {
+    messages.value[key] = value
+  }
+
+  const initForm = (fetchUrl: URL, newMethod: string | undefined, NewHeaders: Object | undefined) => {
+    action.value = fetchUrl
+    if (newMethod) method.value = newMethod
+    if (NewHeaders) headers.value = NewHeaders
+
+    mutateStatus('idle')
+    flushState()
+  }
+
+  const recaptchaCheck = async () => {
+    if (recaptcha) {
+      await recaptcha.recaptchaLoaded()
+      const recaptchaToken: string | null = await recaptcha.executeRecaptcha('contact')
+      if (!recaptchaToken) {
+        mutateStatus('error', 'recaptcha')
+        return
+      }
+      addCustomData('g-recaptcha-response', recaptchaToken)
+    }
+  }
+
+  const validationCheck = async () => {
+    const isValid = await validateFields()
+    if (!isValid) mutateStatus('error', 'validation')
+  }
+
+  const submit = () => {
+    
+    recaptchaCheck()
+    validationCheck()
+
+    if (status.value === 'error') return
+    send()
   }
 
   const send = async () => {
     mutateStatus('submitting')
-
-    if (recaptcha) {
-      await recaptcha.recaptchaLoaded()
-      const recaptchaToken: String | null = await recaptcha.executeRecaptcha('contact')
-    }
-
-    const validation = await validateFields()
-    if (!validation) {
-      mutateStatus('error')
-      return false
-    }
+    //
   }
 
   return {
+    method,
+    action,
+    headers,
     status,
-    labels,
-    setLabel,
-    send
+    messages,
+    mutateStatus,
+    initForm,
+    setMessage,
+    submit
   }
 }

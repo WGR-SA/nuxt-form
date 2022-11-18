@@ -20,7 +20,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.runtimeConfig.public.form = options
 
     if (options.recaptcha) {
-      addPlugin(resolve(runtimeDir, 'recaptcha'))
+      addPlugin(resolve(runtimeDir, 'plugins', 'recaptcha'))
     }
 
     addComponent({
@@ -31,6 +31,16 @@ export default defineNuxtModule<ModuleOptions>({
     addComponent({
       name: 'FormInput',
       filePath: resolve(runtimeDir, 'components', 'FormInput.vue')
+    })
+
+    addComponent({
+      name: 'FormInputContainer',
+      filePath: resolve(runtimeDir, 'components', 'FormInput.vue')
+    })
+
+    addComponent({
+      name: 'FormAlert',
+      filePath: resolve(runtimeDir, 'components', 'FormAlert.vue')
     })
 
     addImports({

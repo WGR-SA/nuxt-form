@@ -1,23 +1,28 @@
 <script lang="ts" setup>
+import { computed } from 'vue'
 import { useFormBuilder } from '../composables/builder'
 
-export interface FormBuilderProps {
-  method: 'POST' | 'GET',
+interface FormBuilderProps {
   fetchUrl: URL,
+  method?: 'POST' | 'GET',
   headers?: Object
 }
 
 const props = defineProps<FormBuilderProps>()
-const { status, labels, send } = useFormBuilder()
+const { status, messages, initForm, submit } = useFormBuilder()
+const inputShown = computed(() => status.value === 'idle' || status.value === 'error')
+
+initForm(props.fetchUrl, props.method, props.headers)
 </script>
 
 <template>
-  <form action="">
-    <fieldset>
+  <form class="form">
+    <FormAlert />
+    <fieldset v-if="inputShown">
       <slot />
+      <button type="submit" @click.prevent="submit">
+        {{ messages.submit }}
+      </button>
     </fieldset>
-    <button type="submit" @click.prevent="send">
-      {{ labels.submit }}
-    </button>
   </form>
 </template>
