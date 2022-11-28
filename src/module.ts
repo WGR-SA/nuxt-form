@@ -1,8 +1,8 @@
 import { fileURLToPath } from 'url'
 import { defineNuxtModule, createResolver, addPlugin, addImports, addComponent } from '@nuxt/kit'
 
-import type { ModuleOptions } from './types'
-export * from './types'
+import type { ModuleOptions } from './runtime/types'
+export * from './runtime/types'
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
@@ -51,6 +51,11 @@ export default defineNuxtModule<ModuleOptions>({
     addImports({
       name: 'useFormData',
       from: resolve(runtimeDir, 'composable', 'data.ts')
+    })
+
+    addImports({
+      name: 'useFormSender',
+      from: resolve(runtimeDir, 'composable', 'sender.ts')
     })
   }
 })

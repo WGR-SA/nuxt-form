@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   modules: [
     NuxtForm
   ],
+  debug: true,
   runtimeConfig: {
     public: {
       recaptchaSitekey: ''

@@ -1,79 +1,52 @@
-import { useReCaptcha } from 'vue-recaptcha-v3'
-import { useRuntimeConfig, useState } from '#app'
+import { computed } from 'vue'
+import { useState } from '#app'
 import { useFormData } from '../composables/data'
+import { useFormSender } from '../composables/sender'
 
-import type { FormStatus, FormErrorType, FormMessages } from '../../types'
-import { FormMessageDefaults } from '../../types'
+import type { FormConfig, FormState, FormMessages } from '../types'
+import { FormConfigDefaults } from '../types'
 
 export const useFormBuilder = () => {
-  const { state, flushState, addCustomData, validateFields } = useFormData()
+  const useformdata = useFormData()
+  const { flushState, fieldValidation } = useFormData()
+  const { sendForm, recaptchaValidation } = useFormSender()
 
-  const method = useState<string>('form_methods', () => 'POST')
-  const action = useState<URL>('form_action')
-  const headers = useState<Object>('form_headers', () => ({ 'Content-Type': 'application/json', 'Accept': 'application/json' }))
-  const messages = useState<FormMessages>('form_messages', () => FormMessageDefaults)
-  const status = useState<FormStatus>('form_status', () => 'idle')   
-  const errorType = useState<FormErrorType>('form_error_type', () => false)
-  const recaptcha = useRuntimeConfig().public.form.recaptcha ? useReCaptcha() : null
+  const formConfig = useState<FormConfig>('form_config', () => FormConfigDefaults)
+  const formState = useState<FormState>('form_status', () => ({ status: 'idle' }))  
+  const formHasErrors = computed<boolean>(() => formState.value.status === 'error') 
+  const showForm = computed<boolean>(() => formState.value.status === 'idle' || formState.value.status === 'error')
+  const getFormStatus = computed<string>(() => formState.value.status)
+  const getFormMessages = computed<FormMessages>(() => formConfig.value.messages)
 
-  const mutateStatus = (newStatus: FormStatus, newErrorType?: FormErrorType) => {
-    status.value = newStatus
-    errorType.value = newErrorType ?? false
+  const mutateFormState = (status: FormState['status'], errorType?: FormState['errorType']) => { 
+    formState.value = { status, errorType }
   }
 
-  const setMessage = (key: string, value: string) => {
-    messages.value[key] = value
-  }
+  const initForm = (fetchUrl: FormConfig['action'], newMethod: FormConfig['method'] | undefined, newHeaders: FormConfig['headers'] | undefined) => {
+    formConfig.value = {
+      ...formConfig.value,
+      action: fetchUrl,
+      method: newMethod ?? formConfig.value.method,
+      headers: newHeaders ?? formConfig.value.headers
+    }
 
-  const initForm = (fetchUrl: URL, newMethod: string | undefined, NewHeaders: Object | undefined) => {
-    action.value = fetchUrl
-    if (newMethod) method.value = newMethod
-    if (NewHeaders) headers.value = NewHeaders
-
-    mutateStatus('idle')
     flushState()
   }
 
-  const recaptchaCheck = async () => {
-    if (recaptcha) {
-      await recaptcha.recaptchaLoaded()
-      const recaptchaToken: string | null = await recaptcha.executeRecaptcha('contact')
-      if (!recaptchaToken) {
-        mutateStatus('error', 'recaptcha')
-        return
-      }
-      addCustomData('g-recaptcha-response', recaptchaToken)
-    }
-  }
-
-  const validationCheck = async () => {
-    const isValid = await validateFields()
-    if (!isValid) mutateStatus('error', 'validation')
-  }
-
-  const submit = () => {
+  const submitForm = async () => {
+    await fieldValidation()
+    await recaptchaValidation()
     
-    recaptchaCheck()
-    validationCheck()
-
-    if (status.value === 'error') return
-    send()
-  }
-
-  const send = async () => {
-    mutateStatus('submitting')
-    //
+    if ( formHasErrors ) return
+    sendForm()
   }
 
   return {
-    method,
-    action,
-    headers,
-    status,
-    messages,
-    mutateStatus,
+    showForm,
+    getFormStatus,
+    getFormMessages,
+    mutateFormState,
     initForm,
-    setMessage,
-    submit
+    submitForm
   }
 }

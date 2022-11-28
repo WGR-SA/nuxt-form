@@ -10,7 +10,7 @@ const props = defineProps<FormTextareaProps>()
 
 <template>
   <FormInputContainer>
-    <select :name="inputname" :value="value ?? ''" :required="required">
+    <select :name="name" :value="value ?? ''" :required="required">
       <option v-for="(option, key) in options" :value="key">
         {{ option }}
       </option>

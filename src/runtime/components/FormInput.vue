@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-export type FormInputProps = {
-  inputname: string,
+export interface FormInputProps {
+  name: string,
   label: string,
-  rules?: any[],
+  rules?: string[],
   type?: string,
   required?: boolean,
   placeholder?: string,
@@ -13,7 +13,7 @@ const props = defineProps<FormInputProps>()
 </script>
 
 <template>
-  <FormInputContainer>
-    <input :name="inputname" :type="type ?? 'text'" :placeholder="placeholder ?? ''" :value="value ?? ''" :required="required">
+  <FormInputContainer v-bind="props">
+    <input :name="name" :value="value ?? ''" :required="required" :type="type ?? 'text'" :placeholder="placeholder">
   </FormInputContainer>
 </template>

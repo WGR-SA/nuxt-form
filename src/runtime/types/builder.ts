@@ -1,6 +1,3 @@
-export type FormStatus = 'idle' | 'submitting' | 'submitted' | 'error'
-export type FormErrorType = 'validation' | 'recaptcha' | 'unknown' | false
-
 export interface FormMessages {
   submit: string,
   alert: {
@@ -16,6 +13,17 @@ export interface FormMessages {
   [key: string]: any
 }
 
+export type FormConfig = {
+  action: URL,
+  method?: string,
+  headers?: Object,
+  messages: FormMessages
+}
+
+export type FormStatus = 'idle' | 'submitting' | 'submitted' | 'error'
+export type FormErrorType = 'validation' | 'recaptcha' | 'unknown' | false
+export type FormState = { status: FormStatus, errorType?: FormErrorType } 
+
 export const FormMessageDefaults: FormMessages = {
   submit: 'Submit',
   alert: {
@@ -29,3 +37,11 @@ export const FormMessageDefaults: FormMessages = {
     unknown: 'There was an error submitting your form. Please try again.'
   }
 }
+
+export const FormConfigDefaults: FormConfig = {
+  action: new URL('http://localhost/'),
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+  messages: FormMessageDefaults
+}
+

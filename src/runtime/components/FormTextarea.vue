@@ -10,7 +10,7 @@ const props = defineProps<FormTextareaProps>()
 
 <template>
   <FormInputContainer>
-    <textarea :name="inputname" :value="value ?? ''" :required="required" :rows="rows ?? 5">
+    <textarea :name="name" :value="value ?? ''" :required="required" :rows="rows ?? 5">
       {{ placeholder }}
     </textarea>
   </FormInputContainer>

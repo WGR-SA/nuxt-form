@@ -1,2 +1,2 @@
 export { default } from './module'
-export * from './types'
+export * from './runtime/types'
