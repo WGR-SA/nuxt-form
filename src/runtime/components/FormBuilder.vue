@@ -8,20 +8,20 @@ interface FormBuilderProps {
 }
 
 const props = defineProps<FormBuilderProps>()
-const formbuilder = useFormBuilder()
-// const { showForm, getFormMessages, initForm, submitForm } = useFormBuilder()
+const { showForm, formMessages, initForm, submitForm } = useFormBuilder()
 
-//initForm(props.fetchUrl, props.method, props.headers)
+initForm(props.fetchUrl, props.method, props.headers)
 </script>
 
 <template>
   <form class="form">
-    <!-- <FormAlert />
+    <FormAlert />
     <fieldset v-if="showForm">
       <slot></slot>
       <button type="submit" @click.prevent="submitForm">
-        {{ getFormMessages.submit }}
+        {{ formMessages.submit }}
       </button>
-    </fieldset> -->
+    </fieldset>
+    
   </form>
 </template>

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useFormData } from '../composables/data';
 export interface FormInputProps {
   name: string,
   label: string,
@@ -10,10 +11,11 @@ export interface FormInputProps {
 }
 
 const props = defineProps<FormInputProps>()
+const { state } = useFormData()
 </script>
 
 <template>
   <FormInputContainer v-bind="props">
-    <input :name="name" :value="value ?? ''" :required="required" :type="type ?? 'text'" :placeholder="placeholder">
+    <input v-model="state[name]" :name="name" :required="required" :type="type ?? 'text'" :placeholder="placeholder">
   </FormInputContainer>
 </template>

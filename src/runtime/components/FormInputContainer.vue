@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { watchEffect } from 'vue';
 import { useFormData } from '../composables/data'
 
 interface FormInputContainerProps {
@@ -12,13 +13,18 @@ const props = defineProps<FormInputContainerProps>()
 const { v$, addField } = useFormData()
 
 addField(({ name: props.name, rules: props.rules ?? [] }))
+
+watchEffect(() => {
+  console.log(v$.value);
+})
+
 </script>
 
 <template>
   <div class="form__input">
     <label :for="name">{{ label }}</label>
     <slot></slot>
-    <p class="form__error" v-for="error of v$[name].$errors" :key="error.$uid">
+    <p class="form__error" v-for="error of v$[name]?.$errors" :key="error.$uid">
       {{ error.$message }}
     </p>
   </div>

@@ -4,7 +4,8 @@
 <template>
   <div>
     <FormBuilder fetchUrl="http://locahost:8888">
-      <FormInput name="name" label="Name" :rules="['required']"></FormInput>
+      <FormInput name="firstname" label="Name" :rules="['required']" />
+      <FormInput name="email" label="Email" :rules="['required', 'email']" />
     </FormBuilder>
   </div>
 </template>

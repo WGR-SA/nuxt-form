@@ -7,16 +7,13 @@ import type { FormConfig, FormState, FormMessages } from '../types'
 import { FormConfigDefaults } from '../types'
 
 export const useFormBuilder = () => {
-  const useformdata = useFormData()
   const { flushState, fieldValidation } = useFormData()
-  const { sendForm, recaptchaValidation } = useFormSender()
+  const { recaptchaValidation, sendForm } = useFormSender()
 
   const formConfig = useState<FormConfig>('form_config', () => FormConfigDefaults)
   const formState = useState<FormState>('form_status', () => ({ status: 'idle' }))  
-  const formHasErrors = computed<boolean>(() => formState.value.status === 'error') 
+  const formMessages = computed<FormMessages>(() => formConfig.value.messages)
   const showForm = computed<boolean>(() => formState.value.status === 'idle' || formState.value.status === 'error')
-  const getFormStatus = computed<string>(() => formState.value.status)
-  const getFormMessages = computed<FormMessages>(() => formConfig.value.messages)
 
   const mutateFormState = (status: FormState['status'], errorType?: FormState['errorType']) => { 
     formState.value = { status, errorType }
@@ -34,17 +31,20 @@ export const useFormBuilder = () => {
   }
 
   const submitForm = async () => {
-    await fieldValidation()
-    await recaptchaValidation()
+    const fv = await fieldValidation(), rv = await recaptchaValidation()
     
-    if ( formHasErrors ) return
+    if (!fv || !rv) {
+      mutateFormState('error', !fv ? 'field_validation' : 'recaptcha')
+      return
+    }
+    mutateFormState('submitting')
     sendForm()
   }
 
   return {
     showForm,
-    getFormStatus,
-    getFormMessages,
+    formState,
+    formMessages,
     mutateFormState,
     initForm,
     submitForm

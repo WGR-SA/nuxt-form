@@ -35,7 +35,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addComponent({
       name: 'FormInputContainer',
-      filePath: resolve(runtimeDir, 'components', 'FormInput.vue')
+      filePath: resolve(runtimeDir, 'components', 'FormInputContainer.vue')
     })
 
     addComponent({

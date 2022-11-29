@@ -2,18 +2,16 @@
 import { computed } from 'vue'
 import { useFormBuilder } from '../composables/builder'
 
-const formBuilder = useFormBuilder()
-const status = formBuilder.getFormStatus
-const messages = formBuilder.getFormMessages
-
-const alert = computed<string>(() => messages.value.alert[status as unknown as keyof typeof messages.value.alert])
+const { formState, formMessages } = useFormBuilder()
+const alert = computed<string>(() => formMessages.value.alert[formState.value.status as unknown as keyof typeof formMessages.value.alert])
+const error = computed<string>(() => formMessages.value.error[formState.value.errorType as unknown as keyof typeof formMessages.value.error])
 </script>
 
 <template>
-  <div v-if="status !== 'idle'" :class="`alert alert--${status}`">
+  <div v-if="formState.status !== 'idle'" :class="`alert alert--${formState.status}`">
     {{ alert }}
-    <span v-if="status == 'error'">
-      {{ messages.error }}
+    <span v-if="formState.status == 'error'">
+      {{ error }}
     </span>
   </div>
 </template> 
