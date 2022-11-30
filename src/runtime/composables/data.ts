@@ -7,7 +7,7 @@ export const useFormData = () => {
   const state = useState<{[key: string]: string}>('form_state')
   const rules = useState<{[key: string]: any[]}>('form_rules')
 
-  const v$ = useVuelidate(rules, state)
+  const v$ = useVuelidate(rules, state, { $autoDirty: true })
  
   const flushState = () => {
     state.value = {}
@@ -15,8 +15,17 @@ export const useFormData = () => {
   }
 
   const addField = (options: AddFieldOptions) => {    
+    if (options.name in state.value) {
+      return
+    }
     state.value[options.name] = ''
     rules.value[options.name] = options.rules.map((r: string) => validators[r as keyof typeof validators])
+  }
+
+  const setDefaultValue = (field: any) => {
+    if (field.type === 'checkbox') state.value[field.name] = 'false'
+    if (field.options) state.value[field.name] = Object.keys(field.options)[0]
+    if (field.checked) state.value[field.name] = field.value ?? String(field.checked)
   }
 
   const addCustomData = (name: string, value: string) => {
@@ -32,6 +41,7 @@ export const useFormData = () => {
     state,
     flushState,
     addField,
+    setDefaultValue,
     addCustomData,
     fieldValidation
   }

@@ -3,8 +3,8 @@ import { computed } from 'vue'
 import { useFormBuilder } from '../composables/builder'
 
 const { formState, formMessages } = useFormBuilder()
-const alert = computed<string>(() => formMessages.value.alert[formState.value.status as unknown as keyof typeof formMessages.value.alert])
-const error = computed<string>(() => formMessages.value.error[formState.value.errorType as unknown as keyof typeof formMessages.value.error])
+const alert = computed<string>(() => formMessages.value.alert[formState.value.status as keyof typeof formMessages.value.alert])
+const error = computed<string>(() => formMessages.value.error[formState.value.errorType as keyof typeof formMessages.value.error])
 </script>
 
 <template>

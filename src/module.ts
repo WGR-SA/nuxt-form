@@ -29,15 +29,26 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     addComponent({
+      name: 'FormInputContainer',
+      filePath: resolve(runtimeDir, 'components', 'FormInputContainer.vue')
+    })
+
+    addComponent({
       name: 'FormInput',
       filePath: resolve(runtimeDir, 'components', 'FormInput.vue')
     })
 
     addComponent({
-      name: 'FormInputContainer',
-      filePath: resolve(runtimeDir, 'components', 'FormInputContainer.vue')
+      name: 'FormSelect',
+      filePath: resolve(runtimeDir, 'components', 'FormSelect.vue')
     })
 
+    addComponent({
+      name: 'FormTextarea',
+      filePath: resolve(runtimeDir, 'components', 'FormTextarea.vue')
+    })
+
+    
     addComponent({
       name: 'FormAlert',
       filePath: resolve(runtimeDir, 'components', 'FormAlert.vue')

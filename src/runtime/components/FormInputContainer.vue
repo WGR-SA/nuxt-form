@@ -1,23 +1,29 @@
 <script lang="ts" setup>
-import { watchEffect } from 'vue';
+import { watch } from 'vue';
 import { useFormData } from '../composables/data'
 
 interface FormInputContainerProps {
   name: string,
   label: string,
   rules?: string[],
+  options?: { [key: string | number]: string },
+  required?: boolean,
+  checked?: boolean,
+  value?: string,
   [key: string]: any
 }
 
 const props = defineProps<FormInputContainerProps>()
-const { v$, addField } = useFormData()
+const { state, addField, setDefaultValue } = useFormData()
 
 addField(({ name: props.name, rules: props.rules ?? [] }))
+setDefaultValue(props)
 
-watchEffect(() => {
-  console.log(v$.value);
+watch(state.value, () => {
+  console.log(state.value);
 })
 
+const { v$ } = useFormData()
 </script>
 
 <template>
