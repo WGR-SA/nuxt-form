@@ -1,7 +1,7 @@
 import { FormMessages } from '../../types'
 
 export const fr: FormMessages = {
-  submit: 'Envoyer local',
+  submit: 'Envoyer',
   alert: {
     idle: 'Votre formulaire est prêt à être soumis.',
     submitting: 'Envoi en cours...',
