@@ -1,3 +1,4 @@
 export interface ModuleOptions {
-  recaptcha: boolean
+  recaptcha: boolean,
+  default_styles: boolean
 }

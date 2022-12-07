@@ -1,0 +1,104 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.25px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  color: #333;
+}
+
+label {
+  display: block;
+  width: 100%;
+  margin: 0 0 0.25rem;
+  padding: 0 1px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+input, textarea, select {
+  padding: .5rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto;
+  margin: 0 0.5rem 0 0;
+  transform: translateY(25%);
+  cursor: pointer;
+}
+
+button {
+  display: block;
+  margin: 1rem 0 1rem auto;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  background-color: #fff;
+}
+
+.form__input {
+  margin: 0 0 0.75rem;
+}
+
+.form__input,
+.form__input * {
+  box-sizing: border-box;
+}
+
+.form__error {
+  margin: 0.25rem 1px 0;
+  font-size: 0.75rem;
+  color: red;
+}
+
+.form__checkbox,
+.form__radio {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row-reverse;
+}
+
+.form__checkbox input,
+.form__radio input {
+  height: 0.75rem;
+}
+
+.form__radio label,
+.form__checkbox label {
+  margin: 0;
+  font-weight: 400;
+}
+
+.form__radio {
+  margin: 0 0 0.25rem;
+}
+
+.alert {
+  margin: 0 0 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  background-color: #f2dede;
+  font-size: 0.75rem;
+  line-height: 1.3rem;
+  color: #a94442;
+}
+
+.alert--submitting, .alert--submitted {
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+

@@ -9,7 +9,7 @@ const error = computed<string>(() => formMessages.value.error[formState.value.er
 
 <template>
   <div v-if="formState.status !== 'idle'" :class="`alert alert--${formState.status}`">
-    {{ alert }}
+    <strong>{{ alert }}</strong><br>
     <span v-if="formState.status == 'error'">
       {{ error }}
     </span>

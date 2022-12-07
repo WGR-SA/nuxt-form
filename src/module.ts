@@ -10,7 +10,8 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: 'form'
   },
   defaults: {
-    recaptcha: true
+    recaptcha: true,
+    default_styles: true
   },
   setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
@@ -22,6 +23,10 @@ export default defineNuxtModule<ModuleOptions>({
     if (options.recaptcha) {
       addPlugin(resolve(runtimeDir, 'plugins', 'recaptcha'))
     }
+
+    if (options.default_styles) {
+      nuxt.options.css.push(resolve(runtimeDir, 'assets', 'form.css'))
+    } 
 
     addComponent({
       name: 'FormBuilder',
