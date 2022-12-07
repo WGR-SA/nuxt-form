@@ -13,6 +13,7 @@ export default defineNuxtModule<ModuleOptions>({
     recaptcha: true,
     default_styles: true,
     messages: {},
+    lang: 'fr'
   },
   setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)

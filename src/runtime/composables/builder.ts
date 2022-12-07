@@ -1,19 +1,22 @@
 import { computed } from 'vue'
-import { useState } from '#app'
+import { useState, useRuntimeConfig } from '#app'
 import { useFormData } from '../composables/data'
-import { useRuntimeConfig } from '#app'
 import { useFormSender } from '../composables/sender'
+import * as defaultFormMessages from '../messages/form'
 
 import type { FormConfig, FormState, FormMessages } from '../types'
 import { FormConfigDefaults } from '../types'
 
 export const useFormBuilder = () => {
+
   const { flushState, fieldValidation } = useFormData()
   const { recaptchaValidation, sendForm } = useFormSender()
 
+  const moduleConfig = useRuntimeConfig().public.form
   const formConfig = useState<FormConfig>('form_config', () => FormConfigDefaults)
   const formState = useState<FormState>('form_status', () => ({ status: 'idle' }))  
-  const formMessages = computed<FormMessages>(() => ({...formConfig.value.messages, ...useRuntimeConfig().public.form.messages}))
+  const defaultMessages: FormMessages = defaultFormMessages[moduleConfig.lang as keyof typeof defaultFormMessages] ?? defaultFormMessages.en
+  const formMessages = computed<FormMessages>(() => ({ ...defaultMessages, ...moduleConfig.messages, ...formConfig.value.messages}))
   const showForm = computed<boolean>(() => formState.value.status === 'idle' || formState.value.status === 'error')
 
   const mutateFormState = (status: FormState['status'], errorType?: FormState['errorType']) => { 
