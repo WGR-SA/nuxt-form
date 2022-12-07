@@ -10,6 +10,7 @@ interface FormInputContainerProps {
   required?: boolean,
   checked?: boolean,
   value?: string,
+  default?: string,
   [key: string]: any
 }
 
@@ -18,10 +19,6 @@ const { state, addField, setDefaultValue } = useFormData()
 
 addField(({ name: props.name, rules: props.rules ?? [] }))
 setDefaultValue(props)
-
-watch(state.value, () => {
-  console.log(state.value);
-})
 
 const { v$ } = useFormData()
 </script>

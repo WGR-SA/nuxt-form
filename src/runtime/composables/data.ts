@@ -24,7 +24,7 @@ export const useFormData = () => {
 
   const setDefaultValue = (field: any) => {
     if (field.type === 'checkbox') state.value[field.name] = 'false'
-    if (field.options) state.value[field.name] = Object.keys(field.options)[0]
+    if (field.options) state.value[field.name] = field.default ?? Object.keys(field.options)[0]
     if (field.checked) state.value[field.name] = field.value ?? String(field.checked)
   }
 

@@ -44,6 +44,11 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     addComponent({
+      name: 'FormRadio',
+      filePath: resolve(runtimeDir, 'components', 'FormRadio.vue')
+    })
+
+    addComponent({
       name: 'FormTextarea',
       filePath: resolve(runtimeDir, 'components', 'FormTextarea.vue')
     })
