@@ -11,7 +11,8 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {
     recaptcha: true,
-    default_styles: true
+    default_styles: true,
+    messages: {},
   },
   setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)

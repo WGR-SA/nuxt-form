@@ -7,18 +7,18 @@ export const useFormSender = () => {
   const { addCustomData } = useFormData()
 
   const recaptchaValidation = async () => {
-    // if (recaptcha) {
-    //   await recaptcha.recaptchaLoaded()
-    //   const recaptchaToken: string | null = await recaptcha.executeRecaptcha('contact')
-    //   if (!recaptchaToken) return false 
-    //   addCustomData('g-recaptcha-response', recaptchaToken)
-    // } 
+    if (recaptcha) {
+      await recaptcha.recaptchaLoaded()
+      const recaptchaToken: string | null = await recaptcha.executeRecaptcha('contact')
+      if (!recaptchaToken) return false 
+      addCustomData('g-recaptcha-response', recaptchaToken)
+    } 
     return true
   }
 
-  const sendForm = async () => {
-
-    return true
+  const sendForm = async () => {  
+    
+    return true 
   }
 
   return {

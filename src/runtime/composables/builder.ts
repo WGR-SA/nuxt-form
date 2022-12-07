@@ -1,6 +1,7 @@
 import { computed } from 'vue'
 import { useState } from '#app'
 import { useFormData } from '../composables/data'
+import { useRuntimeConfig } from '#app'
 import { useFormSender } from '../composables/sender'
 
 import type { FormConfig, FormState, FormMessages } from '../types'
@@ -12,7 +13,7 @@ export const useFormBuilder = () => {
 
   const formConfig = useState<FormConfig>('form_config', () => FormConfigDefaults)
   const formState = useState<FormState>('form_status', () => ({ status: 'idle' }))  
-  const formMessages = computed<FormMessages>(() => formConfig.value.messages)
+  const formMessages = computed<FormMessages>(() => ({...formConfig.value.messages, ...useRuntimeConfig().public.form.messages}))
   const showForm = computed<boolean>(() => formState.value.status === 'idle' || formState.value.status === 'error')
 
   const mutateFormState = (status: FormState['status'], errorType?: FormState['errorType']) => { 
