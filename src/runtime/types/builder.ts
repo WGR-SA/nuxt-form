@@ -15,7 +15,7 @@ export interface FormMessages {
 }
 
 export type FormConfig = {
-  action: URL,
+  action: string,
   method?: string,
   headers?: Object,
   messages: FormMessages
@@ -26,7 +26,7 @@ export type FormErrorType = 'field_validation' | 'recaptcha' | 'unknown' | false
 export type FormState = { status: FormStatus, errorType?: FormErrorType } 
 
 export const FormConfigDefaults: FormConfig = {
-  action: new URL('http://localhost/'),
+  action: 'http://localhost/',
   method: 'POST',
   headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
   messages: {} as FormMessages

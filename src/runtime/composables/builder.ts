@@ -1,7 +1,7 @@
 import { computed } from 'vue'
-import { useState, useRuntimeConfig } from '#app'
+import { useState, useRuntimeConfig, useFetch } from '#app'
 import { useFormData } from '../composables/data'
-import { useFormSender } from '../composables/sender'
+import { useFormRecaptcha } from './recaptcha'
 import * as defaultFormMessages from '../messages/form'
 
 import type { FormConfig, FormState, FormMessages } from '../types'
@@ -10,7 +10,7 @@ import { FormConfigDefaults } from '../types'
 export const useFormBuilder = () => {
 
   const { flushState, fieldValidation } = useFormData()
-  const { recaptchaValidation, sendForm } = useFormSender()
+  const { recaptchaValidation } = useFormRecaptcha()
 
   const moduleConfig = useRuntimeConfig().public.form
   const formConfig = useState<FormConfig>('form_config', () => FormConfigDefaults)
@@ -42,11 +42,25 @@ export const useFormBuilder = () => {
       return
     }
     mutateFormState('submitting')
-    sendForm()
+
+    const { error } = await useFetch(formConfig.value.action, {
+      ...formConfig.value.headers,
+      key: String(Date.now()),
+      method: formConfig.value.method,
+      body: JSON.stringify(formState.value)
+    })
+
+    if (error) {
+      mutateFormState('error', 'unknown')
+      return
+    }
+
+    mutateFormState('submitted')
   }
 
   return {
     showForm,
+    formConfig,
     formState,
     formMessages,
     mutateFormState,

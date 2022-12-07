@@ -1,8 +1,8 @@
 import { useReCaptcha } from 'vue-recaptcha-v3'
 import { useRuntimeConfig } from '#app'
-import { useFormData } from '../composables/data'
+import { useFormData } from './data'
 
-export const useFormSender = () => {
+export const useFormRecaptcha = () => {
   const recaptcha = useRuntimeConfig().public.form.recaptcha ? useReCaptcha() : null
   const { addCustomData } = useFormData()
 
@@ -16,13 +16,7 @@ export const useFormSender = () => {
     return true
   }
 
-  const sendForm = async () => {  
-    
-    return true 
-  }
-
   return {
     recaptchaValidation,
-    sendForm,
   }
 }

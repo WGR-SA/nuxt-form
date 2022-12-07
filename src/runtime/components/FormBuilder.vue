@@ -2,7 +2,7 @@
 import { useFormBuilder } from '../composables/builder'
 
 interface FormBuilderProps {
-  fetchUrl: URL,
+  fetchUrl: string,
   method?: 'POST' | 'GET',
   headers?: Object
 }
@@ -22,6 +22,5 @@ initForm(props.fetchUrl, props.method, props.headers)
         {{ formMessages.submit }}
       </button>
     </fieldset>
-    
   </form>
 </template>

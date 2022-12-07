@@ -11,7 +11,7 @@ interface FormInputContainerProps {
   value?: string,
   default?: string,
   type?: string,
-  [key: string]: any
+  [key: string]: any  
 }
 
 const props = defineProps<FormInputContainerProps>()
@@ -24,7 +24,7 @@ const { v$ } = useFormData()
 </script>
 
 <template>
-  <div :class="`form__input form__${type ?? 'default'}`">
+  <div :class="`form__input form__${type ?? 'default'} ${(rules?.includes('required')) ? 'form--required' : '' }`">
     <label :for="name">{{ label }}</label>
     <slot></slot>
     <p class="form__error" v-for="error of v$[name]?.$errors" :key="error.$uid">

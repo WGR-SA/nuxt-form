@@ -77,8 +77,8 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     addImports({
-      name: 'useFormSender',
-      from: resolve(runtimeDir, 'composable', 'sender.ts')
+      name: 'useFormRecaptcha',
+      from: resolve(runtimeDir, 'composable', 'recaptcha.ts')
     })
   }
 })
