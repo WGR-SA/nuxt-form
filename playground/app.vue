@@ -20,7 +20,6 @@ const selectOptions = {
       <FormInput name="datetime" type="datetime-local" label="date" />
       <FormRadio name="radiotext" label="Radio test" :default="2" :options="selectOptions" />
       <FormRadio name="radiotext3" label="Radio test" :options="selectOptions" />
-
     </FormBuilder>  
   </div>
 </template>

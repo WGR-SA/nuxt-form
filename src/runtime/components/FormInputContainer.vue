@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { watch } from 'vue';
 import { useFormData } from '../composables/data'
 
 interface FormInputContainerProps {
@@ -15,7 +14,7 @@ interface FormInputContainerProps {
 }
 
 const props = defineProps<FormInputContainerProps>()
-const { state, addField, setDefaultValue } = useFormData()
+const { addField, setDefaultValue } = useFormData()
 
 addField(({ name: props.name, rules: props.rules ?? [] }))
 setDefaultValue(props)
