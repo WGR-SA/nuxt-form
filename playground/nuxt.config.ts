@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     }
   },
   form: {
-    recaptcha: false,
+    recaptcha: true,
     default_styles: true,
     messages: {
     }

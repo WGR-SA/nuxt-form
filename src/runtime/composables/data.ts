@@ -17,7 +17,7 @@ export const useFormData = () => {
     rules.value = {}
   }
 
-  const addField = (options: AddFieldOptions) => {    
+  const addField = (options: AddFieldOptions) => {        
     if (options.name in state.value) {
       return
     }

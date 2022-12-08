@@ -23,7 +23,7 @@ export type FormConfig = {
 
 export type FormStatus = 'idle' | 'submitting' | 'submitted' | 'error'
 export type FormErrorType = 'field_validation' | 'recaptcha' | 'unknown' | false
-export type FormState = { status: FormStatus, errorType?: FormErrorType } 
+export type FormState = { status: FormStatus, errorType?: FormErrorType | string } 
 
 export const FormConfigDefaults: FormConfig = {
   action: 'http://localhost/',

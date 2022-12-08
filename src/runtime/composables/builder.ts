@@ -9,7 +9,7 @@ import { FormConfigDefaults } from '../types'
 
 export const useFormBuilder = () => {
 
-  const { flushState, fieldValidation } = useFormData()
+  const { state, flushState, fieldValidation } = useFormData()
   const { recaptchaValidation } = useFormRecaptcha()
 
   const moduleConfig = useRuntimeConfig().public.form
@@ -30,7 +30,6 @@ export const useFormBuilder = () => {
       method: newMethod ?? formConfig.value.method,
       headers: newHeaders ?? formConfig.value.headers
     }
-
     flushState()
   }
 
@@ -47,15 +46,16 @@ export const useFormBuilder = () => {
       ...formConfig.value.headers,
       key: String(Date.now()),
       method: formConfig.value.method,
-      body: JSON.stringify(formState.value)
+      body: state
     })
 
-    if (error) {
-      mutateFormState('error', 'unknown')
+    if (error.value) {
+      mutateFormState('error', error?.value?.statusMessage ?? 'unknown')
       return
     }
 
     mutateFormState('submitted')
+    //flushState()
   }
 
   return {
