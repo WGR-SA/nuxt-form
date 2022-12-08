@@ -13,9 +13,6 @@
       "require": "./dist/module.cjs"
     }
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
   "files": [
