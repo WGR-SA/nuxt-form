@@ -78,17 +78,17 @@ Exemple:
   placeholder?: string,
 ```
 
-#### `FormSelect`extends `FormInput`
+#### `FormSelect` extends `FormInput`
 ```
   options: { [key: string | number]: string }
 ```
 
-#### `FormTextarea`extends `FormInput`
+#### `FormTextarea` extends `FormInput`
 ```
   rows?: number
 ```
 
-#### `FormRadio`extends `FormInput`
+#### `FormRadio` extends `FormInput`
 ```
   options: { [key: string | number]: string }
   default?: string
