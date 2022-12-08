@@ -1,7 +1,10 @@
 {
   "name": "wgr-sa/nuxt-form",
-  "version": "0.1",
+  "version": "0.1.1",
+  "repository": "https://github.com/WGR-SA/nuxt-form",
+  "author": "jeanvier",
   "license": "MIT",
+  "private": false,
   "type": "module",
   "exports": {
     ".": {
