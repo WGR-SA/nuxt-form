@@ -1,7 +1,8 @@
 {
   "name": "@wgr-sa/nuxt-form",
-  "version": "0.1.1",
-  "repository": "https://github.com/WGR-SA/nuxt-form",
+  "description": "Form builder for Nuxt 3",
+  "version": "0.1.2",
+  "repository": "https://github.com/WGR-SA/nuxt-form.git",
   "author": "jeanvier",
   "license": "MIT",
   "private": false,
@@ -11,6 +12,9 @@
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
