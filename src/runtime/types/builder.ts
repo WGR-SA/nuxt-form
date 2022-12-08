@@ -1,7 +1,7 @@
 export interface FormMessages {
   submit: string,
   alert: {
-    idle: string, //tmp
+    idle: string,
     submitting: string,
     submitted: string,
     error: string
@@ -23,12 +23,11 @@ export type FormConfig = {
 
 export type FormStatus = 'idle' | 'submitting' | 'submitted' | 'error'
 export type FormErrorType = 'field_validation' | 'recaptcha' | 'unknown' | false
-export type FormState = { status: FormStatus, errorType?: FormErrorType | string } 
+export type FormState = { status: FormStatus, errorType?: FormErrorType | string }
 
 export const FormConfigDefaults: FormConfig = {
   action: 'http://localhost/',
   method: 'POST',
-  headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+  headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
   messages: {} as FormMessages
 }
-

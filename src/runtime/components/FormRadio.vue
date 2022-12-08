@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { useFormData } from '../composables/data';
+import { useFormData } from '../composables/data'
 
 import type { FormInputProps } from './FormInput.vue'
 
@@ -18,9 +18,9 @@ const required = computed(() => props.required ?? false)
 
 <template>
   <FormInputContainer v-bind="props">
-    <div class="form__radio"  v-for="(option, key) in options" :key="key">
+    <div v-for="(option, key) in options" :key="key" class="form__radio">
       <label :for="state[name]"> {{ option }} </label>
-      <input type="radio" v-model="state[name]" :value="key" :required="required" />
+      <input v-model="state[name]" type="radio" :value="key" :required="required">
     </div>
   </FormInputContainer>
 </template>

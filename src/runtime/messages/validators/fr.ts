@@ -69,5 +69,5 @@ export const fr: any = {
   phone_local: 'Veuillez entrer un numéro de téléphone valide.',
   email_format: 'Veuillez entrer une adresse email valide au format {format}.',
   email_domain: 'Veuillez entrer une adresse email valide avec un domaine existant.',
-  email_exists: 'Veuillez entrer une adresse email valide.',
+  email_exists: 'Veuillez entrer une adresse email valide.'
 }

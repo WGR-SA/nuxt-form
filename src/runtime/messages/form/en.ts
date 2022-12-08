@@ -10,7 +10,7 @@ export const en: FormMessages = {
   },
   error: {
     recaptcha: 'There was an error with the reCAPTCHA. Please try again.',
-    'field_validation': 'There was an error with field validation. Please check the form and try again.',
+    field_validation: 'There was an error with field validation. Please check the form and try again.',
     unknown: 'There was an unknown error submitting your form. Please try again.'
   }
 }

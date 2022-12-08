@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { useFormData } from '../composables/data';
+import { useFormData } from '../composables/data'
 
 import type { FormInputProps } from './FormInput.vue'
 

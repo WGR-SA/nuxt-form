@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { useFormData } from '../composables/data';
+import { useFormData } from '../composables/data'
 
 import type { FormInputProps } from './FormInput.vue'
 
@@ -17,6 +17,6 @@ const rows = computed(() => props.rows ?? 3)
 
 <template>
   <FormInputContainer v-bind="props">
-    <textarea v-model="state[name]" :required="required" :rows="rows"></textarea>
+    <textarea v-model="state[name]" :required="required" :rows="rows" />
   </FormInputContainer>
 </template>

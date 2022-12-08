@@ -1,25 +1,25 @@
 import { computed } from 'vue'
 import { useState, useRuntimeConfig, useFetch } from '#app'
 import { useFormData } from '../composables/data'
-import { useFormRecaptcha } from './recaptcha'
 import * as defaultFormMessages from '../messages/form'
 
 import type { FormConfig, FormState, FormMessages } from '../types'
 import { FormConfigDefaults } from '../types'
 
-export const useFormBuilder = () => {
+import { useFormRecaptcha } from './recaptcha'
 
+export const useFormBuilder = () => {
   const { state, flushState, fieldValidation } = useFormData()
   const { recaptchaValidation } = useFormRecaptcha()
 
   const moduleConfig = useRuntimeConfig().public.form
   const formConfig = useState<FormConfig>('form_config', () => FormConfigDefaults)
-  const formState = useState<FormState>('form_status', () => ({ status: 'idle' }))  
+  const formState = useState<FormState>('form_status', () => ({ status: 'idle' }))
   const defaultMessages: FormMessages = defaultFormMessages[moduleConfig.lang as keyof typeof defaultFormMessages] ?? defaultFormMessages.en
-  const formMessages = computed<FormMessages>(() => ({ ...defaultMessages, ...moduleConfig.messages, ...formConfig.value.messages}))
+  const formMessages = computed<FormMessages>(() => ({ ...defaultMessages, ...moduleConfig.messages, ...formConfig.value.messages }))
   const showForm = computed<boolean>(() => formState.value.status === 'idle' || formState.value.status === 'error')
 
-  const mutateFormState = (status: FormState['status'], errorType?: FormState['errorType']) => { 
+  const mutateFormState = (status: FormState['status'], errorType?: FormState['errorType']) => {
     formState.value = { status, errorType }
   }
 
@@ -34,8 +34,9 @@ export const useFormBuilder = () => {
   }
 
   const submitForm = async () => {
-    const fv = await fieldValidation(), rv = await recaptchaValidation()
-    
+    const fv = await fieldValidation()
+    const rv = await recaptchaValidation()
+
     if (!fv || !rv) {
       mutateFormState('error', !fv ? 'field_validation' : 'recaptcha')
       return
@@ -55,7 +56,6 @@ export const useFormBuilder = () => {
     }
 
     mutateFormState('submitted')
-    //flushState()
   }
 
   return {

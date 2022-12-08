@@ -10,13 +10,15 @@ export const useFormRecaptcha = () => {
     if (recaptcha) {
       await recaptcha.recaptchaLoaded()
       const recaptchaToken: string | null = await recaptcha.executeRecaptcha('contact')
-      if (!recaptchaToken) return false 
+      if (!recaptchaToken) {
+        return false
+      }
       addCustomData('g-recaptcha-response', recaptchaToken)
-    } 
+    }
     return true
   }
 
   return {
-    recaptchaValidation,
+    recaptchaValidation
   }
 }

@@ -28,7 +28,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     if (options.default_styles) {
       nuxt.options.css.push(resolve(runtimeDir, 'assets', 'form.css'))
-    } 
+    }
 
     addComponent({
       name: 'FormBuilder',
@@ -60,7 +60,6 @@ export default defineNuxtModule<ModuleOptions>({
       filePath: resolve(runtimeDir, 'components', 'FormTextarea.vue')
     })
 
-    
     addComponent({
       name: 'FormAlert',
       filePath: resolve(runtimeDir, 'components', 'FormAlert.vue')
