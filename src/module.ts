@@ -22,10 +22,6 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.runtimeConfig.public.form = options
 
-    if (options.recaptcha) {
-      addPlugin(resolve(runtimeDir, 'plugins', 'recaptcha'))
-    }
-
     if (options.default_styles) {
       nuxt.options.css.push(resolve(runtimeDir, 'assets', 'form.css'))
     }

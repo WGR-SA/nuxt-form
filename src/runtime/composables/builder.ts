@@ -1,10 +1,11 @@
 import { computed } from 'vue'
 import { useState, useRuntimeConfig, useFetch } from '#app'
-import { useFormData } from '../composables/data'
-import * as defaultFormMessages from '../messages/form'
 
 import type { FormConfig, FormState, FormMessages } from '../types'
 import { FormConfigDefaults } from '../types'
+
+import { useFormData } from '../composables/data'
+import * as defaultFormMessages from '../messages/form'
 
 import { useFormRecaptcha } from './recaptcha'
 

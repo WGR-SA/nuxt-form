@@ -1,15 +1,16 @@
-import { useReCaptcha } from 'vue-recaptcha-v3'
+import { load } from 'recaptcha-v3'
 import { useRuntimeConfig } from '#app'
+
 import { useFormData } from './data'
 
 export const useFormRecaptcha = () => {
-  const recaptcha = useRuntimeConfig().public.form.recaptcha ? useReCaptcha() : null
+  const sitekey = useRuntimeConfig().public.recaptchaSitekey
   const { addCustomData } = useFormData()
 
   const recaptchaValidation = async () => {
-    if (recaptcha) {
-      await recaptcha.recaptchaLoaded()
-      const recaptchaToken: string | null = await recaptcha.executeRecaptcha('contact')
+    if (useRuntimeConfig().public.form.recaptcha) {
+      const recaptcha = await load(sitekey)
+      const recaptchaToken: string | null = await recaptcha.execute('contact')
       if (!recaptchaToken) {
         return false
       }
