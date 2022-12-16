@@ -8,7 +8,7 @@ const selectOptions = {
 
 <template>
   <div style="max-width: 1200px;padding: 40px;margin: 0 auto;">
-    <FormBuilder fetchUrl="http://locahost:8888">
+    <FormBuilder fetchUrl="http://localhost:8888">
       <FormInput name="firstname" label="Name" :rules="['required']" placeholder="Name" />
       <FormInput name="email" label="Email" :rules="['required', 'email']" />
       <FormSelect name="seletctest" label="Select" :rules="['required']" :options="selectOptions" />
@@ -23,4 +23,3 @@ const selectOptions = {
     </FormBuilder>
   </div>
 </template>
-

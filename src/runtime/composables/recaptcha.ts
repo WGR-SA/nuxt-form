@@ -1,16 +1,24 @@
-import { load } from 'recaptcha-v3'
-import { useRuntimeConfig } from '#app'
-
+import { useRuntimeConfig, useHead } from '#app'
 import { useFormData } from './data'
 
 export const useFormRecaptcha = () => {
   const sitekey = useRuntimeConfig().public.recaptchaSitekey
   const { addCustomData } = useFormData()
 
+  const recaptchaInit = () => {
+    if (useRuntimeConfig().public.form.recaptcha) {
+      useHead({
+        script: [
+          { src: `https://www.google.com/recaptcha/api.js?render=${sitekey}` }
+        ]
+      })
+    }
+  }
+
   const recaptchaValidation = async () => {
     if (useRuntimeConfig().public.form.recaptcha) {
-      const recaptcha = await load(sitekey)
-      const recaptchaToken: string | null = await recaptcha.execute('contact')
+      const recaptcha = window.grecaptcha
+      const recaptchaToken = await recaptcha.execute(sitekey, { action: 'contact' })
       if (!recaptchaToken) {
         return false
       }
@@ -20,6 +28,7 @@ export const useFormRecaptcha = () => {
   }
 
   return {
+    recaptchaInit,
     recaptchaValidation
   }
 }

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useFormBuilder } from '../composables/builder'
+import { useFormRecaptcha } from '../composables/recaptcha'
 
 interface FormBuilderProps {
   fetchUrl: string,
@@ -8,9 +9,12 @@ interface FormBuilderProps {
 }
 
 const props = defineProps<FormBuilderProps>()
+const { recaptchaInit } = useFormRecaptcha()
 const { showForm, formMessages, initForm, submitForm } = useFormBuilder()
 
+recaptchaInit()
 initForm(props.fetchUrl, props.method, props.headers)
+
 </script>
 
 <template>
