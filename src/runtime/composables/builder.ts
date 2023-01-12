@@ -45,7 +45,7 @@ export const useFormBuilder = () => {
     mutateFormState('submitting')
 
     const { error } = await useFetch(formConfig.value.action, {
-      ...formConfig.value.headers,
+      headers: formConfig.value.headers as Record<string, string>,
       key: String(Date.now()),
       method: formConfig.value.method,
       body: state
