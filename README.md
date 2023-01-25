@@ -27,6 +27,7 @@ export default defineNuxtConfig({
   },
   form: {
     recaptcha: boolean, // Use recaptcha | default: TRUE
+    hide_recaptcha: boolean, // Hide recaptcha badge | default: FALSE
     default_styles: boolean, // Add default module style from form.css | default: TRUE
     messages: object, // overwrite default messages | default: see message folder
     lang: string // lang 'fr' && 'en' available  
