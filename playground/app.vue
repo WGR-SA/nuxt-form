@@ -12,6 +12,7 @@ const selectOptions = {
       <FormInput name="firstname" label="Name" :rules="['required']" placeholder="Name" />
       <FormInput name="email" label="Email" :rules="['required', 'email']" />
       <FormSelect name="seletctest" label="Select" :rules="['required']" :options="selectOptions" />
+      <!-- WIP <FormSelectMultiple name="seletctesst" label="Select" :rules="['required']" :options="selectOptions" /> --> 
       <FormTextarea name="message" label="Message" :rules="['required']" />
       <FormInput name="check" type="checkbox" label="checkbox active" :checked="true"/>
       <FormInput name="checkin" type="checkbox" label="checkbox inactive"/>

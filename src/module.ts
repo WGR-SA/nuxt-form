@@ -11,6 +11,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {
     recaptcha: true,
+    hide_recaptcha: false,
     default_styles: true,
     messages: {},
     lang: 'fr'
@@ -24,6 +25,10 @@ export default defineNuxtModule<ModuleOptions>({
 
     if (options.default_styles) {
       nuxt.options.css.push(resolve(runtimeDir, 'assets', 'form.css'))
+    }
+
+    if (options.hide_recaptcha) {
+      nuxt.options.css.push(resolve(runtimeDir, 'assets', 'recaptcha.css'))
     }
 
     addComponent({
@@ -45,6 +50,11 @@ export default defineNuxtModule<ModuleOptions>({
       name: 'FormSelect',
       filePath: resolve(runtimeDir, 'components', 'FormSelect.vue')
     })
+
+    // addComponent({
+    //   name: 'FormSelectMultiple',
+    //   filePath: resolve(runtimeDir, 'components', 'FormSelectMultiple.vue')
+    // })
 
     addComponent({
       name: 'FormRadio',
