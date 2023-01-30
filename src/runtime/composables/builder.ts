@@ -25,12 +25,13 @@ export const useFormBuilder = () => {
     formState.value = { status, errorType }
   }
 
-  const initForm = (fetchUrl: FormConfig['action'], newMethod: FormConfig['method'] | undefined, newHeaders: FormConfig['headers'] | undefined) => {
+  const initForm = (fetchUrl: FormConfig['action'], method: FormConfig['method'] | undefined, headers: FormConfig['headers'] | undefined, stringify: FormConfig['stringify'] | undefined) => {
     formConfig.value = {
       ...formConfig.value,
       action: fetchUrl,
-      method: newMethod ?? formConfig.value.method,
-      headers: newHeaders ?? formConfig.value.headers
+      method: method ?? formConfig.value.method,
+      headers: headers ?? formConfig.value.headers,
+      stringify: stringify ?? formConfig.value.stringify
     }
     formResponse.value = null
     flushState()
@@ -50,7 +51,7 @@ export const useFormBuilder = () => {
       headers: formConfig.value.headers as Record<string, string>,
       key: String(Date.now()),
       method: formConfig.value.method,
-      body: state
+      body: (formConfig.value.stringify) ? state : JSON.stringify(state)
     })
 
     if (error.value) {

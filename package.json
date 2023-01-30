@@ -1,7 +1,7 @@
 {
   "name": "@wgr-sa/nuxt-form",
   "description": "Form builder for Nuxt 3",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "repository": "https://github.com/WGR-SA/nuxt-form.git",
   "author": "jeanvier",
   "license": "MIT",

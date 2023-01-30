@@ -18,7 +18,8 @@ export type FormConfig = {
   action: string,
   method?: string,
   headers?: Object,
-  messages: FormMessages
+  messages: FormMessages,
+  stringify?: boolean
 }
 
 export type FormStatus = 'idle' | 'submitting' | 'submitted' | 'error'
@@ -29,5 +30,6 @@ export const FormConfigDefaults: FormConfig = {
   action: 'http://localhost/',
   method: 'POST',
   headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-  messages: {} as FormMessages
+  messages: {} as FormMessages,
+  stringify: false
 }

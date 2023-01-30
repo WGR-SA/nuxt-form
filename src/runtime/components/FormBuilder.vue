@@ -5,7 +5,8 @@ import { useFormRecaptcha } from '../composables/recaptcha'
 interface FormBuilderProps {
   fetchUrl: string,
   method?: 'POST' | 'GET',
-  headers?: Object
+  headers?: Object,
+  stringify?: boolean
 }
 
 const props = defineProps<FormBuilderProps>()
@@ -13,7 +14,7 @@ const { recaptchaInit } = useFormRecaptcha()
 const { showForm, formMessages, initForm, submitForm } = useFormBuilder()
 
 recaptchaInit()
-initForm(props.fetchUrl, props.method, props.headers)
+initForm(props.fetchUrl, props.method, props.headers, props.stringify)
 
 </script>
 

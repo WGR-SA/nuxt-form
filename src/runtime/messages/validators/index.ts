@@ -1,1 +1,1 @@
-export * from "./fr";
+export * from './fr'

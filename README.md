@@ -64,7 +64,8 @@ Exemple:
 ```
   fetchUrl: string,
   method?: 'POST' | 'GET',
-  headers?: Object
+  headers?: Object,
+  stringify?: boolean // Stringify body
 ```
 
 #### `FormInput`
