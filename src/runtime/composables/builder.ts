@@ -16,6 +16,7 @@ export const useFormBuilder = () => {
   const moduleConfig = useRuntimeConfig().public.form
   const formConfig = useState<FormConfig>('form_config', () => FormConfigDefaults)
   const formState = useState<FormState>('form_status', () => ({ status: 'idle' }))
+  const formResponse = useState<unknown>(() => null)
   const defaultMessages: FormMessages = defaultFormMessages[moduleConfig.lang as keyof typeof defaultFormMessages] ?? defaultFormMessages.en
   const formMessages = computed<FormMessages>(() => ({ ...defaultMessages, ...moduleConfig.messages, ...formConfig.value.messages }))
   const showForm = computed<boolean>(() => formState.value.status === 'idle' || formState.value.status === 'error')
@@ -31,6 +32,7 @@ export const useFormBuilder = () => {
       method: newMethod ?? formConfig.value.method,
       headers: newHeaders ?? formConfig.value.headers
     }
+    formResponse.value = null
     flushState()
   }
 
@@ -44,7 +46,7 @@ export const useFormBuilder = () => {
     }
     mutateFormState('submitting')
 
-    const { error } = await useFetch(formConfig.value.action, {
+    const { data, error } = await useFetch(formConfig.value.action, {
       headers: formConfig.value.headers as Record<string, string>,
       key: String(Date.now()),
       method: formConfig.value.method,
@@ -52,8 +54,13 @@ export const useFormBuilder = () => {
     })
 
     if (error.value) {
+      formResponse.value = null
       mutateFormState('error', error?.value?.statusMessage ?? 'unknown')
       return
+    }
+
+    if (data.value) {
+      formResponse.value = data
     }
 
     mutateFormState('submitted')
@@ -64,6 +71,7 @@ export const useFormBuilder = () => {
     formConfig,
     formState,
     formMessages,
+    formResponse,
     mutateFormState,
     initForm,
     submitForm
