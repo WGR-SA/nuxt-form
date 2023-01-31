@@ -15,10 +15,10 @@ declare namespace FormBuilder {
     [key: string]: any
   }
 
-  type Props = {
+  interface Props {
     fetchUrl: string,
     method?: 'POST' | 'GET',
-    headers?: Object,
+    headers?: { [key: string]: string },
     stringify?: boolean,
     messages?: Partial<Messages>,
   }

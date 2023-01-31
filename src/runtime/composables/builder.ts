@@ -1,14 +1,20 @@
 import { useState, useFetch } from '#app'
-import { FormInstance } from '../classes/builder'
-import { useFormRecaptcha } from './recaptcha'
+import { FormInstance } from '#imports'
+import { useFormRecaptcha } from '#imports'
+import { useFormMessage } from '#imports'
 
 export const useFormBuilder = () => {
   const { recaptchaValidation } = useFormRecaptcha()
+  const { initFormMessage } = useFormMessage()
 
   const forms = useState<FormInstance[]>('forms', () => ([]))
 
-  const initForm = (config: FormInstance) => {
-    forms.value.push(new FormInstance(config))
+  const initForm = (config: FormBuilder.Props) => {
+    const form = new FormInstance(config)
+    forms.value.push(form)
+    
+    initFormMessage(config.fetchUrl, config.messages)
+
     return getFormInstance(config.fetchUrl)
   }
 
@@ -21,7 +27,7 @@ export const useFormBuilder = () => {
   }
 
   const submitForm = async (form: FormInstance) => {
-    const fv = await form.dataHandler.fieldValidation()
+    const fv = await form.data.fieldValidation()
     const rv = await recaptchaValidation(form)
 
     if (!fv || !rv) {
@@ -30,7 +36,7 @@ export const useFormBuilder = () => {
     }
     form.mutateState('submitting')
 
-    const { data, error } = await useFetch(form.fetchUrl, form.fetchParams)
+    const { data, error } = await useFetch(form.fetchUrl, form.fetchParams as any) // TODO: fix this
 
     if (error.value) {
       form.mutateState('error', error?.value?.statusMessage ?? 'unknown')

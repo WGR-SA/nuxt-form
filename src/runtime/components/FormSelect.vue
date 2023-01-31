@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { useFormData } from '../composables/data'
 
-const { state } = useFormData()
+// TO DO Props & Form instance & data
+
 const props = defineProps<FormInput.Select>()
 const required = computed(() => props.required ?? false)
 </script>

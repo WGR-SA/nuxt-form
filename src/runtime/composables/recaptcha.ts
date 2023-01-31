@@ -1,5 +1,5 @@
 import { useRuntimeConfig, useHead } from '#app'
-import { FormInstance } from '../classes/builder'
+import { FormInstance } from '#imports'
 
 export const useFormRecaptcha = () => {
   const sitekey = useRuntimeConfig().public.recaptchaSitekey
@@ -21,7 +21,7 @@ export const useFormRecaptcha = () => {
       if (!recaptchaToken) {
         return false
       }
-      form.dataHandler.addCustomData('g-recaptcha-response', recaptchaToken)
+      form.data.addCustomData('g-recaptcha-response', recaptchaToken)
     }
     return true
   }

@@ -1,2 +1,7 @@
 export { default } from './module'
-export * from './runtime/types/app'
+
+declare global {
+  interface Window {
+    grecaptcha: any;
+  }
+}

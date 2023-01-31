@@ -1,5 +1,4 @@
-import { fileURLToPath } from 'url'
-import { defineNuxtModule, createResolver, addPlugin, addImports, addComponent } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addImports, addComponent } from '@nuxt/kit'
 
 export default defineNuxtModule<FormModule.options>({
   meta: {
@@ -15,7 +14,7 @@ export default defineNuxtModule<FormModule.options>({
   },
   setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
-    const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
+    const runtimeDir = resolve('./runtime')
 
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.runtimeConfig.public.form = options
@@ -30,47 +29,62 @@ export default defineNuxtModule<FormModule.options>({
 
     addComponent({
       name: 'FormBuilder',
-      filePath: resolve(runtimeDir, 'components', 'FormBuilder.vue')
+      filePath: resolve(runtimeDir, 'components', 'FormBuilder')
     })
 
     addComponent({
       name: 'FormInputContainer',
-      filePath: resolve(runtimeDir, 'components', 'FormInputContainer.vue')
+      filePath: resolve(runtimeDir, 'components', 'FormInputContainer')
     })
 
     addComponent({
       name: 'FormInput',
-      filePath: resolve(runtimeDir, 'components', 'FormInput.vue')
+      filePath: resolve(runtimeDir, 'components', 'FormInput')
     })
 
     addComponent({
       name: 'FormSelect',
-      filePath: resolve(runtimeDir, 'components', 'FormSelect.vue')
+      filePath: resolve(runtimeDir, 'components', 'FormSelect')
     })
 
     addComponent({
       name: 'FormRadio',
-      filePath: resolve(runtimeDir, 'components', 'FormRadio.vue')
+      filePath: resolve(runtimeDir, 'components', 'FormRadio')
     })
 
     addComponent({
       name: 'FormTextarea',
-      filePath: resolve(runtimeDir, 'components', 'FormTextarea.vue')
+      filePath: resolve(runtimeDir, 'components', 'FormTextarea')
     })
 
     addComponent({
       name: 'FormAlert',
-      filePath: resolve(runtimeDir, 'components', 'FormAlert.vue')
+      filePath: resolve(runtimeDir, 'components', 'FormAlert')
     })
 
     addImports({
       name: 'useFormBuilder',
-      from: resolve(runtimeDir, 'composable', 'builder.ts')
+      from: resolve(runtimeDir, 'composables', 'builder')
     })
 
     addImports({
       name: 'useFormRecaptcha',
-      from: resolve(runtimeDir, 'composable', 'recaptcha.ts')
+      from: resolve(runtimeDir, 'composables', 'recaptcha')
+    })
+
+    addImports({
+      name: 'useFormMessage',
+      from: resolve(runtimeDir, 'composables', 'message')
+    })
+
+    addImports({
+      name: 'FormInstance',
+      from: resolve(runtimeDir, 'utils', 'formInstance')
+    })
+
+    addImports({
+      name: 'FormDataHandler',
+      from: resolve(runtimeDir, 'utils', 'dataHandler')
     })
   }
 })

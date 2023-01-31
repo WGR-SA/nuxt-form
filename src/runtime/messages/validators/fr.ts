@@ -1,4 +1,4 @@
-export const fr: any = {
+export const fr: {[key: string]: string} = {
   required: 'Ce champ est obligatoire.',
   email: 'Veuillez entrer une adresse email valide.',
   min: 'Veuillez entrer au moins {min} caractères.',

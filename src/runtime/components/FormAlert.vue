@@ -1,16 +1,17 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { useFormBuilder } from '../composables/builder'
+import { useFormBuilder } from '#imports'
+import { useFormMessage } from '#imports';
 
-const { formState, formMessages } = useFormBuilder()
-const alert = computed<string>(() => formMessages.value.alert[formState.value.status as keyof typeof formMessages.value.alert])
-const error = computed<string>(() => formMessages.value.error[formState.value.errorType as keyof typeof formMessages.value.error])
+// TO DO: get form instance from useFormBuilder & create a computed property for the alert and error message
 </script>
 
 <template>
-  <div v-if="formState.status !== 'idle'" :class="`alert alert--${formState.status}`">
+  <div 
+    v-if="form.state.status !== 'idle'" 
+    :class="`alert alert--${form.state.status}`"
+  >
     <strong>{{ alert }}</strong><br>
-    <span v-if="formState.status == 'error'">
+    <span v-if="form.state.status == 'error'">
       {{ error }}
     </span>
   </div>

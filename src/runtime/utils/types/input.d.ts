@@ -1,5 +1,4 @@
 declare namespace FormInput {
-
   interface Container {
     name: string,
     label: string,

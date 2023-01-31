@@ -8,19 +8,16 @@ const selectOptions = {
   3: 'Option 3'
 }
 
-const formResponse = useState('form_response')
-const formError = useState('form_response')
-
-watchEffect(() => {
-  console.log(formResponse.value)
-})
+// watchEffect(() => {
+//   console.log(formResponse.value)
+// })
 
 </script>
 
 <template>
   <div style="max-width: 1200px;padding: 40px;margin: 0 auto;">
     <FormBuilder fetch-url="http://localhost:8888">
-      <FormInput name="firstname" label="Name" :rules="['required']" placeholder="Name" />
+      <!--<FormInput name="firstname" label="Name" :rules="['required']" placeholder="Name" />-->
     </FormBuilder>
     <!-- <FormBuilder fetchUrl="http://localhost:8888">
       <FormInput name="firstname" label="Name" :rules="['required']" placeholder="Name" />
