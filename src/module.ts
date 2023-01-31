@@ -1,10 +1,7 @@
 import { fileURLToPath } from 'url'
 import { defineNuxtModule, createResolver, addPlugin, addImports, addComponent } from '@nuxt/kit'
 
-import type { ModuleOptions } from './runtime/types'
-export * from './runtime/types'
-
-export default defineNuxtModule<ModuleOptions>({
+export default defineNuxtModule<FormModule.options>({
   meta: {
     name: '@wgr-sa/nuxt-form',
     configKey: 'form'
@@ -51,11 +48,6 @@ export default defineNuxtModule<ModuleOptions>({
       filePath: resolve(runtimeDir, 'components', 'FormSelect.vue')
     })
 
-    // addComponent({
-    //   name: 'FormSelectMultiple',
-    //   filePath: resolve(runtimeDir, 'components', 'FormSelectMultiple.vue')
-    // })
-
     addComponent({
       name: 'FormRadio',
       filePath: resolve(runtimeDir, 'components', 'FormRadio.vue')
@@ -74,11 +66,6 @@ export default defineNuxtModule<ModuleOptions>({
     addImports({
       name: 'useFormBuilder',
       from: resolve(runtimeDir, 'composable', 'builder.ts')
-    })
-
-    addImports({
-      name: 'useFormData',
-      from: resolve(runtimeDir, 'composable', 'data.ts')
     })
 
     addImports({

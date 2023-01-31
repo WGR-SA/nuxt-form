@@ -1,6 +1,15 @@
 {
   "extends": "./playground/.nuxt/tsconfig.json",
   "include": [
-    "./src"
-  ]
+    "./src",
+    "./.nuxt/nuxt.d.ts",
+    "./types/app.d.ts",
+    "./types/builder.d.ts",
+    "./types/data.d.ts",
+    "./types/input.d.ts",
+    "./types/module.d.ts",
+    "/**/*",
+    "/**/**/*"
+  ],
+
 }

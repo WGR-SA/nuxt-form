@@ -2,15 +2,8 @@
 import { computed } from 'vue'
 import { useFormData } from '../composables/data'
 
-import type { FormInputProps } from './FormInput.vue'
-
-interface FormTextareaProps extends FormInputProps {
-  name: string,
-  rows?: number
-}
-
 const { state } = useFormData()
-const props = defineProps<FormTextareaProps>()
+const props = defineProps<FormInput.Textarea>()
 const required = computed(() => props.required ?? false)
 const rows = computed(() => props.rows ?? 3)
 </script>

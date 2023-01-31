@@ -2,15 +2,8 @@
 import { computed } from 'vue'
 import { useFormData } from '../composables/data'
 
-import type { FormInputProps } from './FormInput.vue'
-
-interface FormSelectProps extends FormInputProps {
-  name: string,
-  options: { [key: string | number]: string }
-}
-
 const { state } = useFormData()
-const props = defineProps<FormSelectProps>()
+const props = defineProps<FormInput.Select>()
 const required = computed(() => props.required ?? false)
 </script>
 

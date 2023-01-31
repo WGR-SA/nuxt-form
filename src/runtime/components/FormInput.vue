@@ -2,19 +2,8 @@
 import { computed } from 'vue'
 import { useFormData } from '../composables/data'
 
-export interface FormInputProps {
-  name: string,
-  label: string,
-  rules?: string[],
-  type?: string,
-  required?: boolean,
-  checked?: boolean,
-  value?: string,
-  placeholder?: string,
-}
-
 const { state } = useFormData()
-const props = defineProps<FormInputProps>()
+const props = defineProps<FormInput.Text>()
 const type = computed(() => props.type ?? 'text')
 </script>
 

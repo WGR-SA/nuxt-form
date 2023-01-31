@@ -1,24 +1,8 @@
 <script lang="ts" setup>
-import { useFormData } from '../composables/data'
+const props = defineProps<FormInput.Container>()
 
-interface FormInputContainerProps {
-  name: string,
-  label: string,
-  rules?: string[],
-  options?: { [key: string | number]: string },
-  required?: boolean,
-  checked?: boolean,
-  value?: string,
-  default?: string,
-  type?: string,
-  [key: string]: any
-}
-
-const props = defineProps<FormInputContainerProps>()
-const { addField, setDefaultValue } = useFormData()
-
-addField(({ name: props.name, rules: props.rules ?? [] }))
-setDefaultValue(props)
+form.dataHandler.addField(({ name: props.name, rules: props.rules ?? [] }))
+form.dataHandler.setDefaultValue(props)
 
 const { v$ } = useFormData()
 </script>

@@ -1,80 +1,52 @@
-import { computed } from 'vue'
-import { useState, useRuntimeConfig, useFetch } from '#app'
-
-import type { FormConfig, FormState, FormMessages } from '../types'
-import { FormConfigDefaults } from '../types'
-
-import { useFormData } from '../composables/data'
-import * as defaultFormMessages from '../messages/form'
-
+import { useState, useFetch } from '#app'
+import { FormInstance } from '../classes/builder'
 import { useFormRecaptcha } from './recaptcha'
 
 export const useFormBuilder = () => {
-  const { state, flushState, fieldValidation } = useFormData()
   const { recaptchaValidation } = useFormRecaptcha()
 
-  const moduleConfig = useRuntimeConfig().public.form
-  const formConfig = useState<FormConfig>('form_config', () => FormConfigDefaults)
-  const formState = useState<FormState>('form_status', () => ({ status: 'idle' }))
-  const formResponse = useState<unknown>(() => null)
-  const defaultMessages: FormMessages = defaultFormMessages[moduleConfig.lang as keyof typeof defaultFormMessages] ?? defaultFormMessages.en
-  const formMessages = computed<FormMessages>(() => ({ ...defaultMessages, ...moduleConfig.messages, ...formConfig.value.messages }))
-  const showForm = computed<boolean>(() => formState.value.status === 'idle' || formState.value.status === 'error')
+  const forms = useState<FormInstance[]>('forms', () => ([]))
 
-  const mutateFormState = (status: FormState['status'], errorType?: FormState['errorType']) => {
-    formState.value = { status, errorType }
+  const initForm = (config: FormInstance) => {
+    forms.value.push(new FormInstance(config))
+    return getFormInstance(config.fetchUrl)
   }
 
-  const initForm = (fetchUrl: FormConfig['action'], method: FormConfig['method'] | undefined, headers: FormConfig['headers'] | undefined, stringify: FormConfig['stringify'] | undefined) => {
-    formConfig.value = {
-      ...formConfig.value,
-      action: fetchUrl,
-      method: method ?? formConfig.value.method,
-      headers: headers ?? formConfig.value.headers,
-      stringify: stringify ?? formConfig.value.stringify
+  const getFormInstance = (fetchUrl: string) => {
+    const form = forms.value.find((form: FormInstance) => form.fetchUrl === fetchUrl)
+    if (!form) {
+      throw new Error(`Form with key ${fetchUrl} not found`)
     }
-    formResponse.value = null
-    flushState()
+    return form
   }
 
-  const submitForm = async () => {
-    const fv = await fieldValidation()
-    const rv = await recaptchaValidation()
+  const submitForm = async (form: FormInstance) => {
+    const fv = await form.dataHandler.fieldValidation()
+    const rv = await recaptchaValidation(form)
 
     if (!fv || !rv) {
-      mutateFormState('error', !fv ? 'field_validation' : 'recaptcha')
+      form.mutateState('error', !fv ? 'field_validation' : 'recaptcha')
       return
     }
-    mutateFormState('submitting')
+    form.mutateState('submitting')
 
-    const { data, error } = await useFetch(formConfig.value.action, {
-      headers: formConfig.value.headers as Record<string, string>,
-      key: String(Date.now()),
-      method: formConfig.value.method,
-      body: (formConfig.value.stringify) ? state : JSON.stringify(state)
-    })
+    const { data, error } = await useFetch(form.fetchUrl, form.fetchParams)
 
     if (error.value) {
-      formResponse.value = null
-      mutateFormState('error', error?.value?.statusMessage ?? 'unknown')
+      form.mutateState('error', error?.value?.statusMessage ?? 'unknown')
       return
     }
 
     if (data.value) {
-      formResponse.value = data
+      form.response = data
     }
 
-    mutateFormState('submitted')
+    form.mutateState('submitted')
   }
 
   return {
-    showForm,
-    formConfig,
-    formState,
-    formMessages,
-    formResponse,
-    mutateFormState,
     initForm,
+    getFormInstance,
     submitForm
   }
 }

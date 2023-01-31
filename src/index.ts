@@ -1,2 +1,2 @@
 export { default } from './module'
-export * from './runtime/types'
+export * from './runtime/types/app'

@@ -2,29 +2,21 @@
 import { useFormBuilder } from '../composables/builder'
 import { useFormRecaptcha } from '../composables/recaptcha'
 
-interface FormBuilderProps {
-  fetchUrl: string,
-  method?: 'POST' | 'GET',
-  headers?: Object,
-  stringify?: boolean
-}
-
-const props = defineProps<FormBuilderProps>()
+const config = defineProps<FormBuilder.Props>()
 const { recaptchaInit } = useFormRecaptcha()
-const { showForm, formMessages, initForm, submitForm } = useFormBuilder()
+const { initForm, submitForm } = useFormBuilder()
+const form = initForm(config)
 
 recaptchaInit()
-initForm(props.fetchUrl, props.method, props.headers, props.stringify)
-
 </script>
 
 <template>
   <form class="form">
     <FormAlert />
-    <fieldset v-if="showForm">
-      <slot></slot>
-      <button type="submit" @click.prevent="submitForm">
-        {{ formMessages.submit }}
+    <fieldset v-if="form.shown">
+      <slot />
+      <button type="submit" @click.prevent="submitForm(form)">
+        {{ form.messages.submit }}
       </button>
     </fieldset>
   </form>

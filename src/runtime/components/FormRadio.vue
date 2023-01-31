@@ -2,16 +2,8 @@
 import { computed } from 'vue'
 import { useFormData } from '../composables/data'
 
-import type { FormInputProps } from './FormInput.vue'
-
-interface FormRadioProps extends FormInputProps {
-  name: string,
-  options: { [key: string | number]: string }
-  default?: string
-}
-
 const { state } = useFormData()
-const props = defineProps<FormRadioProps>()
+const props = defineProps<FormInput.Radio>()
 const required = computed(() => props.required ?? false)
 
 </script>
