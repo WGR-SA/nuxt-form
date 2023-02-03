@@ -16,6 +16,7 @@ const props = defineProps<{
 }>()
 
 const form = inject('form') as FormInstance
+const validator = inject('validator') as any
 
 form.data.addField(({ name: props.name, rules: props.rules ?? [] }))
 form.data.setDefaultValue(props)
@@ -27,7 +28,7 @@ form.data.setDefaultValue(props)
     <label :for="name">{{ label }}</label>
     <slot />
     <p 
-      v-for="error of form.data.v$.value[name]?.$errors" 
+      v-for="error of validator[name]?.$errors" 
       :key="error.$uid" 
       class="form__error" 
     >

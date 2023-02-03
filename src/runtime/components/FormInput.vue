@@ -21,7 +21,7 @@ const type = computed(() => props.type ?? 'text')
 <template>
   <FormInputContainer v-bind="props">
     <input 
-      v-model="form.data.state.value[name]"
+      v-model="form.data.state[name]"
       :type="type" 
       :required="required" 
       :placeholder="placeholder" 

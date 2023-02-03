@@ -13,9 +13,10 @@ const config = defineProps<{
   messages?: Partial<FormBuilder.Messages> 
 }>()
 
-const form = initForm(config as FormBuilder.Props)
+const { form, validator } = initForm(config as FormBuilder.Props)
 
-provide<FormInstance>('form', form)
+provide('form', form)
+provide('validator', validator)
 </script>
 
 <template>
@@ -25,7 +26,7 @@ provide<FormInstance>('form', form)
       <slot />
       <button 
         type="submit" 
-        @click.prevent="submitForm(form)"
+        @click.prevent="submitForm(form, validator)"
       >
         {{ getFormMessage(form.fetchUrl, 'form', 'submit' ) }}
       </button>

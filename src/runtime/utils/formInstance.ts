@@ -11,13 +11,14 @@ export class FormInstance {
   public shown: ComputedRef<boolean> = computed(() => this.state.status === 'idle' || this.state.status === 'error')
   public response: FormBuilder.Response = null
   public data: FormDataHandler
+  public v$: any
 
-  constructor(config: FormBuilder.Props, rules: Ref<{ [key: string]: any }>, state: Ref<{ [key: string]: string }>, v$: Ref) {
+  constructor(config: FormBuilder.Props) {
     this.method = config.method ?? 'POST'
     this.fetchUrl = config.fetchUrl
     this.headers = { ...config.headers }
     this.stringify = config.stringify ?? false
-    this.data = new FormDataHandler(rules, state, v$)
+    this.data = new FormDataHandler()
   }
 
   get fetchParams () {

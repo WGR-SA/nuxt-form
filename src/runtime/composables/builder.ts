@@ -1,5 +1,5 @@
-import { ref } from 'vue'
-import { useState, useFetch } from '#app'
+import { ref, reactive } from 'vue'
+import { useFetch } from '#app'
 import { useVuelidate } from '@vuelidate/core'
 import { useFormRecaptcha, useFormMessage, FormInstance } from '#imports'
 
@@ -7,34 +7,22 @@ export const useFormBuilder = () => {
   const { recaptchaInit, recaptchaValidation } = useFormRecaptcha()
   const { initFormMessage } = useFormMessage()
 
-  const forms = useState<FormInstance[]>('forms', () => ([]))
-
   const initForm = (config: FormBuilder.Props) => {
-    recaptchaInit()
-
-    const rules = ref({})
-    const state = ref({})
-    const v$ = useVuelidate(rules, state, { $autoDirty: true })
-
-    const form = new FormInstance(config, rules, state, v$)
-    initFormMessage(config.fetchUrl, config.messages)
-  
-    return form
-  }
-
-  const getFormInstance = (fetchUrl: string) => {
-    const form = forms.value.find((form: FormInstance) => form.fetchUrl === fetchUrl)
-    if (!form) {
-      throw new Error(`Form with key ${fetchUrl} not found`)
-    }
-    return form
-  }
-
-  const submitForm = async (form: FormInstance) => {
-    const fv = await form.data.fieldValidation()
-    console.log('fv', fv);
-    console.log(form.data);
+    const form = reactive(new FormInstance(config))
+    const validator = validatorInit(form.data.rules, form.data.state)
     
+    recaptchaInit()
+    initFormMessage(config.fetchUrl, config.messages)
+
+    return { form, validator }
+  }
+
+  const validatorInit = (rules: any, state: any) => {
+    return useVuelidate(rules, state, { $autoDirty: true })
+  }
+
+  const submitForm = async (form: any, validator: any ) => {
+    const fv = await validator.$validate()
     const rv = await recaptchaValidation(form)
 
     if (!fv || !rv) {
@@ -59,7 +47,6 @@ export const useFormBuilder = () => {
 
   return {
     initForm,
-    getFormInstance,
     submitForm
   }
 }
