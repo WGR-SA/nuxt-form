@@ -1,4 +1,4 @@
-import { defineNuxtModule, createResolver, addImports, addComponent } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addImports, addImportsDir, addComponent } from '@nuxt/kit'
 
 export default defineNuxtModule<FormModule.options>({
   meta: {
@@ -86,5 +86,16 @@ export default defineNuxtModule<FormModule.options>({
       name: 'FormDataHandler',
       from: resolve(runtimeDir, 'utils', 'dataHandler')
     })
+
+    addImports({
+      name: 'FormMessages',
+      from: resolve(runtimeDir, 'messages', 'form')
+    })
+
+    addImports({
+      name: 'ValidatorMessages',
+      from: resolve(runtimeDir, 'messages', 'validators')
+    })
+
   }
 })

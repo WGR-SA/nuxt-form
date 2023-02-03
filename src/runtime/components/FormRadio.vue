@@ -1,18 +1,39 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
+import { FormInstance } from '#imports'
 
-// TO DO Props & Form instance & data
+const props = defineProps<{
+  name: string,
+  label: string,
+  options: { [key: string | number]: string }
+  rules?: string[],
+  type?: string,
+  required?: boolean,
+  checked?: boolean,
+  value?: string,
+  placeholder?: string,
+  default?: string
+}>()
 
-const props = defineProps<FormInput.Radio>()
+const form = inject('form') as FormInstance
 const required = computed(() => props.required ?? false)
 
 </script>
 
 <template>
   <FormInputContainer v-bind="props">
-    <div v-for="(option, key) in options" :key="key" class="form__radio">
-      <label :for="state[name]"> {{ option }} </label>
-      <input v-model="state[name]" type="radio" :value="key" :required="required">
+    <div 
+      v-for="(option, key) in options" 
+      :key="key" 
+      class="form__radio"
+    >
+      <label :for="form.data.state.value[name]"> {{ option }} </label>
+      <input 
+        v-model="form.data.state.value[name]" 
+        type="radio" 
+        :value="key" 
+        :required="required"
+      >
     </div>
   </FormInputContainer>
 </template>

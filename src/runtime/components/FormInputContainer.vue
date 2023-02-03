@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { inject } from 'vue'
+import { FormInstance } from '#imports'
+
 const props = defineProps<{
   name: string,
   label: string,
@@ -12,12 +15,11 @@ const props = defineProps<{
   [key: string]: any
 }>()
 
-// TO DO: Get Form instance and set default & validators
+const form = inject('form') as FormInstance
 
 form.data.addField(({ name: props.name, rules: props.rules ?? [] }))
 form.data.setDefaultValue(props)
 
-const { v$ } = form.data.data.v$
 </script>
 
 <template>
@@ -25,9 +27,9 @@ const { v$ } = form.data.data.v$
     <label :for="name">{{ label }}</label>
     <slot />
     <p 
-      v-for="error of v$[name]?.$errors" 
+      v-for="error of form.data.v$.value[name]?.$errors" 
       :key="error.$uid" 
-      class="form__error"
+      class="form__error" 
     >
       {{ error.$message }}
     </p>

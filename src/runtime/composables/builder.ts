@@ -1,21 +1,25 @@
+import { ref } from 'vue'
 import { useState, useFetch } from '#app'
-import { FormInstance } from '#imports'
-import { useFormRecaptcha } from '#imports'
-import { useFormMessage } from '#imports'
+import { useVuelidate } from '@vuelidate/core'
+import { useFormRecaptcha, useFormMessage, FormInstance } from '#imports'
 
 export const useFormBuilder = () => {
-  const { recaptchaValidation } = useFormRecaptcha()
+  const { recaptchaInit, recaptchaValidation } = useFormRecaptcha()
   const { initFormMessage } = useFormMessage()
 
   const forms = useState<FormInstance[]>('forms', () => ([]))
 
   const initForm = (config: FormBuilder.Props) => {
-    const form = new FormInstance(config)
-    forms.value.push(form)
-    
-    initFormMessage(config.fetchUrl, config.messages)
+    recaptchaInit()
 
-    return getFormInstance(config.fetchUrl)
+    const rules = ref({})
+    const state = ref({})
+    const v$ = useVuelidate(rules, state, { $autoDirty: true })
+
+    const form = new FormInstance(config, rules, state, v$)
+    initFormMessage(config.fetchUrl, config.messages)
+  
+    return form
   }
 
   const getFormInstance = (fetchUrl: string) => {
@@ -28,6 +32,9 @@ export const useFormBuilder = () => {
 
   const submitForm = async (form: FormInstance) => {
     const fv = await form.data.fieldValidation()
+    console.log('fv', fv);
+    console.log(form.data);
+    
     const rv = await recaptchaValidation(form)
 
     if (!fv || !rv) {
@@ -36,7 +43,7 @@ export const useFormBuilder = () => {
     }
     form.mutateState('submitting')
 
-    const { data, error } = await useFetch(form.fetchUrl, form.fetchParams as any) // TODO: fix this
+    const { data, error } = await useFetch(form.fetchUrl, form.fetchParams)
 
     if (error.value) {
       form.mutateState('error', error?.value?.statusMessage ?? 'unknown')

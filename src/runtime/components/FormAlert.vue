@@ -1,8 +1,12 @@
 <script lang="ts" setup>
-import { useFormBuilder } from '#imports'
-import { useFormMessage } from '#imports';
+import { inject, computed } from 'vue'
+import { FormInstance, useFormMessage } from '#imports'
 
-// TO DO: get form instance from useFormBuilder & create a computed property for the alert and error message
+const { getFormMessage } = useFormMessage() 
+
+const form = inject('form') as FormInstance
+const alert = computed(() => getFormMessage(form.fetchUrl, 'form', `alert.${form.state.status}`))
+const error = computed(() => getFormMessage(form.fetchUrl, 'form', `alert.${form.state.errorType ?? 'unknown'}`))
 </script>
 
 <template>

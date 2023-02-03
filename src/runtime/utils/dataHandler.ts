@@ -1,27 +1,21 @@
 import { Ref } from 'vue'
-import { useState } from '#app'
-import { useVuelidate } from '@vuelidate/core'
 import * as validators from '@vuelidate/validators'
 
 export class FormDataHandler {
-  private state: Ref<{ [key: string]: string }>
-  private rules: Ref<{ [key: string]: any }>
+  private rules
 
-  public v$: Ref
+  public state
+  public v$
 
-  constructor (fetchUrl: string) {
-    this.state = useState(`${fetchUrl}.state`)
-    this.rules = useState(`${fetchUrl}.rules`)
-    this.v$ = useVuelidate(this.rules, this.state, { $autoDirty: true })
+  constructor(rules: Ref<{ [key: string]: any }>, state: Ref<{ [key: string]: string }>, v$: Ref) {    
+    this.state = rules
+    this.rules = state
+    this.v$ = v$
   }
 
   async fieldValidation () {
     return await this.v$.value.$validate()
-  }
-
-  getData () {
-    return this.state.value
-  }
+  } 
 
   flushData () {
     this.state.value = {}
@@ -32,9 +26,14 @@ export class FormDataHandler {
     if (options.name in this.state.value) {
       return
     }
+    
     this.state.value[options.name] = ''
-    this.rules.value[options.name] = options.rules.map((r: string) => validators[r as keyof typeof validators])
-    // TO DO: add lng support for error messages
+    this.rules.value[options.name] = options.rules.map((r: string) => validators[r as keyof typeof validators])    
+    // TO DO: add lng supporst for error messages & custom messages
+  }
+
+  addCustomData (name: string, value: string) {
+    this.state.value[name] = value
   }
 
   setDefaultValue (field: any) {
@@ -47,9 +46,5 @@ export class FormDataHandler {
     if (field.checked) {
       this.state.value[field.name] = field.value ?? String(field.checked)
     }
-  }
-
-  addCustomData (name: string, value: string) {
-    this.state.value[name] = value
   }
 }

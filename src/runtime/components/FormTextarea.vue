@@ -1,9 +1,20 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
+import { FormInstance } from '#imports'
 
-// TO DO Props & Form instance & data
+const props = defineProps<{
+  name: string,
+  label: string,
+  rules?: string[],
+  type?: string,
+  required?: boolean,
+  checked?: boolean,
+  value?: string,
+  placeholder?: string,
+  rows?: number,
+}>()
 
-const props = defineProps<FormInput.Textarea>()
+const form = inject('form') as FormInstance
 const required = computed(() => props.required ?? false)
 const rows = computed(() => props.rows ?? 3)
 </script>
@@ -11,7 +22,7 @@ const rows = computed(() => props.rows ?? 3)
 <template>
   <FormInputContainer v-bind="props">
     <textarea 
-      v-model="state[name]" 
+      v-model="form.data.state.value[name]" 
       :required="required" 
       :rows="rows" 
     />

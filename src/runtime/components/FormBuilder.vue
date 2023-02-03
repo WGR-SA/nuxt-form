@@ -1,31 +1,33 @@
 <script lang="ts" setup>
-import { useFormBuilder } from '#imports'
-import { useFormRecaptcha } from '#imports'
+import { provide } from 'vue'
+import { useFormBuilder, useFormMessage, FormInstance } from '#imports'
 
-const config = defineProps<{
-  fetchUrl: string,
-  method?: 'POST' | 'GET',
-  headers?: Object,
-  stringify?: boolean,
-  messages?: Partial<FormBuilder.Messages>,
-}>()
-const { recaptchaInit } = useFormRecaptcha()
 const { initForm, submitForm } = useFormBuilder()
+const { getFormMessage } = useFormMessage()
+
+const config = defineProps<{ 
+  fetchUrl: string, 
+  method?: 'POST' | 'GET',
+  headers?: { [key: string]: string }, 
+  stringify?: boolean, 
+  messages?: Partial<FormBuilder.Messages> 
+}>()
+
 const form = initForm(config as FormBuilder.Props)
 
-recaptchaInit()
+provide<FormInstance>('form', form)
 </script>
 
 <template>
   <form class="form">
-    <!-- <FormAlert /> -->
+    <FormAlert />
     <fieldset v-if="form.shown">
       <slot />
       <button 
         type="submit" 
         @click.prevent="submitForm(form)"
       >
-        {{ form.messages.submit }}
+        {{ getFormMessage(form.fetchUrl, 'form', 'submit' ) }}
       </button>
     </fieldset>
   </form>

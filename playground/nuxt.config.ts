@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     hide_recaptcha: false,
     default_styles: true,
     messages: {
-    }
+    },
+    lang: 'fr'
   }
 })

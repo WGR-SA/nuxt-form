@@ -16,8 +16,8 @@ const selectOptions = {
 
 <template>
   <div style="max-width: 1200px;padding: 40px;margin: 0 auto;">
-    <FormBuilder fetch-url="http://localhost:8888">
-      <!--<FormInput name="firstname" label="Name" :rules="['required']" placeholder="Name" />-->
+    <FormBuilder fetch-url="https://httpbin.org/">
+      <FormInput name="email" label="Name" :rules="['email', 'required']" placeholder="Name" />
     </FormBuilder>
     <!-- <FormBuilder fetchUrl="http://localhost:8888">
       <FormInput name="firstname" label="Name" :rules="['required']" placeholder="Name" />

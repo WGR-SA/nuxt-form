@@ -1,6 +1,5 @@
 import { useState, useRuntimeConfig } from '#app'
-import * as FormMessages from '../messages/form'
-import * as ValidatorMessages from '../messages/validators'
+import { FormMessages, ValidatorMessages }  from '#imports'
 
 interface FormMessageStore {
   key: string,
@@ -15,8 +14,8 @@ export const useFormMessage = () => {
 
   const initFormMessage = (key: string, messages?: Partial<FormBuilder.Messages>) => {
     
-    const form = { ...FormMessages, ...{ [config.public.lang]: config.messages.form }, ...{ [config.public.lang]: messages?.form }}
-    const validators = { ...ValidatorMessages, ...{ [config.public.lang]: config.messages.validators }, ...{ [config.public.lang]: messages?.validators } }
+    const form = { ...FormMessages, ...{ [config.public.lang]: config.messages?.form }, ...{ [config.public.lang]: messages?.form }}
+    const validators = { ...ValidatorMessages, ...{ [config.public.lang]: config.messages?.validators }, ...{ [config.public.lang]: messages?.validators } }
     messageStore.value.push({ key, form, validators })
   } 
 
@@ -25,8 +24,13 @@ export const useFormMessage = () => {
     if (!store) {
       throw new Error(`Message store with key ${key} not found`)
     }
-    // TO DO - add support for nested paths && lng fallback
-    return store[type][config.public.lang][path]
+    
+    return resolvePath(path, store[type][config.public.form.lang]) ?? resolvePath(path, store[type]['en'])
+  }
+
+  const resolvePath = (path: string | string[], obj: any, separator = '.') => { 
+    const properties = Array.isArray(path) ? path : path.split(separator); 
+    return properties.reduce((prev, curr) => prev && prev[curr], obj); 
   }
 
   return {
