@@ -1,12 +1,8 @@
 <script lang="ts" setup>
-import { inject, computed } from 'vue'
-import { FormInstance, useFormMessage } from '#imports'
-
-const { getFormMessage } = useFormMessage() 
+import { inject } from 'vue'
+import { FormInstance } from '#imports'
 
 const form = inject('form') as FormInstance
-const alert = computed(() => getFormMessage(form.fetchUrl, 'form', `alert.${form.state.status}`))
-const error = computed(() => getFormMessage(form.fetchUrl, 'form', `alert.${form.state.errorType ?? 'unknown'}`))
 </script>
 
 <template>
@@ -14,9 +10,9 @@ const error = computed(() => getFormMessage(form.fetchUrl, 'form', `alert.${form
     v-if="form.state.status !== 'idle'" 
     :class="`alert alert--${form.state.status}`"
   >
-    <strong>{{ alert }}</strong><br>
+    <strong>{{ form.messages.get(`alert.${form.state.status}`) }}</strong><br>
     <span v-if="form.state.status == 'error'">
-      {{ error }}
+      {{ form.messages.get(`error.${form.state.errorType ?? 'unknown'}`) }}
     </span>
   </div>
 </template>

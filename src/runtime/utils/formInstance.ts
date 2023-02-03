@@ -1,24 +1,24 @@
-import { computed, ComputedRef, Ref } from 'vue'
 import { UseFetchOptions } from '#app'
-import { FormDataHandler } from '#imports'
+import { FormDataHandler, FormMessageStore } from '#imports'
 
 export class FormInstance {
-  public fetchUrl: string
+  public url: string
   public method: string
   public headers: { [key: string]: string }
   public stringify: boolean
-  public state: FormBuilder.State = { status: 'idle' }
-  public shown: ComputedRef<boolean> = computed(() => this.state.status === 'idle' || this.state.status === 'error')
   public response: FormBuilder.Response = null
+  public state: FormBuilder.State = { status: 'idle' }
+  public shown: boolean = this.state.status === 'idle' || this.state.status === 'error'
   public data: FormDataHandler
-  public v$: any
+  public messages: FormMessageStore 
 
   constructor(config: FormBuilder.Props) {
     this.method = config.method ?? 'POST'
-    this.fetchUrl = config.fetchUrl
+    this.url = config.url
     this.headers = { ...config.headers }
     this.stringify = config.stringify ?? false
     this.data = new FormDataHandler()
+    this.messages = new FormMessageStore()
   }
 
   get fetchParams () {
@@ -30,7 +30,7 @@ export class FormInstance {
     } as UseFetchOptions<unknown>
   }
 
-  mutateState (status: FormBuilder.Status, errorType?: FormBuilder.ErrorType | string) {
+  mutateState (status: FormBuilder.Status, errorType?: FormBuilder.ErrorType | string) {    
     this.state = { status, errorType }
   }
 }

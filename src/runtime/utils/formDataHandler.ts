@@ -1,13 +1,8 @@
 import * as validators from '@vuelidate/validators'
 
 export class FormDataHandler {
-  public rules: { [key: string]: any }
-  public state: { [key: string]: any }
-
-  constructor () {    
-    this.state = {}
-    this.rules = {}
-  }
+  public rules: { [key: string]: any } = {}
+  public state: { [key: string]: any } = {}
 
   addField (options: { name: string, rules: string[] }) {
     if (options.name in this.state) {

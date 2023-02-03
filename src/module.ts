@@ -73,18 +73,18 @@ export default defineNuxtModule<FormModule.options>({
     })
 
     addImports({
-      name: 'useFormMessage',
-      from: resolve(runtimeDir, 'composables', 'message')
-    })
-
-    addImports({
       name: 'FormInstance',
       from: resolve(runtimeDir, 'utils', 'formInstance')
     })
 
     addImports({
       name: 'FormDataHandler',
-      from: resolve(runtimeDir, 'utils', 'dataHandler')
+      from: resolve(runtimeDir, 'utils', 'formDataHandler')
+    })
+
+    addImports({
+      name: 'FormMessageStore',
+      from: resolve(runtimeDir, 'utils', 'formMessageStore')
     })
 
     addImports({

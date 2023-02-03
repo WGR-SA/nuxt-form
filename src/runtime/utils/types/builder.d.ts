@@ -16,11 +16,12 @@ declare namespace FormBuilder {
   }
 
   interface Props {
-    fetchUrl: string,
+    url: string,
     method?: 'POST' | 'GET',
     headers?: { [key: string]: string },
     stringify?: boolean,
     messages?: Partial<Messages>,
+    lang?: string,
   }
 
   type Status = 'idle' | 'submitting' | 'submitted' | 'error'
