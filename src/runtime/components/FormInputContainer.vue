@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { useFormData } from '../composables/data'
+import { inject } from 'vue'
+import { FormInstance } from '#imports'
 
-interface FormInputContainerProps {
+const props = defineProps<{
   name: string,
   label: string,
   rules?: string[],
@@ -12,22 +13,26 @@ interface FormInputContainerProps {
   default?: string,
   type?: string,
   [key: string]: any
-}
+}>()
 
-const props = defineProps<FormInputContainerProps>()
-const { addField, setDefaultValue } = useFormData()
+const form = inject('form') as FormInstance
+const validator = inject('validator') as any
 
-addField(({ name: props.name, rules: props.rules ?? [] }))
-setDefaultValue(props)
+form.data.addField(({ name: props.name, rules: props.rules ?? [] }))
+form.data.setDefaultValue(props)
+form.updateValidatorMessages()
 
-const { v$ } = useFormData()
 </script>
 
 <template>
   <div :class="`form__input form__${type ?? 'default'} ${(rules?.includes('required')) ? 'form--required' : '' }`">
     <label :for="name">{{ label }}</label>
     <slot />
-    <p v-for="error of v$[name]?.$errors" :key="error.$uid" class="form__error">
+    <p 
+      v-for="error of validator[name]?.$errors" 
+      :key="error.$uid" 
+      class="form__error" 
+    >
       {{ error.$message }}
     </p>
   </div>

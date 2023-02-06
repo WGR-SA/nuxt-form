@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   modules: [
     NuxtForm
   ],
+  typescript: {
+    strict: true
+  },
   runtimeConfig: {
     public: {
       recaptchaSitekey: ''
@@ -15,6 +18,7 @@ export default defineNuxtConfig({
     hide_recaptcha: false,
     default_styles: true,
     messages: {
-    }
+    },
+    lang: 'fr'
   }
 })

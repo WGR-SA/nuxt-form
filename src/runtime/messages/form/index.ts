@@ -1,2 +1,7 @@
-export * from './fr'
-export * from './en'
+import { fr } from './fr'
+import { en } from './en'
+
+export const FormMessages = {
+  fr: fr,
+  en: en
+}

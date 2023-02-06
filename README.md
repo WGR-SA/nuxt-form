@@ -41,7 +41,7 @@ Add `FormBuilder` Component in template and include inputs components (`FormInpu
 
 Exemple:
 ```
-<FormBuilder fetchUrl="http://locahost:8888">
+<FormBuilder action="http://locahost:8888">
   <FormInput name="name_key" label="Name" :rules="['required']" placeholder="Name" />
   <FormInput name="email_key" label="Email" :rules="['required', 'email']" />
   <FormSelect name="select_key" label="Select" :options="select_options" />
@@ -62,7 +62,7 @@ Exemple:
 
 #### `FormBuilder`
 ```
-  fetchUrl: string,
+  action: string,
   method?: 'POST' | 'GET',
   headers?: Object,
   stringify?: boolean // Stringify body

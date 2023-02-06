@@ -1,9 +1,8 @@
 import { useRuntimeConfig, useHead } from '#app'
-import { useFormData } from './data'
+import { FormInstance } from '#imports'
 
 export const useFormRecaptcha = () => {
   const sitekey = useRuntimeConfig().public.recaptchaSitekey
-  const { addCustomData } = useFormData()
 
   const recaptchaInit = () => {
     if (useRuntimeConfig().public.form.recaptcha) {
@@ -15,14 +14,14 @@ export const useFormRecaptcha = () => {
     }
   }
 
-  const recaptchaValidation = async () => {
+  const recaptchaValidation = async (form: FormInstance) => {
     if (useRuntimeConfig().public.form.recaptcha) {
       const recaptcha = window.grecaptcha
       const recaptchaToken = await recaptcha.execute(sitekey, { action: 'contact' })
       if (!recaptchaToken) {
         return false
       }
-      addCustomData('g-recaptcha-response', recaptchaToken)
+      form.data.addCustomData('g-recaptcha-response', recaptchaToken)
     }
     return true
   }

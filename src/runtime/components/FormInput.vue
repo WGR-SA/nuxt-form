@@ -1,25 +1,31 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { useFormData } from '../composables/data'
+import { computed, inject } from 'vue'
+import { FormInstance } from '#imports'
 
-export interface FormInputProps {
-  name: string,
-  label: string,
-  rules?: string[],
-  type?: string,
-  required?: boolean,
-  checked?: boolean,
-  value?: string,
-  placeholder?: string,
-}
+const props = defineProps<{ 
+  name: string, 
+  label: string, 
+  rules?: string[], 
+  type?: string, 
+  required?: boolean, 
+  checked?: boolean, 
+  value?: string, 
+  placeholder?: string 
+}>()
 
-const { state } = useFormData()
-const props = defineProps<FormInputProps>()
+const form = inject('form') as FormInstance
 const type = computed(() => props.type ?? 'text')
+
 </script>
 
 <template>
   <FormInputContainer v-bind="props">
-    <input v-model="state[name]" :type="type" v-bind:required="required" v-bind:placeholder="placeholder" v-bind:checked="checked">
+    <input 
+      v-model="form.data.state[name]"
+      :type="type" 
+      :required="required" 
+      :placeholder="placeholder" 
+      :checked="checked"
+    >
   </FormInputContainer>
 </template>

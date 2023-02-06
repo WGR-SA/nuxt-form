@@ -1,6 +1,4 @@
-import { FormMessages } from '../../types'
-
-export const fr: FormMessages = {
+export const fr: FormBuilder.Messages = {
   submit: 'Envoyer',
   alert: {
     idle: 'Votre formulaire est prêt à être soumis.',
