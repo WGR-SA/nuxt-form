@@ -30,6 +30,14 @@ export class FormInstance {
     } as UseFetchOptions<unknown>
   }
 
+  updateValidatorMessages () {
+    Object.keys(this.data.rules).map((field) => {
+      this.data.rules[field].map((rule: any) => {
+        rule.$message = this.messages.get(rule.$params.type, 'validators') ?? rule.$message
+      })
+    })
+  }
+
   mutateState (status: FormBuilder.Status, errorType?: FormBuilder.ErrorType | string) {    
     this.state = { status, errorType }
   }

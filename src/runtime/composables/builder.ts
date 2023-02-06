@@ -5,6 +5,7 @@ import { useFormRecaptcha, FormInstance } from '#imports'
 
 export const useFormBuilder = () => {
   const { recaptchaInit, recaptchaValidation } = useFormRecaptcha()
+  const lang = useRuntimeConfig().public.form.lang
 
   const initForm = (config: FormBuilder.Props) => {
     const form = reactive(new FormInstance(config))
@@ -12,7 +13,7 @@ export const useFormBuilder = () => {
     
     recaptchaInit()
 
-    form.messages.setLang(useRuntimeConfig().public.form.lang)
+    form.messages.setLang(lang)
 
     return { form, validator }
   }

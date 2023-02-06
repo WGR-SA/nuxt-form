@@ -17,7 +17,7 @@ export class FormMessageStore {
     this.lang = lang
   }
 
-  get (path: string, lang: string = this.lang, type: 'form' | 'validators' = 'form') {
+  get (path: string, type: 'form' | 'validators' = 'form', lang: string = this.lang,) {
     return this.resolvePath(path, this[type][lang]) ?? this.resolvePath(path, this[type]['en'])
   }   
 

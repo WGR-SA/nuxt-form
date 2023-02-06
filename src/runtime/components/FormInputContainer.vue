@@ -20,6 +20,7 @@ const validator = inject('validator') as any
 
 form.data.addField(({ name: props.name, rules: props.rules ?? [] }))
 form.data.setDefaultValue(props)
+form.updateValidatorMessages()
 
 </script>
 
