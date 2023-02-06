@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-import { useFetch } from '#app'
+import { useFetch, useRuntimeConfig } from '#app'
 import { useVuelidate } from '@vuelidate/core'
 import { useFormRecaptcha, FormInstance } from '#imports'
 
@@ -11,6 +11,8 @@ export const useFormBuilder = () => {
     const validator = validatorInit(form.data.rules, form.data.state)
     
     recaptchaInit()
+
+    form.messages.setLang(useRuntimeConfig().public.form.lang)
 
     return { form, validator }
   }
@@ -29,7 +31,7 @@ export const useFormBuilder = () => {
     }
     form.mutateState('submitting')
 
-    const { data, error } = await useFetch(form.fetchUrl, form.fetchParams)
+    const { data, error } = await useFetch(form.action, form.fetchParams)
 
     if (error.value) {
       form.mutateState('error', error?.value?.statusMessage ?? 'unknown')

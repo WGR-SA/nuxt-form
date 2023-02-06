@@ -3,6 +3,7 @@ import { FormMessages, ValidatorMessages } from '#imports'
 export class FormMessageStore {
   public form: { [lang: string]: FormBuilder.Messages } = FormMessages
   public validators: { [lang: string]: { [key: string]: string } } = ValidatorMessages
+  public lang: string = 'en'
 
   updateFormMessages (lang: string, messages: FormBuilder.Messages) {
     this.form[lang] = Object.assign(this.form[lang], messages)
@@ -12,7 +13,11 @@ export class FormMessageStore {
     this.validators[lang] = Object.assign(this.validators[lang], messages)
   }
 
-  get (path: string, lang: string = 'en', type: 'form' | 'validators' = 'form') {
+  setLang (lang: string) {
+    this.lang = lang
+  }
+
+  get (path: string, lang: string = this.lang, type: 'form' | 'validators' = 'form') {
     return this.resolvePath(path, this[type][lang]) ?? this.resolvePath(path, this[type]['en'])
   }   
 

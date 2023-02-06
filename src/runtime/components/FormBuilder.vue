@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { provide } from 'vue'
-import { useFormBuilder, FormInstance } from '#imports'
+import { useFormBuilder } from '#imports'
 
 const { initForm, submitForm } = useFormBuilder()
 
 const config = defineProps<{ 
-  url: string, 
+  action: string, 
   method?: 'POST' | 'GET',
   headers?: { [key: string]: string }, 
   stringify?: boolean, 

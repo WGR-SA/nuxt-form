@@ -1,4 +1,4 @@
-import { defineNuxtModule, createResolver, addImports, addImportsDir, addComponent } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addImports, addComponent } from '@nuxt/kit'
 
 export default defineNuxtModule<FormModule.options>({
   meta: {

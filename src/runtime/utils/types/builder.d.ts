@@ -16,7 +16,7 @@ declare namespace FormBuilder {
   }
 
   interface Props {
-    url: string,
+    action: string,
     method?: 'POST' | 'GET',
     headers?: { [key: string]: string },
     stringify?: boolean,

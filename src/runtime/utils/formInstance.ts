@@ -2,7 +2,7 @@ import { UseFetchOptions } from '#app'
 import { FormDataHandler, FormMessageStore } from '#imports'
 
 export class FormInstance {
-  public url: string
+  public action: string
   public method: string
   public headers: { [key: string]: string }
   public stringify: boolean
@@ -14,7 +14,7 @@ export class FormInstance {
 
   constructor(config: FormBuilder.Props) {
     this.method = config.method ?? 'POST'
-    this.url = config.url
+    this.action = config.action
     this.headers = { ...config.headers }
     this.stringify = config.stringify ?? false
     this.data = new FormDataHandler()
