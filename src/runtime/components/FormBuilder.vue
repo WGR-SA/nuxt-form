@@ -15,6 +15,7 @@ const config = defineProps<{
 
 const { form, validator } = initForm(config as FormBuilder.Props)
 
+defineExpose(form)
 provide('form', form)
 provide('validator', validator)
 </script>

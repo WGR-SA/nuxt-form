@@ -1,17 +1,11 @@
 <script setup>
-import { watchEffect } from 'vue'
-import { useState } from '#app'
+const loginForm = ref()
 
-const selectOptions = {
-  1: 'Option 1',
-  2: 'Option 2',
-  3: 'Option 3'
-}
-
-// watchEffect(() => {
-//   console.log(formResponse.value)
-// })
-
+watchEffect(() => {
+  if (loginForm.value?.response) {
+    console.log(loginForm.value?.response)
+  }
+})
 </script>
 
 <template>
@@ -20,8 +14,9 @@ const selectOptions = {
       <FormInput name="email" label="Email" :rules="['email', 'required']" placeholder="Name" />
     </FormBuilder>
 
-    <FormBuilder action="https://httpbin.org/post">
-      <FormInput name="email" label="Name" :rules="['required']" placeholder="Name" />
+    <FormBuilder ref="loginForm" action="https://httpbin.org/post">
+      <FormInput name="username" label="Email" :rules="['required']" placeholder="email" />
+      <FormInput name="password" type="password" label="Password" :rules="['required']" placeholder="password" />
     </FormBuilder>
   </div>
 </template>
