@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-import { useFetch, useRuntimeConfig, useState } from '#app'
+import { useFetch, useRuntimeConfig } from '#app'
 import { useVuelidate } from '@vuelidate/core'
 import { useFormRecaptcha, FormInstance } from '#imports'
 
@@ -10,7 +10,7 @@ export const useFormBuilder = () => {
   const initForm = (config: FormBuilder.Props) => {
     const form = reactive(new FormInstance(config))
     const validator = validatorInit(form.data.rules, form.data.state)
-    
+
     recaptchaInit()
 
     form.messages.setLang(lang)

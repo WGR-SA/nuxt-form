@@ -33,7 +33,12 @@ export class FormInstance {
   updateValidatorMessages () {
     Object.keys(this.data.rules).map((field) => {
       this.data.rules[field].map((rule: any) => {
+        const hasParams = typeof rule.$message !== 'string'
         rule.$message = this.messages.get(rule.$params.type, 'validators') ?? rule.$message
+        
+        if (hasParams) {
+          Object.keys(rule.$params).map((param) => rule.$message = rule.$message.replace(`{${param}}`, rule.$params[param]))
+        }
       })
     })
   }
