@@ -4,13 +4,20 @@ export class FormDataHandler {
   public rules: { [key: string]: any } = {}
   public state: { [key: string]: any } = {}
 
-  addField (options: { name: string, rules: string[] }) {
+  addField(options: { name: string, rules: Array<string | { [key: string]: string[] }> }) {
     if (options.name in this.state) {
       return
     }    
     
     this.state[options.name] = ''
-    this.rules[options.name] = options.rules.map((r: string) => validators[r as keyof typeof validators])    
+    this.rules[options.name] = options.rules.map((r: string | { [key: string]: string[] }) => {
+      if (typeof r === 'string') {
+        return validators[r as keyof typeof validators]
+      } else {
+        const vkey = Object.keys(r)[0]
+        return validators[vkey as keyof typeof validators](...r[vkey])
+      }
+    })   
   }
 
   addCustomData (name: string, value: string) {

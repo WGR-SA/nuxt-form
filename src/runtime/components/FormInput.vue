@@ -5,7 +5,7 @@ import { FormInstance } from '#imports'
 const props = defineProps<{ 
   name: string, 
   label: string, 
-  rules?: string[], 
+  rules?: Array<string | {[key: string]: string[]}>, 
   type?: string, 
   required?: boolean, 
   checked?: boolean, 
