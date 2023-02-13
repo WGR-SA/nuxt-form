@@ -18,10 +18,7 @@ const props = defineProps<{
 const form = inject('form') as FormInstance
 const validator = inject('validator') as any
 
-form.data.addField(({ name: props.name, rules: props.rules ?? [] }))
-form.data.setDefaultValue(props)
-form.updateValidatorMessages()
-
+form.addField(props)
 </script>
 
 <template>

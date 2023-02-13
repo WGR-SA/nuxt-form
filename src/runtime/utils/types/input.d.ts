@@ -2,13 +2,14 @@ declare namespace FormInput {
   interface Container {
     name: string,
     label: string,
-    rules?: string[],
+    rules?: Array<string | { [key: string]: string[] }>,
     options?: { [key: string | number]: string },
     required?: boolean,
     checked?: boolean,
     value?: string,
     default?: string,
     type?: string,
+    placeholder?: string,
     [key: string]: any
   }
 
@@ -34,5 +35,12 @@ declare namespace FormInput {
 
   interface Textarea extends Text {
     rows?: number,
+  }
+
+  interface Component {
+    select: 'FormSelect',
+    radio: 'FormRadio',
+    textarea: 'FormTextarea',
+    [key: string]: 'FormInput'
   }
 }

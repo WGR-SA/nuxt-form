@@ -33,6 +33,11 @@ export default defineNuxtModule<FormModule.options>({
     })
 
     addComponent({
+      name: 'FormGenerator',
+      filePath: resolve(runtimeDir, 'components', 'FormGenerator')
+    })
+
+    addComponent({
       name: 'FormInputContainer',
       filePath: resolve(runtimeDir, 'components', 'FormInputContainer')
     })
@@ -79,12 +84,27 @@ export default defineNuxtModule<FormModule.options>({
 
     addImports({
       name: 'FormDataHandler',
-      from: resolve(runtimeDir, 'utils', 'formDataHandler')
+      from: resolve(runtimeDir, 'utils/data', 'formDataHandler')
+    })
+
+    addImports({
+      name: 'FormValidator',
+      from: resolve(runtimeDir, 'utils/validators', 'FormValidator')
     })
 
     addImports({
       name: 'FormMessageStore',
-      from: resolve(runtimeDir, 'utils', 'formMessageStore')
+      from: resolve(runtimeDir, 'utils/messages', 'formMessageStore')
+    })
+
+    addImports({
+      name: 'FormModelFormatter',
+      from: resolve(runtimeDir, 'utils/models', 'FormModelFormatter')
+    })
+
+    addImports({
+      name: 'NuxtFormField',
+      from: resolve(runtimeDir, 'utils/models/decorators', 'FormDecorator')
     })
 
     addImports({

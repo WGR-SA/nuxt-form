@@ -9,7 +9,7 @@ export const useFormBuilder = () => {
 
   const initForm = (config: FormBuilder.Props) => {
     const form = reactive(new FormInstance(config))
-    const validator = validatorInit(form.data.rules, form.data.state)
+    const validator = validatorInit(form.validator.rules, form.data.state)
 
     recaptchaInit()
 
