@@ -1,4 +1,4 @@
-# Nuxt-Form Module
+# Nuxt-Form
 
 Nuxt 3 module to create and post forms with integrated builder, inputs components and optional Recaptcha validation. Automatic field validation included with [Vuelidate](https://vuelidate-next.netlify.app). 
 

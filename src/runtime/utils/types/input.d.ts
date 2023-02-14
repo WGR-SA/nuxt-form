@@ -36,11 +36,4 @@ declare namespace FormInput {
   interface Textarea extends Text {
     rows?: number,
   }
-
-  interface Component {
-    select: 'FormSelect',
-    radio: 'FormRadio',
-    textarea: 'FormTextarea',
-    [key: string]: 'FormInput'
-  }
 }

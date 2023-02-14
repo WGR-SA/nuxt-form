@@ -1,9 +1,5 @@
 {
   "extends": "./playground/.nuxt/tsconfig.json",
-  "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-  },
   "include": [
     "./src/**/*",
   ]
