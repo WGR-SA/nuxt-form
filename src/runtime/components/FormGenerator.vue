@@ -16,8 +16,6 @@ const config = defineProps<{
 }>()
 
 const model = new FormModelFormatter(config.model)
-console.log(config.model);
-
 const { form, validator } = initForm(config as FormBuilder.Props)
 
 defineExpose(form)
