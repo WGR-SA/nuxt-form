@@ -44,21 +44,25 @@ export default defineNuxtModule<FormModule.options>({
 
     addComponent({
       name: 'FormInput',
+      global: true,
       filePath: resolve(runtimeDir, 'components', 'FormInput')
     })
 
     addComponent({
       name: 'FormSelect',
+      global: true,
       filePath: resolve(runtimeDir, 'components', 'FormSelect')
     })
 
     addComponent({
       name: 'FormRadio',
+      global: true,
       filePath: resolve(runtimeDir, 'components', 'FormRadio')
     })
 
     addComponent({
       name: 'FormTextarea',
+      global: true,
       filePath: resolve(runtimeDir, 'components', 'FormTextarea')
     })
 
@@ -79,12 +83,12 @@ export default defineNuxtModule<FormModule.options>({
 
     addImports({
       name: 'FormInstance',
-      from: resolve(runtimeDir, 'utils', 'formInstance')
+      from: resolve(runtimeDir, 'utils', 'FormInstance')
     })
 
     addImports({
       name: 'FormDataHandler',
-      from: resolve(runtimeDir, 'utils/data', 'formDataHandler')
+      from: resolve(runtimeDir, 'utils/data', 'FormDataHandler')
     })
 
     addImports({
@@ -94,7 +98,7 @@ export default defineNuxtModule<FormModule.options>({
 
     addImports({
       name: 'FormMessageStore',
-      from: resolve(runtimeDir, 'utils/messages', 'formMessageStore')
+      from: resolve(runtimeDir, 'utils/messages', 'FormMessageStore')
     })
 
     addImports({
@@ -116,6 +120,5 @@ export default defineNuxtModule<FormModule.options>({
       name: 'ValidatorMessages',
       from: resolve(runtimeDir, 'messages', 'validators')
     })
-
   }
 })

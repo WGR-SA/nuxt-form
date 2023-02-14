@@ -8,6 +8,8 @@
 // })
 
 import { User } from './entities/User'
+const newEntity = new User()
+newEntity.email = 'test@test.ch'
 </script>
 
 <template>
@@ -15,6 +17,7 @@ import { User } from './entities/User'
     <FormGenerator 
       action="https://httpbin.org/post"
       :model="User"
+      :values="newEntity"
       profile="typeorm"
     />
     <!-- <FormBuilder action="https://httpbin.org/post">

@@ -23,7 +23,7 @@ form.addField(props)
 
 <template>
   <div :class="`form__input form__${type ?? 'default'} ${(rules?.includes('required')) ? 'form--required' : '' }`">
-    <label :for="name">{{ label }}</label>
+    <label v-if="type !== 'hidden'" :for="name">{{ label }}</label>
     <slot />
     <p 
       v-for="error of validator[name]?.$errors" 

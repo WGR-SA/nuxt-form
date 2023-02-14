@@ -24,5 +24,5 @@ export class User {
     enum: ['admin', 'customer', 'analyst'],
     default: 'customer',
   })
-  roles: UserRoleType[]
+  role: UserRoleType[]
 }

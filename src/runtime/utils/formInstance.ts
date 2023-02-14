@@ -32,8 +32,9 @@ export class FormInstance {
     } as UseFetchOptions<unknown>
   }
 
-  addField (config: FormInput.Container) { 
-    this.data.addField(config.name)
+  addField (config: FormInput.Container) {         
+    this.data.addField(config)
+    this.data.setDefaultValue(config)
     this.validator.addRules({ name: config.name, rules: config.rules ?? [], messages: this.messages })
   }
 

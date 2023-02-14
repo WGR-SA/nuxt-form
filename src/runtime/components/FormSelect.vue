@@ -21,7 +21,7 @@ const required = computed(() => props.required ?? false)
 <template>
   <FormInputContainer v-bind="props">
     <select 
-      v-model="form.data.state.value[name]" 
+      v-model="form.data.state[name]" 
       :required="required"
     >
       <option 

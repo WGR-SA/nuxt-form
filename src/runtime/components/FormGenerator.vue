@@ -7,6 +7,7 @@ const { initForm, submitForm } = useFormBuilder()
 const config = defineProps<{ 
   action: string, 
   model: FormModel.EntityModel,
+  values?: any,
   profile?: string,
   method?: 'POST' | 'GET',
   headers?: { [key: string]: string }, 
@@ -27,11 +28,12 @@ provide('validator', validator)
   <form class="form">
     <FormAlert />
     <fieldset v-if="form.shown">
-      <component
-        :is="model.getInputComponent(field.type ?? 'text')"
-        v-for="field in model.getFields(profile ?? 'base')"
-        v-bind="field"
-        :key="field.name"
+      <component 
+        :is="model.getInputComponent(field.type ?? 'text')" 
+        v-for="field in model.getFields(profile ?? 'base')" 
+        :key="field.name" 
+        v-bind="field" 
+        :value="config.values[field.name]"
       />
       <button 
         type="submit" 

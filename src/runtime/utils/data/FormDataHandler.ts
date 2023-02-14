@@ -1,13 +1,12 @@
 export class FormDataHandler {
   public state: { [key: string]: any } = {}
 
-  addField( name: string ) {
-    if (name in this.state) {
+  addField(config: FormInput.Container ) {
+    if (config.name in this.state) {
       return
     }    
     
-    this.state[name] = ''
-    this.setDefaultValue(name)
+    this.state[config.name] = config.value ?? ''
   }
 
   addCustomData (name: string, value: string) {
@@ -19,7 +18,7 @@ export class FormDataHandler {
       this.state[field.name] = 'false'
     }
     if (field.options) {
-      this.state[field.name] = field.default ?? Object.keys(field.options)[0]
+      this.state[field.name] = field.value ?? field.default ?? Object.keys(field.options)[0]
     }
     if (field.checked) {
       this.state[field.name] = field.value ?? String(field.checked)

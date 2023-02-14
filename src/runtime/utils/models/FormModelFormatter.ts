@@ -1,30 +1,30 @@
-import { ProfileFactory } from './profiles';
+import { ProfileFactory } from './profiles'
 
 export class FormModelFormatter {
-  private model: FormModel.EntityModel;
+  private model: FormModel.EntityModel
 
   constructor(model: FormModel.EntityModel) {
-    this.model = model;
+    this.model = model
   }
 
   getProfile(profile: string) {
-    return new ProfileFactory[profile];
+    return new ProfileFactory[profile]
   }
 
-  getFields(profile: string): FormInput.Container[] {
-    return this.getProfile(profile).mapSchema(this.model);
+  getFields(profile: string): FormInput.Container[] {    
+    return this.getProfile(profile).mapSchema(this.model)
   }
 
   getInputComponent(type: string): string {
     switch (type) {
       case 'select':
-        return 'FormSelect';
+        return 'FormSelect'
       case 'radio':
-        return 'FormRadio';
+        return 'FormRadio'
       case 'textarea':
-        return 'FormTextarea';
+        return 'FormTextarea'
       default:
-        return 'FormInput';
+        return 'FormInput'
     }
   }
 }
