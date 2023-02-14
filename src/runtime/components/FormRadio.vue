@@ -27,9 +27,9 @@ const required = computed(() => props.required ?? false)
       :key="key" 
       class="form__radio"
     >
-      <label :for="form.data.state.value[name]"> {{ option }} </label>
+      <label :for="form.data.state[name]"> {{ option }} </label>
       <input 
-        v-model="form.data.state.value[name]" 
+        v-model="form.data.state[name]" 
         type="radio" 
         :value="key" 
         :required="required"

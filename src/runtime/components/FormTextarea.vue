@@ -22,7 +22,7 @@ const rows = computed(() => props.rows ?? 3)
 <template>
   <FormInputContainer v-bind="props">
     <textarea 
-      v-model="form.data.state.value[name]" 
+      v-model="form.data.state[name]" 
       :required="required" 
       :rows="rows" 
     />

@@ -33,27 +33,36 @@ export default defineNuxtModule<FormModule.options>({
     })
 
     addComponent({
+      name: 'FormGenerator',
+      filePath: resolve(runtimeDir, 'components', 'FormGenerator')
+    })
+
+    addComponent({
       name: 'FormInputContainer',
       filePath: resolve(runtimeDir, 'components', 'FormInputContainer')
     })
 
     addComponent({
       name: 'FormInput',
+      global: true,
       filePath: resolve(runtimeDir, 'components', 'FormInput')
     })
 
     addComponent({
       name: 'FormSelect',
+      global: true,
       filePath: resolve(runtimeDir, 'components', 'FormSelect')
     })
 
     addComponent({
       name: 'FormRadio',
+      global: true,
       filePath: resolve(runtimeDir, 'components', 'FormRadio')
     })
 
     addComponent({
       name: 'FormTextarea',
+      global: true,
       filePath: resolve(runtimeDir, 'components', 'FormTextarea')
     })
 
@@ -74,17 +83,32 @@ export default defineNuxtModule<FormModule.options>({
 
     addImports({
       name: 'FormInstance',
-      from: resolve(runtimeDir, 'utils', 'formInstance')
+      from: resolve(runtimeDir, 'utils', 'FormInstance')
     })
 
     addImports({
       name: 'FormDataHandler',
-      from: resolve(runtimeDir, 'utils', 'formDataHandler')
+      from: resolve(runtimeDir, 'utils/data', 'FormDataHandler')
+    })
+
+    addImports({
+      name: 'FormValidator',
+      from: resolve(runtimeDir, 'utils/validators', 'FormValidator')
     })
 
     addImports({
       name: 'FormMessageStore',
-      from: resolve(runtimeDir, 'utils', 'formMessageStore')
+      from: resolve(runtimeDir, 'utils/messages', 'FormMessageStore')
+    })
+
+    addImports({
+      name: 'FormModelFormatter',
+      from: resolve(runtimeDir, 'utils/models', 'FormModelFormatter')
+    })
+
+    addImports({
+      name: 'NuxtFormField',
+      from: resolve(runtimeDir, 'utils/models/decorators', 'FormDecorator')
     })
 
     addImports({
@@ -96,6 +120,5 @@ export default defineNuxtModule<FormModule.options>({
       name: 'ValidatorMessages',
       from: resolve(runtimeDir, 'messages', 'validators')
     })
-
   }
 })

@@ -1,5 +1,5 @@
 import { UseFetchOptions } from '#app'
-import { FormDataHandler, FormMessageStore } from '#imports'
+import { FormDataHandler, FormValidator, FormMessageStore } from '#imports'
 
 export class FormInstance {
   public action: string
@@ -10,6 +10,7 @@ export class FormInstance {
   public state: FormBuilder.State = { status: 'idle' }
   public shown: boolean = this.state.status === 'idle' || this.state.status === 'error'
   public data: FormDataHandler
+  public validator: FormValidator
   public messages: FormMessageStore 
 
   constructor(config: FormBuilder.Props) {
@@ -18,6 +19,7 @@ export class FormInstance {
     this.headers = { ...config.headers }
     this.stringify = config.stringify ?? false
     this.data = new FormDataHandler()
+    this.validator = new FormValidator()
     this.messages = new FormMessageStore()
   }
 
@@ -30,17 +32,10 @@ export class FormInstance {
     } as UseFetchOptions<unknown>
   }
 
-  updateValidatorMessages () {
-    Object.keys(this.data.rules).map((field) => {
-      this.data.rules[field].map((rule: any) => {
-        const hasParams = typeof rule.$message !== 'string'
-        rule.$message = this.messages.get(rule.$params.type, 'validators') ?? rule.$message
-        
-        if (hasParams) {
-          Object.keys(rule.$params).map((param) => rule.$message = rule.$message.replace(`{${param}}`, rule.$params[param]))
-        }
-      })
-    })
+  addField (config: FormInput.Container) {         
+    this.data.addField(config)
+    this.data.setDefaultValue(config)
+    this.validator.addRules({ name: config.name, rules: config.rules ?? [], messages: this.messages })
   }
 
   mutateState (status: FormBuilder.Status, errorType?: FormBuilder.ErrorType | string) {    
