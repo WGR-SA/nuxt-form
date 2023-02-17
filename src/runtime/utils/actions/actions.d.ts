@@ -1,19 +1,20 @@
 declare namespace FormActions {
 
+  import { UseFetchOptions, AsyncData } from '#app'
+
   interface Actions<DataT> {
 
-    submit(): void;
+    options: UseFetchOptions<DataT>
 
-    post(): void;
-
-    update(): void;
-
-    delete(): void;
-
-    get(id: string): DataT;
-
-    index(): DataT;
-
-    store(): void;
+    async submit(): Promise<AsyncData<DataT>>
+    async save(): Promise<AsyncData<DataT> | DataT | void>
+    async update(): Promise<AsyncData<DataT> | DataT | void>
+    async delete(): Promise<AsyncData<DataT> | DataT | void>
+    async index(): Promise<AsyncData<DataT> | DataT | void>
+    async get(id?: string): Promise<AsyncData<DataT> | DataT | void>
   }
+
+  type methods = 'post' | 'update' | 'delete' | 'index' | 'get'
 }
+
+

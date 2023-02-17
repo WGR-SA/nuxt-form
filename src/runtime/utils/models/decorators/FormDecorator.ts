@@ -5,4 +5,4 @@ export function NuxtFormField(options: FormInput.Container) {
     }
     target.form[propertyName] = options;
   };
-}
+} 

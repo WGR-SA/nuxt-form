@@ -1,35 +1,22 @@
-import { UseFetchOptions } from '#app'
-import { FormDataHandler, FormValidator, FormMessageStore } from '#imports'
+import { FormDataHandler, FormValidator, FormMessageStore, BasicFormActions } from '#imports'
 
 export class FormInstance {
   public action: string
-  public method: string
-  public headers: { [key: string]: string }
-  public stringify: boolean
-  public response: FormBuilder.Response = null
+  public process: string
   public state: FormBuilder.State = { status: 'idle' }
-  public shown: boolean = this.state.status === 'idle' || this.state.status === 'error'
+  public shown: boolean = true
   public data: FormDataHandler
   public validator: FormValidator
   public messages: FormMessageStore 
+  public actions: FormActions.Actions<unknown>
 
   constructor(config: FormBuilder.Props) {
-    this.method = config.method ?? 'POST'
     this.action = config.action
-    this.headers = { ...config.headers }
-    this.stringify = config.stringify ?? false
+    this.process = config.process ?? 'submit'
     this.data = new FormDataHandler()
     this.validator = new FormValidator()
     this.messages = new FormMessageStore()
-  }
-
-  get fetchParams () {
-    return {
-      key: String(Date.now()),
-      headers: this.headers,
-      method: this.method,
-      body: (this.stringify) ? this.data.state : JSON.stringify(this.data.state)
-    } as UseFetchOptions<unknown>
+    this.actions = config.actions ?? new BasicFormActions(this, config.fetchOptions)
   }
 
   addField (config: FormInput.Container) {         
@@ -40,5 +27,10 @@ export class FormInstance {
 
   mutateState (status: FormBuilder.Status, errorType?: FormBuilder.ErrorType | string) {    
     this.state = { status, errorType }
+    this.shown = !!['idle', 'ready', 'error'].find(s => s === this.state.status)
+  }
+
+  ready () {
+    return this.state.status === 'ready'
   }
 }

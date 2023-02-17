@@ -27,6 +27,10 @@ export default defineNuxtModule<FormModule.options>({
       nuxt.options.css.push(resolve(runtimeDir, 'assets', 'recaptcha.css'))
     }
 
+    /**
+     * Form Builder and generator
+     */ 
+
     addComponent({
       name: 'FormBuilder',
       filePath: resolve(runtimeDir, 'components', 'FormBuilder')
@@ -41,6 +45,31 @@ export default defineNuxtModule<FormModule.options>({
       name: 'FormInputContainer',
       filePath: resolve(runtimeDir, 'components', 'FormInputContainer')
     })
+
+    addComponent({
+      name: 'FormSubmit',
+      filePath: resolve(runtimeDir, 'components', 'FormSubmit'),
+      global: true
+    })
+
+    addImports({
+      name: 'useFormBuilder',
+      from: resolve(runtimeDir, 'composables', 'builder')
+    })
+
+    addImports({
+      name: 'useFormRecaptcha',
+      from: resolve(runtimeDir, 'composables', 'recaptcha')
+    })
+
+    addImports({
+      name: 'FormInstance',
+      from: resolve(runtimeDir, 'utils', 'FormInstance')
+    })
+
+    /**
+     * Form Inputs components
+     */ 
 
     addComponent({
       name: 'FormInput',
@@ -71,44 +100,31 @@ export default defineNuxtModule<FormModule.options>({
       filePath: resolve(runtimeDir, 'components', 'FormAlert')
     })
 
-    addImports({
-      name: 'useFormBuilder',
-      from: resolve(runtimeDir, 'composables', 'builder')
-    })
-
-    addImports({
-      name: 'useFormRecaptcha',
-      from: resolve(runtimeDir, 'composables', 'recaptcha')
-    })
-
-    addImports({
-      name: 'FormInstance',
-      from: resolve(runtimeDir, 'utils', 'FormInstance')
-    })
+    /**
+     * Form Data
+     */ 
 
     addImports({
       name: 'FormDataHandler',
       from: resolve(runtimeDir, 'utils/data', 'FormDataHandler')
     })
+    
+    /**
+     * Form Validator
+     */ 
 
     addImports({
       name: 'FormValidator',
       from: resolve(runtimeDir, 'utils/validators', 'FormValidator')
     })
 
+    /**
+     * Form Messages
+     */ 
+
     addImports({
       name: 'FormMessageStore',
       from: resolve(runtimeDir, 'utils/messages', 'FormMessageStore')
-    })
-
-    addImports({
-      name: 'FormModelFormatter',
-      from: resolve(runtimeDir, 'utils/models', 'FormModelFormatter')
-    })
-
-    addImports({
-      name: 'NuxtFormField',
-      from: resolve(runtimeDir, 'utils/models/decorators', 'FormDecorator')
     })
 
     addImports({
@@ -120,5 +136,29 @@ export default defineNuxtModule<FormModule.options>({
       name: 'ValidatorMessages',
       from: resolve(runtimeDir, 'messages', 'validators')
     })
+
+    /**
+     * Form Actions
+     */
+    addImports({
+      name: 'BasicFormActions',
+      from: resolve(runtimeDir, 'utils/actions', 'BasicFormActions')
+    })
+
+    /**
+     * Form Models
+     */ 
+
+    addImports({
+      name: 'FormModelFormatter',
+      from: resolve(runtimeDir, 'utils/models', 'FormModelFormatter')
+    })
+
+    addImports({
+      name: 'NuxtFormField',
+      from: resolve(runtimeDir, 'utils/models/decorators', 'FormDecorator')
+    })
+
+    
   }
 })

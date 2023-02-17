@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-import { useFetch, useRuntimeConfig } from '#app'
+import { useRuntimeConfig } from '#app'
 import { useVuelidate } from '@vuelidate/core'
 import { useFormRecaptcha, FormInstance } from '#imports'
 
@@ -9,7 +9,7 @@ export const useFormBuilder = () => {
 
   const initForm = (config: FormBuilder.Props) => {
     const form = reactive(new FormInstance(config))
-    const validator = validatorInit(form.validator.rules, form.data.state)
+    const validator = validatorInit(form.validator.rules, form.data.state)    
 
     recaptchaInit()
 
@@ -22,8 +22,8 @@ export const useFormBuilder = () => {
     return useVuelidate(rules, state, { $autoDirty: true })
   }
 
-  const submitForm = async (form: FormInstance, validator: any ) => {
-    const fv = await validator.$validate()
+  const formReady = async (form: FormInstance, validator: any ) => {
+    const fv = await validator.value.$validate()
     const rv = await recaptchaValidation(form)
 
     if (!fv || !rv) {
@@ -31,24 +31,11 @@ export const useFormBuilder = () => {
       return
     }
 
-    form.mutateState('submitting')
-
-    const { data, error } = await useFetch(form.action, form.fetchParams)
-
-    if (error.value) {
-      form.mutateState('error', error?.value?.statusMessage ?? 'unknown')
-      return
-    }
-
-    if (data.value) {
-      form.response = data
-    }
-
-    form.mutateState('submitted')
+    form.mutateState('ready')
   }
 
   return {
     initForm,
-    submitForm
+    formReady
   }
 }
