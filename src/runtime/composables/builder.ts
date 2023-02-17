@@ -22,7 +22,7 @@ export const useFormBuilder = () => {
     return useVuelidate(rules, state, { $autoDirty: true })
   }
 
-  const submitForm = async (form: any, validator: any ) => {
+  const submitForm = async (form: FormInstance, validator: any ) => {
     const fv = await validator.$validate()
     const rv = await recaptchaValidation(form)
 
@@ -30,6 +30,7 @@ export const useFormBuilder = () => {
       form.mutateState('error', !fv ? 'field_validation' : 'recaptcha')
       return
     }
+
     form.mutateState('submitting')
 
     const { data, error } = await useFetch(form.action, form.fetchParams)

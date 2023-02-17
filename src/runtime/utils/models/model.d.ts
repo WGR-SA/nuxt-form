@@ -1,5 +1,5 @@
 declare namespace FormModel {
   interface EntityModel {
-    [key: string]: ColumnModel
+    [key: string]: any
   }
 }
