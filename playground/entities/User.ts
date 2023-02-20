@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
-import { NuxtFormField } from "../../src/runtime/utils/models/decorators/FormDecorator" 
+import { NuxtFormField } from "../../src/runtime/utils/models/decorator"
 
 export type UserRoleType = "admin" | "customer" | "analyst"
 

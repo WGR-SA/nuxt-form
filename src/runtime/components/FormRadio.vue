@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue'
-import { FormInstance } from '#imports'
+import { Form } from '#imports'
 
 const props = defineProps<{
   name: string,
@@ -15,7 +15,7 @@ const props = defineProps<{
   default?: string
 }>()
 
-const form = inject('form') as FormInstance
+const form = inject('form') as Form
 const required = computed(() => props.required ?? false)
 
 </script>

@@ -1,6 +1,6 @@
-import { FormDataHandler, FormValidator, FormMessageStore, BasicFormActions } from '#imports'
+import { FormDataHandler, FormValidator, FormMessageStore, DefaultFormActions } from '#imports'
 
-export class FormInstance {
+export class Form {
   public action: string
   public process: string
   public state: FormBuilder.State = { status: 'idle' }
@@ -8,15 +8,17 @@ export class FormInstance {
   public data: FormDataHandler
   public validator: FormValidator
   public messages: FormMessageStore 
-  public actions: FormActions.Actions<unknown>
+  public actions: FormActions<unknown>
 
-  constructor(config: FormBuilder.Props) {
+  constructor(config: FormBuilder.Props, lang: string) {
     this.action = config.action
     this.process = config.process ?? 'submit'
     this.data = new FormDataHandler()
     this.validator = new FormValidator()
     this.messages = new FormMessageStore()
-    this.actions = config.actions ?? new BasicFormActions(this, config.fetchOptions)
+    this.actions = config.actions ?? new DefaultFormActions(this, config.fetchOptions)
+
+    this.messages.setLang(lang)
   }
 
   addField (config: FormInput.Container) {         

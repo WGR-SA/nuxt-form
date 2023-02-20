@@ -7,8 +7,8 @@ const { initForm } = useFormBuilder()
 
 const config = defineProps<{ 
   action: string, 
-  process?: FormActions.methods,
-  actions?: FormActions.Actions<unknown>,
+  process?: FormActionsMethods,
+  actions?: FormActions<unknown>,
   fetchOptions?: UseFetchOptions<unknown>,
   messages?: Partial<FormBuilder.Messages>,
   lang?: string

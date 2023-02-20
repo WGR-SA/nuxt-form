@@ -29,7 +29,7 @@ newEntity.email = 'test@test.ch'
       action="https://httpbin.org/post"
       :model="User"
       :values="newEntity"
-      profile="typeorm"
+      :layers="['typeorm', 'form']"
     />
 
 

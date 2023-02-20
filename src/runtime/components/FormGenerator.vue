@@ -1,23 +1,23 @@
 <script lang="ts" setup>
 import { provide } from 'vue'
-import { UseFetchOptions } from '#app'
+import { UseFetchOptions, useRuntimeConfig } from '#app'
 import { useFormBuilder, FormModelFormatter } from '#imports'
 
 const { initForm } = useFormBuilder()
 
 const config = defineProps<{ 
   action: string, 
-  model: FormModel.EntityModel,
+  model: FormModel.Entity,
   values?: any,
-  profile?: string,
-  process?: FormActions.methods,
-  actions?: FormActions.Actions<unknown>,
+  layers?: string[],
+  process?: FormActionsMethods,
+  actions?: FormActions<unknown>,
   fetchOptions?: UseFetchOptions<unknown>,
   messages?: Partial<FormBuilder.Messages>,
   lang?: string
 }>()
 
-const model = new FormModelFormatter(config.model, config.profile ?? 'base')
+const model = new FormModelFormatter(config.model, config.layers ?? useRuntimeConfig().public.format_layers)
 const { form, validator } = initForm(config as FormBuilder.Props)
 
 defineExpose(form)
@@ -30,8 +30,8 @@ provide('validator', validator)
     <FormAlert />
     <fieldset v-if="form.shown">
       <component 
-        :is="model.getInputComponent(field.type)" 
-        v-for="field in model.getFields()" 
+        :is="field.component" 
+        v-for="field in model.getFormInputs()" 
         :key="field.name" 
         v-bind="field" 
         :value="config.values[field.name]"

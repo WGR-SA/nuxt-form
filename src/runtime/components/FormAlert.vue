@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { inject, computed } from 'vue'
-import { FormInstance } from '#imports'
+import { Form } from '#imports'
 
-const form = inject('form') as FormInstance
+const form = inject('form') as Form
 const alertShown = computed(() => {
   return form.state.status !== 'idle' && form.state.status !== 'ready'
 })

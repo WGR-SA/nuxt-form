@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { inject } from 'vue'
-import { FormInstance, useFormBuilder } from '#imports'
+import { Form, useFormBuilder } from '#imports'
 
 const { formReady } = useFormBuilder()
-const form = inject('form') as FormInstance
+const form = inject('form') as Form
 const validator = inject('validator')
 
 const submit = () => {

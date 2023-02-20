@@ -1,5 +1,5 @@
 export { default } from './module'
-export { NuxtFormField, BasicFormActions } from '#imports'
+export { NuxtFormField, DefaultFormActions, BaseModelLayer } from '#imports'
 
 declare global {
   interface Window {

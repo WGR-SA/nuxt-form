@@ -1,11 +1,25 @@
 import { defineNuxtModule, createResolver, addImports, addComponent } from '@nuxt/kit'
 
-export default defineNuxtModule<FormModule.options>({
+interface FormModuleOptions {
+  format_layers?: string[],
+  custom_layers?: {
+    [key: string]: FormModel.FormatLayer
+  },
+  recaptcha?: boolean,
+  hide_recaptcha?: boolean,
+  default_styles?: boolean,
+  messages?: object,
+  lang?: string,
+}
+
+export default defineNuxtModule<FormModuleOptions>({
   meta: {
     name: '@wgr-sa/nuxt-form',
     configKey: 'form'
   },
   defaults: {
+    format_layers: ['base'],
+    custom_layers: {},
     recaptcha: true,
     hide_recaptcha: false,
     default_styles: true,
@@ -63,8 +77,8 @@ export default defineNuxtModule<FormModule.options>({
     })
 
     addImports({
-      name: 'FormInstance',
-      from: resolve(runtimeDir, 'utils', 'FormInstance')
+      name: 'Form',
+      from: resolve(runtimeDir, 'utils', 'form')
     })
 
     /**
@@ -106,7 +120,7 @@ export default defineNuxtModule<FormModule.options>({
 
     addImports({
       name: 'FormDataHandler',
-      from: resolve(runtimeDir, 'utils/data', 'FormDataHandler')
+      from: resolve(runtimeDir, 'utils/data', 'handler')
     })
     
     /**
@@ -114,8 +128,13 @@ export default defineNuxtModule<FormModule.options>({
      */ 
 
     addImports({
+      name: 'useFormValidator',
+      from: resolve(runtimeDir, 'composables', 'validator')
+    })
+
+    addImports({
       name: 'FormValidator',
-      from: resolve(runtimeDir, 'utils/validators', 'FormValidator')
+      from: resolve(runtimeDir, 'utils/validators', 'validator')
     })
 
     /**
@@ -124,7 +143,7 @@ export default defineNuxtModule<FormModule.options>({
 
     addImports({
       name: 'FormMessageStore',
-      from: resolve(runtimeDir, 'utils/messages', 'FormMessageStore')
+      from: resolve(runtimeDir, 'utils/messages', 'store')
     })
 
     addImports({
@@ -141,8 +160,8 @@ export default defineNuxtModule<FormModule.options>({
      * Form Actions
      */
     addImports({
-      name: 'BasicFormActions',
-      from: resolve(runtimeDir, 'utils/actions', 'BasicFormActions')
+      name: 'DefaultFormActions',
+      from: resolve(runtimeDir, 'utils/actions', 'default')
     })
 
     /**
@@ -151,12 +170,17 @@ export default defineNuxtModule<FormModule.options>({
 
     addImports({
       name: 'FormModelFormatter',
-      from: resolve(runtimeDir, 'utils/models', 'FormModelFormatter')
+      from: resolve(runtimeDir, 'utils/models', 'formatter')
+    })
+
+    addImports({
+      name: 'BaseModelLayer',
+      from: resolve(runtimeDir, 'utils/models/layers', 'base')
     })
 
     addImports({
       name: 'NuxtFormField',
-      from: resolve(runtimeDir, 'utils/models/decorators', 'FormDecorator')
+      from: resolve(runtimeDir, 'utils/models/decorators', 'decorator')
     })
 
     

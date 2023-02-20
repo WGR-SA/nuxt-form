@@ -1,9 +1,9 @@
-import { useFetch, UseFetchOptions, useRuntimeConfig } from '#app'
-import { FormInstance } from '#imports'
+import { useFetch, UseFetchOptions } from '#app'
+import { Form } from '#imports'
 
-export class BasicFormActions implements FormActions.Actions<unknown> {
+export class DefaultFormActions implements FormActions<unknown> {
 
-  public form: FormInstance
+  public form: Form
   public options: UseFetchOptions<unknown> = {
     key: String(new Date().getTime()),
     method: 'POST',
@@ -13,7 +13,7 @@ export class BasicFormActions implements FormActions.Actions<unknown> {
     }
   }
   
-  constructor(form: FormInstance, options: UseFetchOptions<unknown>) {
+  constructor(form: Form, options: UseFetchOptions<unknown>) {
     this.form = form
     this.options = {...this.options, ...options}
   }
