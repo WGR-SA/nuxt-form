@@ -1,6 +1,6 @@
 # Nuxt-Form
 
-Nuxt 3 module to create and post forms with integrated builder, inputs components and optional Recaptcha validation. Automatic field validation included with [Vuelidate](https://vuelidate-next.netlify.app). 
+Nuxt 3 module to create and post forms with integrated builder, inputs components and optional Recaptcha validation. Automatic field validation included with [class-validator](https://github.com/typestack/class-validator). 
 
 ## Install
 Run `npm i @wgr-sa/nuxt-form`
@@ -26,11 +26,13 @@ export default defineNuxtConfig({
     }
   },
   form: {
-    recaptcha: boolean, // Use recaptcha | default: TRUE
-    hide_recaptcha: boolean, // Hide recaptcha badge | default: FALSE
-    default_styles: boolean, // Add default module style from form.css | default: TRUE
-    messages: object, // overwrite default messages | default: see message folder
-    lang: string // lang 'fr' && 'en' available  
+    recaptcha?: boolean, // Use recaptcha | default: TRUE
+    hide_recaptcha?: boolean, // Hide recaptcha badge | default: FALSE
+    default_styles?: boolean, // Add default module style from form.css | default: TRUE
+    messages?: object, // overwrite default messages | default: see message folder
+    lang?: string // lang 'fr' && 'en' available  
+    format_layers?: string[], | default 'base' for typeorm use ['typeorm', 'class-validator', 'from']
+    custom_layers?: [key: string]: FormModel.FormatLayer
   }
 }
 ```
@@ -42,10 +44,10 @@ Add `FormBuilder` Component in template and include inputs components (`FormInpu
 Exemple:
 ```
 <FormBuilder action="http://locahost:8888">
-  <FormInput name="name_key" label="Name" :rules="['required']" placeholder="Name" />
-  <FormInput name="email_key" label="Email" :rules="['required', 'email']" />
+  <FormInput name="name_key" label="Name" :rules="['isNotEmpty']" placeholder="Name" />
+  <FormInput name="email_key" label="Email" :rules="['isNotEmpty', 'isEmail']" />
   <FormSelect name="select_key" label="Select" :options="select_options" />
-  <FormTextarea name="message_key" label="Message" :rules="['required']" /> 
+  <FormTextarea name="message_key" label="Message" :rules="['isNotEmpty']" /> 
 </FormBuilder>  
 ```
 
@@ -56,7 +58,7 @@ Exemple:
 - `FormTextarea` use select textarea tag
 - `FormRadio` special component for radio options
 
-`rules` prop is used for field validation see [Vuelidate docs](https://vuelidate-next.netlify.app/validators.html) for details
+`rules` prop is used for field validation see [Validation decorators](https://github.com/typestack/class-validator#validation-decorators) or [Validator](https://github.com/validatorjs/validator.js) for details
 
 ### Component props 
 
