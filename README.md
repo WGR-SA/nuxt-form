@@ -65,9 +65,11 @@ Exemple:
 #### `FormBuilder`
 ```
   action: string,
-  method?: 'POST' | 'GET',
-  headers?: Object,
-  stringify?: boolean // Stringify body
+  process?: FormActionsMethods,
+  actions?: FormActions<unknown>,
+  fetchOptions?: UseFetchOptions<unknown>,
+  messages?: Partial<FormBuilder.Messages>,
+  lang?: string
 ```
 
 #### `FormInput`
