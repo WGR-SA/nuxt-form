@@ -1,54 +1,37 @@
 import { reactive } from 'vue'
-import { useFetch, useRuntimeConfig } from '#app'
-import { useVuelidate } from '@vuelidate/core'
-import { useFormRecaptcha, FormInstance } from '#imports'
+import { useRuntimeConfig } from '#app'
+import { useFormValidator, useFormRecaptcha, Form } from '#imports'
 
 export const useFormBuilder = () => {
+
   const { recaptchaInit, recaptchaValidation } = useFormRecaptcha()
-  const lang = useRuntimeConfig().public.form.lang
+  const { validateAllFields } = useFormValidator()
 
   const initForm = (config: FormBuilder.Props) => {
-    const form = reactive(new FormInstance(config))
-    const validator = validatorInit(form.validator.rules, form.data.state)
 
+    const form = reactive(new Form(config, useRuntimeConfig().public.form))
     recaptchaInit()
 
-    form.messages.setLang(lang)
-
-    return { form, validator }
+    return form
   }
 
-  const validatorInit = (rules: { [key: string]: any }, state: { [key: string]: any }) => {
-    return useVuelidate(rules, state, { $autoDirty: true })
-  }
+  const formReady = async (form: Form ) => {
 
-  const submitForm = async (form: FormInstance, validator: any ) => {
-    const fv = await validator.$validate()
-    const rv = await recaptchaValidation(form)
-
-    if (!fv || !rv) {
-      form.mutateState('error', !fv ? 'field_validation' : 'recaptcha')
+    if (!await validateAllFields(form)) {
+      form.mutateState('error', 'field_validation')
       return
     }
 
-    form.mutateState('submitting')
-
-    const { data, error } = await useFetch(form.action, form.fetchParams)
-
-    if (error.value) {
-      form.mutateState('error', error?.value?.statusMessage ?? 'unknown')
+    if (!await recaptchaValidation(form)) {
+      form.mutateState('error', 'recaptcha')
       return
     }
-
-    if (data.value) {
-      form.response = data
-    }
-
-    form.mutateState('submitted')
+  
+    form.mutateState('ready')
   }
 
   return {
     initForm,
-    submitForm
+    formReady
   }
 }

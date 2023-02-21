@@ -1,13 +1,23 @@
 <script setup>
-// const loginForm = ref()
+import { User } from './entities/User'
 
-// watchEffect(() => {
-//   if (loginForm.value?.response) {
-//     console.log(loginForm.value?.response)
+const loginForm = ref()
+const userForm = ref()
+
+// watchEffect(async () => {
+//   if (loginForm.value?.ready()) {
+//     console.log('ready');
+//     const {data, error} = await loginForm.value.actions.submit()
+//     console.log(data, error);
+//   }
+
+//   if(userForm.value?.ready()){
+//     console.log('ready');
+//     const {data, error} = await userForm.value.actions.save()
+//     console.log(data, error);
 //   }
 // })
 
-import { User } from './entities/User'
 const newEntity = new User()
 newEntity.email = 'test@test.ch'
 </script>
@@ -15,18 +25,20 @@ newEntity.email = 'test@test.ch'
 <template>
   <div style="max-width: 1200px;padding: 40px;margin: 0 auto;">
     <FormGenerator 
+      ref="userForm"
       action="https://httpbin.org/post"
       :model="User"
       :values="newEntity"
-      profile="typeorm"
+      :layers="['typeorm', 'class-validator', 'form']"
     />
-    <!-- <FormBuilder action="https://httpbin.org/post">
-      <FormInput name="email" label="Email" :rules="['email', 'required', {'minLength': [10]}]" placeholder="Name" />
-    </FormBuilder>
+
 
     <FormBuilder ref="loginForm" action="https://httpbin.org/post">
-      <FormInput name="username" label="Email" :rules="['required']" placeholder="email" />
-      <FormInput name="password" type="password" label="Password" :rules="['required']" placeholder="password" />
-    </FormBuilder> -->
+      <FormInput name="username" label="Email" :rules="['isEmail']" placeholder="email" />
+      <FormInput name="password" type="password" label="Password" placeholder="password" />
+      <FormSubmit>
+        Login
+      </FormSubmit>
+    </FormBuilder>
   </div>
 </template>

@@ -1,13 +1,16 @@
 <script lang="ts" setup>
-import { inject } from 'vue'
-import { FormInstance } from '#imports'
+import { inject, computed } from 'vue'
+import { Form } from '#imports'
 
-const form = inject('form') as FormInstance
+const form = inject('form') as Form
+const alertShown = computed(() => {
+  return form.state.status !== 'idle' && form.state.status !== 'ready'
+})
 </script>
 
 <template>
   <div 
-    v-if="form.state.status !== 'idle'" 
+    v-if="alertShown" 
     :class="`alert alert--${form.state.status}`"
   >
     <strong>{{ form.messages.get(`alert.${form.state.status}`) }}</strong><br>

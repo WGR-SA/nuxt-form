@@ -1,23 +1,23 @@
 <script lang="ts" setup>
 import { provide } from 'vue'
+import { UseFetchOptions } from '#app'
 import { useFormBuilder } from '#imports'
 
-const { initForm, submitForm } = useFormBuilder()
+const { initForm } = useFormBuilder()
 
 const config = defineProps<{ 
   action: string, 
-  method?: 'POST' | 'GET',
-  headers?: { [key: string]: string }, 
-  stringify?: boolean, 
+  process?: FormActionsMethods,
+  actions?: FormActions<unknown>,
+  fetchOptions?: UseFetchOptions<unknown>,
   messages?: Partial<FormBuilder.Messages>,
   lang?: string
 }>()
 
-const { form, validator } = initForm(config as FormBuilder.Props)
+const form = initForm(config as FormBuilder.Props)
 
 defineExpose(form)
 provide('form', form)
-provide('validator', validator)
 </script>
 
 <template>
@@ -25,12 +25,6 @@ provide('validator', validator)
     <FormAlert />
     <fieldset v-if="form.shown">
       <slot />
-      <button 
-        type="submit" 
-        @click.prevent="submitForm(form, validator)"
-      >
-        {{ form.messages.get('submit') }}
-      </button>
     </fieldset>
   </form>
 </template>

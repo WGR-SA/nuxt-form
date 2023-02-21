@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { inject } from 'vue'
-import { FormInstance } from '#imports'
+import { inject, computed, watch, onMounted } from 'vue'
+import { Form, useFormValidator } from '#imports'
 
 const props = defineProps<{
   name: string,
@@ -14,9 +14,9 @@ const props = defineProps<{
   type?: string,
   [key: string]: any
 }>()
-
-const form = inject('form') as FormInstance
-const validator = inject('validator') as any
+const { validateField } = useFormValidator()
+const errors = computed(() => validateField(form, props.name))
+const form = inject('form') as Form
 
 form.addField(props)
 </script>
@@ -26,11 +26,11 @@ form.addField(props)
     <label v-if="type !== 'hidden'" :for="name">{{ label }}</label>
     <slot />
     <p 
-      v-for="error of validator[name]?.$errors" 
-      :key="error.$uid" 
+      v-for="(error, i) of errors" 
+      :key="i" 
       class="form__error" 
     >
-      {{ error.$message }}
+      {{ error }}
     </p>
   </div>
 </template>

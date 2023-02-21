@@ -17,15 +17,14 @@ declare namespace FormBuilder {
 
   interface Props {
     action: string,
-    method?: 'POST' | 'GET',
-    headers?: { [key: string]: string },
-    stringify?: boolean,
-    messages?: Partial<Messages>,
-    lang?: string,
+    process?: FormActions.methods,
+    actions?: FormActions.Actions<unknown>,
+    fetchOptions?: UseFetchOptions<unknown>,
+    messages?: Partial<FormBuilder.Messages>,
+    lang?: string
   }
 
-  type Status = 'idle' | 'submitting' | 'submitted' | 'error'
-  type ErrorType = 'field_validation' | 'recaptcha' | 'unknown' | false
+  type Status = 'idle' | 'ready' | 'submitting' | 'submitted' | 'error'
+  type ErrorType = 'field_validation' | 'recaptcha' | 'unknown' | false | undefined | string
   type State = { status: Status, errorType?: ErrorType | string }
-  type Response = { [key: string]: any } | null
 }

@@ -1,7 +1,7 @@
 declare namespace FormInput {
   interface Container {
     name: string,
-    label: string,
+    label?: string,
     rules?: Array<string | { [key: string]: string[] }>,
     options?: { [key: string | number]: string },
     required?: boolean,

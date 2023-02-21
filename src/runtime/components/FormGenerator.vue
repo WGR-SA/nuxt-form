@@ -1,46 +1,43 @@
 <script lang="ts" setup>
 import { provide } from 'vue'
+import { UseFetchOptions, useRuntimeConfig } from '#app'
 import { useFormBuilder, FormModelFormatter } from '#imports'
 
-const { initForm, submitForm } = useFormBuilder()
+const { initForm } = useFormBuilder()
 
 const config = defineProps<{ 
   action: string, 
-  model: FormModel.EntityModel,
+  model: FormModel.Entity,
   values?: any,
-  profile?: string,
-  method?: 'POST' | 'GET',
-  headers?: { [key: string]: string }, 
-  stringify?: boolean, 
+  layers?: string[],
+  process?: FormActionsMethods,
+  actions?: FormActions<unknown>,
+  fetchOptions?: UseFetchOptions<unknown>,
   messages?: Partial<FormBuilder.Messages>,
   lang?: string
 }>()
 
-const model = new FormModelFormatter(config.model)
-const { form, validator } = initForm(config as FormBuilder.Props)
+const model = new FormModelFormatter(config.model, config.layers ?? useRuntimeConfig().public.format_layers)
+const form = initForm(config as FormBuilder.Props)
 
 defineExpose(form)
 provide('form', form)
-provide('validator', validator)
 </script>
 
 <template>
   <form class="form">
-    <FormAlert />
+    <!-- <FormAlert /> -->
     <fieldset v-if="form.shown">
       <component 
-        :is="model.getInputComponent(field.type ?? 'text')" 
-        v-for="field in model.getFields(profile ?? 'base')" 
+        :is="field.component ?? 'FormInput'" 
+        v-for="field in model.getFormInputs()" 
         :key="field.name" 
         v-bind="field" 
         :value="config.values[field.name]"
       />
-      <button 
-        type="submit" 
-        @click.prevent="submitForm(form, validator)"
-      >
+      <FormSubmit>
         {{ form.messages.get('submit') }}
-      </button>
+      </FormSubmit>
     </fieldset>
   </form>
 </template>
