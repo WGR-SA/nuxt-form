@@ -182,7 +182,5 @@ export default defineNuxtModule<FormModuleOptions>({
       name: 'NuxtFormField',
       from: resolve(runtimeDir, 'utils/models/decorators', 'decorator')
     })
-
-    
   }
 })

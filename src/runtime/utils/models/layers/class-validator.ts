@@ -25,6 +25,6 @@ export default class ClassValidatorLayer extends BaseModelLayer {
   }
 
   public detectRules: (column: FormModel.Column) => string[] = (column) => {
-    return column.constraints[0] ? {[column.name]: column.constraints} : column.name
+    return column.constraints ? {[column.name]: column.constraints} : column.name
   }
 }

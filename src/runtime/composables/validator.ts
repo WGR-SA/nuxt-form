@@ -13,17 +13,15 @@ export const useFormValidator = () => {
     }
 
     form.validator.rules[field].forEach((rule: any) => {      
-      const validator = validators[rule.$params.type as keyof typeof validators]
-      console.log(rule.$params.type, typeof validator);
-      
+      const validator = validators[rule.$params.type as keyof typeof validators]      
       if (!validator || typeof validator !== 'function') {
         return
       }
 
       // @ts-ignore TODO: fix this
-      const result = validator(form.data.state[field], rule.$params.options)
+      const result = validator(form.data.state[field], rule.$params.options)      
       
-      if (!result && form.data.state[field].length > 0) {
+      if (!result && (form.data.state[field].length > 0 || ['error', 'submitting'].includes(form.state.status))) {
         errors.value.push(rule.$message)
       }
     })
@@ -31,13 +29,13 @@ export const useFormValidator = () => {
     return errors.value
   }
 
-  const validateAllFields = async (form: Form) => {
-    
-    const fields = Object.keys(form.validator.rules)
+  const validateAllFields = async (form: Form) => {    
+    const fields = Object.keys(form.validator.rules)    
     for (let i = 0; i < fields.length; i++) {
       const field = fields[i]
       const errors = validateField(form, field)
-      if (errors.length > 0) {
+      
+      if (errors.length > 0) {        
         return false
       }
     }

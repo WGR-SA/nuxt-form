@@ -100,6 +100,7 @@ export const en: {[key: string]: string} = {
   ibanLocales: 'This field must be a valid IBAN',
   minLength: 'This field must contain at least {0} characters',
   maxLength: 'This field must not contain more than {0} characters',
+  isNotEmpty: 'This field must not be empty',
 }
 
 export default en

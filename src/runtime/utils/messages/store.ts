@@ -5,8 +5,17 @@ export class FormMessageStore {
   public validators: { [lang: string]: { [key: string]: string } } = ValidatorMessages
   public lang: string = 'en'
 
-  updateFormMessages (lang: string, messages: FormBuilder.Messages) {
-    this.form[lang] = Object.assign(this.form[lang], messages)
+  constructor (lang: string, messages: Partial<FormBuilder.Messages> | null = null) {
+    this.setLang(lang)
+    if (messages) {
+      this.updateFormMessages(lang, messages)
+    }
+  }
+
+  updateFormMessages (lang: string, messages: Partial<FormBuilder.Messages>) {        
+    this.form[lang].submit = messages.submit ?? this.form[lang].submit
+    if (messages.error) this.form[lang].error = { ...this.form[lang].error, ...messages.error }
+    if (messages.alert) this.form[lang].alert = { ...this.form[lang].alert, ...messages.alert }    
   }
 
   updateValidatorMessages (lang: string, messages: { [key: string]: string }) {

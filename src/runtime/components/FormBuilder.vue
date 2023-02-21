@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { provide } from 'vue'
-import { UseFetchOptions } from '#app'
+import { UseFetchOptions, useRuntimeConfig } from '#app'
 import { useFormBuilder } from '#imports'
 
 const { initForm } = useFormBuilder()
@@ -15,6 +15,9 @@ const config = defineProps<{
 }>()
 
 const form = initForm(config as FormBuilder.Props)
+
+// Update messages from builder config
+form.messages.updateFormMessages(useRuntimeConfig().public.form.lang, config.messages ?? {})
 
 defineExpose(form)
 provide('form', form)

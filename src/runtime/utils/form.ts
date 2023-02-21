@@ -28,11 +28,9 @@ export class Form {
     this.process = config.process ?? 'submit'
     this.data = new FormDataHandler()
     this.validator = new FormValidator()
-    this.messages = new FormMessageStore()
+    this.messages = new FormMessageStore(options.lang ?? 'en', options.messages ?? {})
     this.actions = config.actions ?? new DefaultFormActions(this, config.fetchOptions)
     this.moduleOptions = options
-
-    this.messages.setLang(options.lang ?? 'en')
   }
 
   addField (config: FormInput.Container) {         

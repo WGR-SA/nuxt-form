@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
-import { IsEmail, IsAlpha, MinLength } from 'class-validator'
+import { IsEmail, IsAlpha, IsNotEmpty, MinLength } from 'class-validator'
 import { NuxtFormField } from "../../src/runtime/utils/models/decorator"
 
 export type UserRoleType = "admin" | "customer" | "analyst"
@@ -16,6 +16,7 @@ export class User {
 
   @Column({ type: 'varchar' })
   //@IsAlpha()
+  @IsNotEmpty()
   @NuxtFormField({ label: 'First Name', })
   firstName: string
 
