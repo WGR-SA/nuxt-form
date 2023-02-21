@@ -1,6 +1,6 @@
 import { defineNuxtModule, createResolver, addImports, addComponent } from '@nuxt/kit'
 
-interface FormModuleOptions {
+export interface FormModuleOptions {
   format_layers?: string[],
   custom_layers?: {
     [key: string]: FormModel.FormatLayer

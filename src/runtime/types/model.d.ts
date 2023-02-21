@@ -4,7 +4,7 @@ declare namespace FormModel {
 
     getColumns(model: ModelColumn[]): FormInput.Container[] | void
     mapLayer(column: ModelColumn): FormBuilder.Container
-    detectRules(column: ModelColumn): string[] | void
+    detectRules(column: ModelColumn): string[] | null
     getType(column: ModelColumn): string
     getDefaultValue(column: ModelColumn): string
     getOptions(column: ModelColumn): {[key: string]: string}

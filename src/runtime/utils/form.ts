@@ -1,5 +1,17 @@
 import { FormDataHandler, FormValidator, FormMessageStore, DefaultFormActions } from '#imports'
 
+export interface FormModuleOptions {
+  format_layers?: string[],
+  custom_layers?: {
+    [key: string]: FormModel.FormatLayer
+  },
+  recaptcha?: boolean,
+  hide_recaptcha?: boolean,
+  default_styles?: boolean,
+  messages?: object,
+  lang?: string,
+}
+
 export class Form {
   public action: string
   public process: string
@@ -9,16 +21,18 @@ export class Form {
   public validator: FormValidator
   public messages: FormMessageStore 
   public actions: FormActions<unknown>
+  public moduleOptions: FormModuleOptions
 
-  constructor(config: FormBuilder.Props, lang: string) {
+  constructor(config: FormBuilder.Props, options: FormModuleOptions) {
     this.action = config.action
     this.process = config.process ?? 'submit'
     this.data = new FormDataHandler()
     this.validator = new FormValidator()
     this.messages = new FormMessageStore()
     this.actions = config.actions ?? new DefaultFormActions(this, config.fetchOptions)
+    this.moduleOptions = options
 
-    this.messages.setLang(lang)
+    this.messages.setLang(options.lang ?? 'en')
   }
 
   addField (config: FormInput.Container) {         

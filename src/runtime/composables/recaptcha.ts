@@ -1,5 +1,5 @@
 import { useRuntimeConfig, useHead } from '#app'
-import { FormInstance } from '#imports'
+import { Form } from '#imports'
 
 export const useFormRecaptcha = () => {
   const sitekey = useRuntimeConfig().public.recaptchaSitekey
@@ -14,7 +14,7 @@ export const useFormRecaptcha = () => {
     }
   }
 
-  const recaptchaValidation = async (form: FormInstance) => {
+  const recaptchaValidation = async (form: Form) => {
     if (useRuntimeConfig().public.form.recaptcha) {
       const recaptcha = window.grecaptcha
       const recaptchaToken = await recaptcha.execute(sitekey, { action: 'contact' })

@@ -19,6 +19,6 @@ export default defineNuxtConfig({
     default_styles: true,
     messages: {
     },
-    lang: 'fr'
+    lang: 'en'
   }
 })

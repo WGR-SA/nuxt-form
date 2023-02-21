@@ -18,19 +18,18 @@ const config = defineProps<{
 }>()
 
 const model = new FormModelFormatter(config.model, config.layers ?? useRuntimeConfig().public.format_layers)
-const { form, validator } = initForm(config as FormBuilder.Props)
+const form = initForm(config as FormBuilder.Props)
 
 defineExpose(form)
 provide('form', form)
-provide('validator', validator)
 </script>
 
 <template>
   <form class="form">
-    <FormAlert />
+    <!-- <FormAlert /> -->
     <fieldset v-if="form.shown">
       <component 
-        :is="field.component" 
+        :is="field.component ?? 'FormInput'" 
         v-for="field in model.getFormInputs()" 
         :key="field.name" 
         v-bind="field" 

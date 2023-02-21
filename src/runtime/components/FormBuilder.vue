@@ -14,11 +14,10 @@ const config = defineProps<{
   lang?: string
 }>()
 
-const { form, validator } = initForm(config as FormBuilder.Props)
+const form = initForm(config as FormBuilder.Props)
 
 defineExpose(form)
 provide('form', form)
-provide('validator', validator)
 </script>
 
 <template>

@@ -4,10 +4,9 @@ import { Form, useFormBuilder } from '#imports'
 
 const { formReady } = useFormBuilder()
 const form = inject('form') as Form
-const validator = inject('validator')
 
 const submit = () => {
-  formReady(form, validator)
+  formReady(form)
 }
 </script>
 

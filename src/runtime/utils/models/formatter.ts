@@ -13,8 +13,6 @@ export class FormModelFormatter {
   public getFormInputs() {
     this.layers.forEach((layer) => {
       const layerInstance = new FormatFactory[layer]()
-      console.log(layerInstance);
-      console.log(layerInstance.getColumns(this.model));
       
       if (this.columns.length === 0) {
         this.columns = layerInstance.getColumns(this.model)
@@ -25,26 +23,37 @@ export class FormModelFormatter {
         if (index === -1) {
           return
         }
+        
         this.columns[index] = {
           ...this.omitColumnKeyWithNullValue(this.columns[index]),
           ...this.omitColumnKeyWithNullValue(column),
         }
       })
-    })
-    console.log(this.columns);
-    
+
+    })    
+
+    this.fillColumns()
 
     return this.columns
   }
 
-  public omitColumnKeyWithNullValue = (columns: FormInput.Container) => {
-    return columns.map((column: FormInput.Container) => {
-      Object.keys(column).forEach((key) => {
-        if (column[key] === null) {
-          delete column[key]
-        }
-      })
-      return column
+  public omitColumnKeyWithNullValue = (column: FormInput.Container) => {
+    Object.keys(column).forEach((key) => {
+      if (column[key] === null) {
+        delete column[key]
+      }
+      if (Array.isArray(column[key]) && column[key].length === 0) {
+        delete column[key]
+      }
+    })
+    return column
+  }
+
+  public fillColumns = () => {
+    this.columns.map((column) => {
+      if (column.rules === null) {
+        column.rules = []
+      }
     })
   }
-}
+} 

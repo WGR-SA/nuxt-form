@@ -5,9 +5,8 @@ export default class FormLayer extends BaseModelLayer {
   columns: FormModel.Column[] = []
 
   public getColumns = (model: { [key: string]: any }) => {
-    console.log(Object.values(model.prototype.form));
-       
-    this.columns = Object.values(model.prototype.form) ?? [] as FormInput.Container[]    
+    this.columns = model.prototype.form ?? [] 
+    
     return this.mapLayer()
   }
 
@@ -16,15 +15,15 @@ export default class FormLayer extends BaseModelLayer {
       return {
         name: column.slug,
         label: column.label ?? null,
-        // rules: this.detectRules(column),
-        // options: this.getOptions(column),
-        // required: column.required ?? false,
-        // checked: column.checked ?? false,
-        // value: column.value ?? this.getDefaultValue(column),
-        // default: column.default ?? this.getDefaultValue(column),
-        // type: this.getType(column),
-        // placeholder: column.placeholder ?? '',
-        // component: this.getComponent(column),
+        rules: this.detectRules(column),
+        options: this.getOptions(column),
+        required: column.required ?? null,
+        checked: column.checked ?? null,
+        value: column.value ?? this.getDefaultValue(column),
+        default: column.default ?? this.getDefaultValue(column),
+        type: this.getType(column),
+        placeholder: column.placeholder ?? null,
+        component: this.getComponent(column),
       }
     })
   }
@@ -38,24 +37,15 @@ export default class FormLayer extends BaseModelLayer {
   }
 
   public getType = (column: FormModel.Column) => {
-    if (!column.type) {
-      return null
-    }
-    return column.type ?? 'text'
+    return column.type ?? null
   }
 
   public getDefaultValue = (column: FormModel.Column) => {
-    if (!column.default) {
-      return null
-    }
-    return column.default ?? ''
+    return column.default ?? null
   }
 
   public getOptions = (column: FormModel.Column) => {
-    if (!column.options) {
-      return null
-    }
-    return column.options ?? {}
+    return column.options ?? null
   }
 
   public getComponent = (column: FormModel.Column) => {

@@ -3,21 +3,21 @@ import { useRuntimeConfig } from '#app'
 import { useFormValidator, useFormRecaptcha, Form } from '#imports'
 
 export const useFormBuilder = () => {
-  const { validatorInit, validatorExec } = useFormValidator()
+
   const { recaptchaInit, recaptchaValidation } = useFormRecaptcha()
+  const { validateAllFields } = useFormValidator()
 
   const initForm = (config: FormBuilder.Props) => {
+
+    const form = reactive(new Form(config, useRuntimeConfig().public.form))
     recaptchaInit()
 
-    const form = reactive(new Form(config, useRuntimeConfig().public.form.lang))
-    const validator = validatorInit(form.validator.rules, form.data.state)    
-
-    return { form, validator }
+    return form
   }
 
-  const formReady = async (form: Form, validator: any ) => {
+  const formReady = async (form: Form ) => {
 
-    if (!await validatorExec(validator)) {
+    if (!await validateAllFields(form)) {
       form.mutateState('error', 'field_validation')
       return
     }

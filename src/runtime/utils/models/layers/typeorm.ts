@@ -20,6 +20,7 @@ export default class TypeORMLayer extends BaseModelLayer {
         options: this.getOptions(column),
         default: this.getDefaultValue(column),
         type: this.getType(column),
+        component: this.getComponent(column),
       };
     });
   }
@@ -68,5 +69,16 @@ export default class TypeORMLayer extends BaseModelLayer {
       return column.options.enum.reduce((acc: { [key: string | number]: string }, curr: string) => (acc[curr] = curr, acc), {}); 
     }
     return {}
+  }
+
+  public getComponent = (column: FormModel.Column) => {
+    switch (this.getType(column)) {
+      case 'select':
+        return 'FormSelect'
+      case 'textarea':
+        return 'FormTextarea'
+      default:
+        return 'FormInput'
+    }    
   }
 }
