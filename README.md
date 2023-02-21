@@ -75,7 +75,7 @@ Exemple:
 #### `FormInput`
 ```
   name: string,
-  label: string,
+  label?: string,
   rules?: string[],
   type?: string,
   required?: boolean,
