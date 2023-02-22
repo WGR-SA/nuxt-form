@@ -1,16 +1,5 @@
 import { defineNuxtModule, createResolver, addImports, addComponent } from '@nuxt/kit'
-
-export interface FormModuleOptions {
-  format_layers?: string[],
-  custom_layers?: {
-    [key: string]: FormModel.FormatLayer
-  },
-  recaptcha?: boolean,
-  hide_recaptcha?: boolean,
-  default_styles?: boolean,
-  messages?: object,
-  lang?: string,
-}
+import type { FormModuleOptions } from './module.d'
 
 export default defineNuxtModule<FormModuleOptions>({
   meta: {
@@ -184,3 +173,6 @@ export default defineNuxtModule<FormModuleOptions>({
     })
   }
 })
+
+export { NuxtFormField } from './runtime/utils/models/decorator'
+export { BaseModelLayer } from './runtime/utils/models/layers/base'

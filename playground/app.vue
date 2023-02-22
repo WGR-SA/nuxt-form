@@ -37,7 +37,7 @@ newEntity.lastName = 'Doe'
 
     <FormBuilder 
       ref="loginForm" 
-      action="https://httpbin.org/posts" 
+      action="https://httpbin.org/post" 
       :messages="{ alert: { submitted: 'Vous vous êtes bien connecté' } }"
     >
       <FormInput 
