@@ -1,4 +1,4 @@
-export class BaseModelLayer implements FormModel.FormatLayer  {
+export default class BaseModelLayer implements FormModel.FormatLayer  {
 
   columns: FormModel.Column[] = []
 

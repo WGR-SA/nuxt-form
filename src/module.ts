@@ -173,6 +173,3 @@ export default defineNuxtModule<FormModuleOptions>({
     })
   }
 })
-
-export { NuxtFormField } from './runtime/utils/models/decorator'
-export { BaseModelLayer } from './runtime/utils/models/layers/base'

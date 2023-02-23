@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 import { IsEmail, IsAlpha, IsNotEmpty, MinLength } from 'class-validator'
-import { NuxtFormField } from "../../src/runtime/utils/models/decorator"
+import NuxtFormField from "../../src/runtime/utils/models/decorator"
 
 export type UserRoleType = "admin" | "customer" | "analyst"
 

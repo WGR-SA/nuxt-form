@@ -38,6 +38,7 @@ provide('form', form)
         v-bind="field" 
         :value="config.values ? config.values[field.name] : ''"
       />
+      <slot />
       <FormSubmit>
         {{ form.messages.get('submit') }}
       </FormSubmit>
