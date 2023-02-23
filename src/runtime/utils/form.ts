@@ -24,7 +24,7 @@ export class Form {
   public moduleOptions: FormModuleOptions
 
   constructor(config: FormBuilder.Props, options: FormModuleOptions) {
-    this.action = config.action
+    this.action = config.action ?? '.'
     this.process = config.process ?? 'submit'
     this.data = new FormDataHandler()
     this.validator = new FormValidator()

@@ -6,7 +6,7 @@ import { useFormBuilder } from '#imports'
 const { initForm } = useFormBuilder()
 
 const config = defineProps<{ 
-  action: string, 
+  action?: string, 
   process?: FormActionsMethods,
   actions?: FormActions<unknown>,
   fetchOptions?: UseFetchOptions<unknown>,

@@ -6,8 +6,8 @@ import { useFormBuilder, FormModelFormatter } from '#imports'
 const { initForm } = useFormBuilder()
 
 const config = defineProps<{ 
-  action: string, 
   model: FormModel.Entity,
+  action?: string,
   values?: any,
   layers?: string[],
   process?: FormActionsMethods,
@@ -17,7 +17,7 @@ const config = defineProps<{
   lang?: string
 }>()
 
-const model = new FormModelFormatter(config.model, config.layers ?? useRuntimeConfig().public.format_layers)
+const model = new FormModelFormatter(config.model, config.layers ?? useRuntimeConfig().public.form.format_layers)
 const form = initForm(config as FormBuilder.Props)
 
 // Update messages from builder config
