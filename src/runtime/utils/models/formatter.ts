@@ -29,7 +29,6 @@ export class FormModelFormatter {
           ...this.omitColumnKeyWithNullValue(column),
         }
       })
-
     })    
 
     this.fillColumns()

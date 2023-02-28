@@ -1,15 +1,13 @@
 <script lang="ts" setup>
 import { provide } from 'vue'
-import { UseFetchOptions, useRuntimeConfig } from '#app'
-import { useFormBuilder } from '#imports'
+import { useRuntimeConfig } from '#app'
+import { useFormBuilder, ModuleTypes } from '#imports'
 
 const { initForm } = useFormBuilder()
 
 const config = defineProps<{ 
   action?: string, 
-  process?: FormActionsMethods,
-  actions?: FormActions<unknown>,
-  fetchOptions?: UseFetchOptions<unknown>,
+  actions?: ModuleTypes.FormActions,
   messages?: Partial<FormBuilder.Messages>,
   lang?: string
 }>()

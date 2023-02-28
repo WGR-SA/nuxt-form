@@ -8,7 +8,7 @@ export default defineNuxtModule<FormModuleOptions>({
   },
   defaults: {
     format_layers: ['base'],
-    custom_layers: {},
+    actions: undefined,
     recaptcha: true,
     hide_recaptcha: false,
     default_styles: true,
@@ -32,8 +32,8 @@ export default defineNuxtModule<FormModuleOptions>({
 
     /**
      * Form Builder and generator
-     */ 
-
+     */
+    
     addComponent({
       name: 'FormBuilder',
       filePath: resolve(runtimeDir, 'components', 'FormBuilder')
@@ -170,6 +170,14 @@ export default defineNuxtModule<FormModuleOptions>({
     addImports({
       name: 'NuxtFormField',
       from: resolve(runtimeDir, 'utils/models/decorators', 'decorator')
+    })
+
+    /**
+     * Form Models
+     */
+    addImports({
+      name: 'ModuleTypes',
+      from: resolve(runtimeDir, '..', 'module.d')
     })
   }
 })

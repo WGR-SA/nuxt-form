@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts">
+import { ref, watchEffect } from 'vue'
 import { User } from './entities/User'
 
 const loginForm = ref()

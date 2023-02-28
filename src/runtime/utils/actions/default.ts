@@ -1,26 +1,22 @@
-import { useFetch, UseFetchOptions } from '#app'
-import { Form } from '#imports'
+import { useFetch } from '#app'
+import type { ModuleTypes } from '#imports'
 
-export class DefaultFormActions implements FormActions<unknown> {
+export class DefaultFormActions implements ModuleTypes.FormActions {
 
-  public form: Form
-  public options: UseFetchOptions<unknown> = {
-    key: String(new Date().getTime()),
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
-  }
+  public form: ModuleTypes.FormMappedForActions
   
-  constructor(form: Form, options: UseFetchOptions<unknown>) {
+  constructor(form: ModuleTypes.FormMappedForActions) {
     this.form = form
-    this.options = {...this.options, ...options}
   }
 
   public async submit(){
     const { data, error } = await useFetch(this.form.action, {
-      ...this.options,
+      key: String(new Date().getTime()),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
       body: this.form.data.state,
       onRequest: () => {
         this.form.mutateState('submitting')
@@ -36,21 +32,16 @@ export class DefaultFormActions implements FormActions<unknown> {
     return { data, error }
   }
 
-  public async save() {
-    this.form.mutateState('submitted')
+  public create() {
+    return false
   }
-
-  public async update() {
-    this.form.mutateState('submitted')
+  public update() {
+    return false
   }
-
-  public async delete() {
-    this.form.mutateState('submitted')
+  public delete() {
+    return false
   }
-
-  public async index() {
-  }
-
-  public async get() {
+  public read() {
+    return false
   }
 }
