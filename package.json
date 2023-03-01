@@ -1,6 +1,6 @@
 {
   "name": "@wgr-sa/nuxt-form",
-  "description": "Form builder for Nuxt 3",
+  "description": "Form builder for Nuxt",
   "version": "0.4.6",
   "repository": "https://github.com/WGR-SA/nuxt-form.git",
   "author": "jeanvier",
