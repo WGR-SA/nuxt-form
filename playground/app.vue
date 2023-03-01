@@ -42,6 +42,18 @@ newEntity.lastName = 'Doe'
       :messages="{ alert: { submitted: 'Vous vous êtes bien connecté' } }"
     >
       <FormInput 
+        mask="###.####.####.##"
+        name="avs"
+        label="AVS"
+        placeholder="###.####.####.##"
+      />
+      <FormInput 
+        mask="A"
+        name="name"
+        label="Nom"
+        placeholder="Nom"
+      />
+      <FormInput 
         name="username" 
         label="Email"
         :required="true"

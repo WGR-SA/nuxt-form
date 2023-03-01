@@ -1,7 +1,7 @@
 {
   "name": "@wgr-sa/nuxt-form",
   "description": "Form builder for Nuxt 3",
-  "version": "0.4.4",
+  "version": "0.4.6",
   "repository": "https://github.com/WGR-SA/nuxt-form.git",
   "author": "jeanvier",
   "license": "MIT",
@@ -33,6 +33,7 @@
     "@nuxt/kit": "^3.1.1",
     "@nuxt/types": "^2.16.0",
     "class-validator": "^0.14.0",
+    "maska": "^2.1.7",
     "typeorm": "^0.3.12"
   },
   "devDependencies": {

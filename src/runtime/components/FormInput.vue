@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import { computed, inject } from 'vue'
+import { computed, inject, onMounted } from 'vue'
+import { MaskInput } from "maska"
+import { useRuntimeConfig } from '#app'
 import { Form } from '#imports'
 
 const props = defineProps<{ 
@@ -7,6 +9,8 @@ const props = defineProps<{
   label: string, 
   rules?: Array<string | {[key: string]: string[]}>, 
   type?: string, 
+  mask?: string,
+  tokens?: {[key: string]: string},
   required?: boolean, 
   checked?: boolean, 
   value?: string, 
@@ -16,12 +20,22 @@ const props = defineProps<{
 const form = inject('form') as Form
 const type = computed(() => props.type ?? 'text')
 
+onMounted(() => {  
+  if( useRuntimeConfig().form.mask ) {
+    new MaskInput('[data-maska]', {
+      tokens: {
+        'A': { pattern: /[A-Z -]/,  transform: (str: string) => str.toLocaleUpperCase(), multiple: true },
+      }
+    })
+  }
+})
 </script>
 
 <template>
   <FormInputContainer v-bind="props">
     <input 
       v-model="form.data.state[name]"
+      :data-maska="mask"
       :type="type" 
       :required="required" 
       :placeholder="placeholder" 

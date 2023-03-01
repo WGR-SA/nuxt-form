@@ -23,7 +23,8 @@ export interface FormModuleOptions {
   actions ?: FormActions,
   recaptcha ?: boolean,
   hide_recaptcha ?: boolean,
-  default_styles ?: boolean,
+  mask?: boolean,
+  default_styles ?: boolean,  
   messages ?: object,
   lang ?: string,
 }

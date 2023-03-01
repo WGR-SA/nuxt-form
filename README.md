@@ -1,6 +1,6 @@
 # Nuxt-Form
 
-Nuxt 3 module to create and post forms with integrated builder, inputs components and optional Recaptcha validation. Automatic field validation included with [class-validator](https://github.com/typestack/class-validator). 
+Nuxt 3 module to create and post forms with integrated builder, inputs components and optional Recaptcha validation. Automatic field validation included with [class-validator](https://github.com/typestack/class-validator). Input data mask aslo included with [maska](https://beholdr.github.io/maska)
 
 ## Install
 Run `npm i @wgr-sa/nuxt-form`
@@ -28,11 +28,11 @@ export default defineNuxtConfig({
   form: {
     recaptcha?: boolean, // Use recaptcha | default: TRUE
     hide_recaptcha?: boolean, // Hide recaptcha badge | default: FALSE
+    mask: Add maska with default values | default TRUE
     default_styles?: boolean, // Add default module style from form.css | default: TRUE
     messages?: object, // overwrite default messages | default: see message folder
     lang?: string // lang 'fr' && 'en' available  
     format_layers?: string[], | default 'base' for typeorm use ['typeorm', 'class-validator', 'from']
-    custom_layers?: [key: string]: FormModel.FormatLayer
   }
 }
 ```
@@ -60,6 +60,8 @@ Exemple:
 
 `rules` prop is used for field validation see [Validation decorators](https://github.com/typestack/class-validator#validation-decorators) or [Validator](https://github.com/validatorjs/validator.js) for details
 
+`mask` prop is used for masking input content see [Maska docs](https://beholdr.github.io/) for details. For custom tokens use disable mask module options and init a `new MaskInput("[data-maska]")` yourself in `onMounted`.
+
 ### Component props 
 
 #### `FormBuilder`
@@ -78,6 +80,7 @@ Exemple:
   label?: string,
   rules?: string[],
   type?: string,
+  mask?: string, 
   required?: boolean,
   checked?: boolean,
   value?: string,

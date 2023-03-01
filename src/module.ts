@@ -11,6 +11,7 @@ export default defineNuxtModule<FormModuleOptions>({
     actions: undefined,
     recaptcha: true,
     hide_recaptcha: false,
+    mask: true,
     default_styles: true,
     messages: {},
     lang: 'fr'
