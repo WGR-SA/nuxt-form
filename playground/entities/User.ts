@@ -15,10 +15,14 @@ export class User {
   email: string
 
   @Column({ type: 'varchar' })
+  @NuxtFormField({ label: 'AVS', mask: '###.####.####.##', placeholder: '756.0000.0000.00' })
+  avs: string
+
+  @Column({ type: 'varchar' })
   //@IsAlpha()
   @IsNotEmpty()
-  @NuxtFormField({ label: 'First Name', })
-  firstName: string
+  @NuxtFormField({ label: 'Nom', mask: 'A' })
+  lastName: string
 
   @Column({ type: 'varchar' })
   //@IsAlpha()

@@ -17,6 +17,7 @@ export default class FormLayer extends BaseModelLayer {
         label: column.label ?? null,
         rules: this.detectRules(column),
         options: this.getOptions(column),
+        mask: column.mask ?? null,
         required: column.required ?? null,
         checked: column.checked ?? null,
         value: column.value ?? this.getDefaultValue(column),
