@@ -27,7 +27,7 @@ export class User {
   @Column({ type: 'varchar' })
   //@IsAlpha()
   @MinLength(3)
-  lastName: string
+  firstName: string
 
   @Column({ 
     type: 'enum',

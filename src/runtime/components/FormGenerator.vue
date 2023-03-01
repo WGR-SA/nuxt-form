@@ -10,6 +10,7 @@ const config = defineProps<{
   action?: string,
   values?: any,
   layers?: string[],
+  exclude?: string[],
   actions?: ModuleTypes.FormActions,
   messages?: Partial<FormBuilder.Messages>,
   lang?: string
@@ -29,13 +30,15 @@ provide('form', form)
   <form class="form">
     <FormAlert />
     <fieldset v-if="form.shown">
-      <component 
-        :is="field.component ?? 'FormInput'" 
-        v-for="field in model.getFormInputs()" 
-        :key="field.name" 
-        v-bind="field" 
-        :value="config.values ? config.values[field.name] : ''"
-      />
+      <template v-for="field in model.getFormInputs()">
+        <component 
+          :is="field.component ?? 'FormInput'" 
+          v-if="exclude ? !exclude.includes(field.name) : true"
+          :key="field.name" 
+          v-bind="field" 
+          :value="config.values ? config.values[field.name] : ''"
+        />
+      </template>
       <slot />
       <FormSubmit>
         {{ form.messages.get('submit') }}

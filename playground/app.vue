@@ -32,6 +32,7 @@ newEntity.lastName = 'Doe'
       action="https://httpbin.org/post"
       :model="User"
       :values="newEntity"
+      :exclude="['firstName']"
       :layers="['typeorm', 'class-validator', 'form']"
       :messages="{ submit: 'Register' }"
     />
