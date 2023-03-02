@@ -54,6 +54,8 @@ export default class BaseModelLayer implements FormModel.FormatLayer  {
         return 'FormTextarea'
       case 'radio':
         return 'FormRadio'
+      case 'file':
+        return 'FormFile'
       default:
         return 'FormInput'
     }    

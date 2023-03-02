@@ -20,7 +20,7 @@ watchEffect(async () => {
 })
 
 const newEntity = new User()
-newEntity.email = 'test@test.ch'
+//newEntity.email = 'test@test.ch'
 //newEntity.firstName = 'John'
 newEntity.lastName = 'Doe'
 </script>
@@ -46,15 +46,23 @@ newEntity.lastName = 'Doe'
         mask="###.####.####.##"
         name="avs"
         label="AVS"
+        :rules="['isNotEmpty']" 
         placeholder="###.####.####.##"
+      />
+
+      <FormFile
+        name="file" 
+        type="file" 
+        label="file"
       />
       <FormInput 
         mask="A"
         name="name"
         label="Nom"
+        :rules="['isNotEmpty']" 
         placeholder="Nom"
       />
-      <FormInput 
+      <!-- <FormInput 
         name="username" 
         label="Email"
         :required="true"
@@ -66,7 +74,7 @@ newEntity.lastName = 'Doe'
         type="password" 
         label="Password" 
         placeholder="password" 
-      />
+      /> -->
       <FormSubmit>
         Login
       </FormSubmit>

@@ -57,6 +57,8 @@ export default class FormLayer extends BaseModelLayer {
         return 'FormTextarea'
       case 'radio':
         return 'FormRadio'
+      case 'file':
+        return 'FormFile'
       default:
         return 'FormInput'
     }

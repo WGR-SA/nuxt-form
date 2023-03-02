@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, inject, onMounted } from 'vue'
+import { computed, inject, onMounted, watch, ref } from 'vue'
 import { MaskInput } from "maska"
 import { useRuntimeConfig } from '#app'
 import { Form } from '#imports'
@@ -18,6 +18,7 @@ const props = defineProps<{
 }>()
 
 const form = inject('form') as Form
+const formInput = ref()
 const type = computed(() => props.type ?? 'text')
 
 onMounted(() => {  
@@ -29,11 +30,18 @@ onMounted(() => {
     })
   }
 })
+
+watch((form?.data?.state), () => {
+  if(formInput.value?.files?.length) {
+    form.data.state[props.name] = formInput.value.files
+  }
+})
 </script>
 
 <template>
   <FormInputContainer v-bind="props">
     <input 
+      ref="formInput"
       v-model="form.data.state[name]"
       :data-maska="mask"
       :type="type" 

@@ -9,7 +9,8 @@ export class DefaultFormActions implements ModuleTypes.FormActions {
     this.form = form
   }
 
-  public async submit(){
+  public async submit(){    
+
     const { data, error } = await useFetch(this.form.action, {
       key: String(new Date().getTime()),
       method: 'POST',

@@ -82,6 +82,12 @@ export default defineNuxtModule<FormModuleOptions>({
     })
 
     addComponent({
+      name: 'FormFile',
+      global: true,
+      filePath: resolve(runtimeDir, 'components', 'FormFile')
+    })
+
+    addComponent({
       name: 'FormSelect',
       global: true,
       filePath: resolve(runtimeDir, 'components', 'FormSelect')
