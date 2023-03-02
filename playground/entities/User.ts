@@ -22,11 +22,12 @@ export class User {
   //@IsAlpha()
   @IsNotEmpty()
   @NuxtFormField({ label: 'Nom', mask: 'A' })
-  lastName: string
+  lastName!: string
 
   @Column({ type: 'varchar' })
   //@IsAlpha()
   @MinLength(3)
+  @NuxtFormField({ label: 'Prénom', mask: 'A' })
   firstName: string
 
   @Column({ 

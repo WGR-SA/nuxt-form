@@ -32,12 +32,11 @@ newEntity.lastName = 'Doe'
       action="https://httpbin.org/post"
       :model="User"
       :values="newEntity"
-      :exclude="['firstName']"
       :layers="['typeorm', 'class-validator', 'form']"
       :messages="{ submit: 'Register' }"
     />
 
-    <FormBuilder 
+    <!-- <FormBuilder 
       ref="loginForm" 
       action="https://httpbin.org/post" 
       :messages="{ alert: { submitted: 'Vous vous êtes bien connecté' } }"
@@ -62,7 +61,7 @@ newEntity.lastName = 'Doe'
         :rules="['isNotEmpty']" 
         placeholder="Nom"
       />
-      <!-- <FormInput 
+<FormInput 
         name="username" 
         label="Email"
         :required="true"
@@ -74,10 +73,10 @@ newEntity.lastName = 'Doe'
         type="password" 
         label="Password" 
         placeholder="password" 
-      /> -->
+      /> 
       <FormSubmit>
         Login
       </FormSubmit>
-    </FormBuilder>
+    </FormBuilder> -->
   </div>
 </template>

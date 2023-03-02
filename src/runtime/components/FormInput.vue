@@ -30,12 +30,6 @@ onMounted(() => {
     })
   }
 })
-
-watch((form?.data?.state), () => {
-  if(formInput.value?.files?.length) {
-    form.data.state[props.name] = formInput.value.files
-  }
-})
 </script>
 
 <template>

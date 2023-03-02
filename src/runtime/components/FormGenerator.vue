@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { provide } from 'vue'
+import { provide, onMounted } from 'vue'
 import { useRuntimeConfig } from '#app'
 import { useFormBuilder, FormModelFormatter, ModuleTypes } from '#imports'
 
@@ -22,6 +22,17 @@ const form = initForm(config as FormBuilder.Props)
 // Update messages from builder config
 form.messages.updateFormMessages(useRuntimeConfig().public.form.lang, config.messages ?? {})
 
+onMounted(() => {
+  
+  // Set initial values
+  Object.keys(config.values ?? {}).forEach(key => {
+    if( config.values[key] && config.values[key].length > 0 )
+    {
+      form.data.state[key] = config.values[key]
+    }
+  })  
+})
+
 defineExpose(form)
 provide('form', form)
 </script>
@@ -35,8 +46,7 @@ provide('form', form)
           :is="field.component ?? 'FormInput'" 
           v-if="exclude ? !exclude.includes(field.name) : true"
           :key="field.name" 
-          v-bind="field" 
-          :value="config.values ? config.values[field.name] : ''"
+          v-bind="field"
         />
       </template>
       <slot />
