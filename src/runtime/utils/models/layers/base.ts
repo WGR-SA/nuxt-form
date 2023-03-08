@@ -43,7 +43,7 @@ export default class BaseModelLayer implements FormModel.FormatLayer  {
   }
 
   public getOptions = (column: FormModel.Column) => {  
-    return column.options ?? {}
+    return column.options ?? null
   }
 
   public getComponent = (column: FormModel.Column) => {

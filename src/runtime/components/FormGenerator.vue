@@ -18,19 +18,19 @@ const config = defineProps<{
 
 const model = new FormModelFormatter(config.model, config.layers ?? useRuntimeConfig().public.form.format_layers)
 const form = initForm(config as FormBuilder.Props)
+const fields = model.getFormInputs()
 
 // Update messages from builder config
 form.messages.updateFormMessages(useRuntimeConfig().public.form.lang, config.messages ?? {})
 
-onMounted(() => {
-  
+onMounted(() => {  
   // Set initial values
   Object.keys(config.values ?? {}).forEach(key => {
     if( config.values[key] && config.values[key].length > 0 )
     {
       form.data.state[key] = config.values[key]
     }
-  })  
+  })    
 })
 
 defineExpose(form)
@@ -41,7 +41,7 @@ provide('form', form)
   <form class="form">
     <FormAlert />
     <fieldset v-if="form.shown">
-      <template v-for="field in model.getFormInputs()">
+      <template v-for="field in fields">
         <component 
           :is="field.component ?? 'FormInput'" 
           v-if="exclude ? !exclude.includes(field.name) : true"

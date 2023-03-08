@@ -6,7 +6,7 @@ const { formReady } = useFormBuilder()
 const form = inject('form') as Form
 
 const submit = () => {
-  form.mutateState('submitting')
+  form.mutateState('validate')
   formReady(form)
 }
 </script>

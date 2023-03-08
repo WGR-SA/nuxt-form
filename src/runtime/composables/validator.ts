@@ -21,7 +21,7 @@ export const useFormValidator = () => {
       // @ts-ignore TODO: fix this
       const result = validator(form.data.state[field], rule.$params.options)      
       
-      if (!result && (form.data.state[field].length > 0 || ['error', 'submitting'].includes(form.state.status))) {
+      if (!result && (form.data.state[field].length > 0 || ['error', 'validate'].includes(form.state.status))) {
         errors.value.push(rule.$message)
       }
     })

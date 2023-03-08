@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { inject, computed, watch, onMounted } from 'vue'
+import { inject, computed } from 'vue'
 import { Form, useFormValidator } from '#imports'
 
 const props = defineProps<{
   name: string,
-  label: string,
+  label?: string,
   rules?: Array<string | { [key: string]: string[] }>, 
   options?: { [key: string | number]: string },
   required?: boolean,
@@ -18,7 +18,7 @@ const { validateField } = useFormValidator()
 const errors = computed(() => validateField(form, props.name))
 const form = inject('form') as Form
 
-form.addField(props)
+form.addField(props as FormInput.Container)
 </script>
 
 <template>

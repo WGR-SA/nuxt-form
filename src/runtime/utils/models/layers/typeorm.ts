@@ -68,7 +68,7 @@ export default class TypeORMLayer extends BaseModelLayer {
     if (column.options.type === 'enum') {
       return column.options.enum.reduce((acc: { [key: string | number]: string }, curr: string) => (acc[curr] = curr, acc), {}); 
     }
-    return {}
+    return null
   }
 
   public getComponent = (column: FormModel.Column) => {

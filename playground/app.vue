@@ -36,12 +36,12 @@ newEntity.lastName = 'Doe'
       :messages="{ submit: 'Register' }"
     />
 
-    <!-- <FormBuilder 
+    <FormBuilder 
       ref="loginForm" 
       action="https://httpbin.org/post" 
       :messages="{ alert: { submitted: 'Vous vous êtes bien connecté' } }"
     >
-      <FormInput 
+      <!-- <FormInput 
         mask="###.####.####.##"
         name="avs"
         label="AVS"
@@ -60,8 +60,8 @@ newEntity.lastName = 'Doe'
         label="Nom"
         :rules="['isNotEmpty']" 
         placeholder="Nom"
-      />
-<FormInput 
+      /> -->
+      <FormInput 
         name="username" 
         label="Email"
         :required="true"
@@ -77,6 +77,6 @@ newEntity.lastName = 'Doe'
       <FormSubmit>
         Login
       </FormSubmit>
-    </FormBuilder> -->
+    </FormBuilder>
   </div>
 </template>
