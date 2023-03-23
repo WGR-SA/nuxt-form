@@ -110,10 +110,16 @@ export default defineNuxtModule<FormModuleOptions>({
       filePath: resolve(runtimeDir, 'components', 'FormAlert')
     })
 
+    addComponent({
+      name: 'FormSuggest',
+      global: true,
+      filePath: resolve(runtimeDir, 'components', 'FormSuggest')
+    })
+
     /**
      * Form Data
      */ 
-
+    
     addImports({
       name: 'FormDataHandler',
       from: resolve(runtimeDir, 'utils/data', 'handler')

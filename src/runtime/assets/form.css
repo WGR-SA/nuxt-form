@@ -50,12 +50,45 @@ button {
 }
 
 .form__input {
+  position: relative;
   margin: 0 0 0.75rem;
 }
 
 .form__input,
 .form__input * {
   box-sizing: border-box;
+}
+
+.form__suggest {
+  display: none;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  z-index: 2;
+  list-style: none;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.form__suggest:has(.visible) {
+  display: block;
+}
+
+.form__suggest li {
+  display: none;
+  padding: .5rem;
+  font-size: 0.8rem;
+  background: white;
+  cursor: pointer;
+} 
+
+.form__suggest li.visible {
+  display: block;
+}
+
+.form__suggest li:hover {
+  background-color: #eee;
 }
 
 .form__error {

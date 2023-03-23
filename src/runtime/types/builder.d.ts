@@ -24,7 +24,7 @@ declare namespace FormBuilder {
     lang?: string
   }
 
-  type Status = 'idle' | 'ready' | 'submitting' | 'submitted' | 'error'
+  type Status = 'idle' | 'ready' | 'validate' | 'submitting' | 'submitted' | 'error'
   type ErrorType = 'field_validation' | 'recaptcha' | 'unknown' | false | undefined | string
   type State = { status: Status, errorType?: ErrorType | string }
 }

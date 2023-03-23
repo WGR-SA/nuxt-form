@@ -10,6 +10,7 @@ const props = defineProps<{
   rules?: Array<string | {[key: string]: string[]}>, 
   type?: string, 
   mask?: string,
+  suggestions?: string[] | {[key: string]: string},
   tokens?: {[key: string]: string},
   required?: boolean, 
   checked?: boolean, 
@@ -43,5 +44,10 @@ onMounted(() => {
       :placeholder="placeholder" 
       :checked="checked"
     >
+    <FormSuggest 
+      v-if="suggestions"
+      :name="name"
+      :options="suggestions"
+    />
   </FormInputContainer>
 </template>

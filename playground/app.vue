@@ -2,6 +2,52 @@
 import { ref, watchEffect } from 'vue'
 import { User } from './entities/User'
 
+const suggestions = [
+  "AMB",
+  "Agrisano",
+  "Aquilana",
+  "Arcosana",
+  "Assura",
+  "Atupri",
+  "Avenir",
+  "Birchmeier",
+  "CSS",
+  "Compact",
+  "Concordia",
+  "EGK",
+  "Easy Sana",
+  "Einsiedeln",
+  "Galenos",
+  "Glarner",
+  "Groupe Mutuel",
+  "Helsana",
+  "Innova",
+  "Intras",
+  "KPT / CPT",
+  "Klug",
+  "Kolping",
+  "Luzerner Hinterland",
+  "Philos",
+  "Provita",
+  "Rhenusana",
+  "SLKK",
+  "Sana24",
+  "Sanagate",
+  "Sanitas",
+  "Sodalis",
+  "Steffisburg",
+  "Sumiswalder",
+  "Supra",
+  "Swica",
+  "Sympany",
+  "Visana",
+  "Visperterminen",
+  "Vita Surselva",
+  "Vivacare",
+  "Wädenswil",
+  "ÖKK"
+] 
+
 const loginForm = ref()
 const userForm = ref()
 
@@ -41,13 +87,14 @@ newEntity.lastName = 'Doe'
       action="https://httpbin.org/post" 
       :messages="{ alert: { submitted: 'Vous vous êtes bien connecté' } }"
     >
-      <!-- <FormInput 
-        mask="###.####.####.##"
-        name="avs"
-        label="AVS"
+      <FormInput 
+        name="assurance"
+        label="Assurance"
         :rules="['isNotEmpty']" 
-        placeholder="###.####.####.##"
+        :suggestions="suggestions"
       />
+
+      <!--
 
       <FormFile
         name="file" 
