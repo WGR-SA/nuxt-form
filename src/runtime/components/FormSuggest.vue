@@ -5,7 +5,7 @@ import { Form, useFetch } from '#imports'
 
 const props = withDefaults(defineProps<{
   name: string,
-  type?: 'list' | 'api',
+  type?: 'list' | 'api' | 'custom',
   fetchUrl?: string,
   responsePath?: string,
   responseKey?: string,
@@ -23,7 +23,7 @@ if ( props.type === 'api' && props.fetchUrl) {
       key: props.fetchUrl,
       method: 'GET',
     })
-    
+
     if(data.value) {
       // @ts-ignore
       options.value = props.responsePath ? data.value[props.responsePath] : data.value
@@ -32,7 +32,7 @@ if ( props.type === 'api' && props.fetchUrl) {
 } 
 
 const inputMatchingOption = (option: string) => {
-  if(props.type === 'api') return true
+  if(['api', 'custom'].includes(props.type)) return true
   return option.toLowerCase().includes(form.data.state[props.name].toLowerCase()) && form.data.state[props.name].length > 0 && form.data.state[props.name].toLowerCase() !== option.toLowerCase()
 }
 const setInputValue = (option: string) => {

@@ -62,7 +62,7 @@ Exemple:
 
 `mask` prop is used for masking input content see [Maska docs](https://beholdr.github.io/) for details. For custom tokens use disable mask module options and init a `new MaskInput("[data-maska]")` in `onMounted`.
 
-The `suggestions` prop adds a list of suggestions when the user is typing into an input field. It has two types list or api with corresponding options. 
+The `suggestions` prop adds a list of suggestions when the user is typing into an input field. It has three types list, api or custom for self matching check. 
 
 ### Component props 
 
@@ -84,7 +84,7 @@ The `suggestions` prop adds a list of suggestions when the user is typing into a
   type?: string,
   mask?: string,
   suggestions?: {
-    type?: 'list' | 'api',
+    type?: 'list' | 'api' | 'custom',
     fetchUrl?: string,
     responsePath?: string,
     responseKey?: string,

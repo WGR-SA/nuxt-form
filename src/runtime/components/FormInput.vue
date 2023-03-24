@@ -11,7 +11,7 @@ const props = defineProps<{
   type?: string, 
   mask?: string,
   suggestions?: {
-    type?: 'list' | 'api',
+    type?: 'list' | 'api' | 'custom',
     fetchUrl?: string,
     responsePath?: string,
     responseKey?: string,
