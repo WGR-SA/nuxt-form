@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, computed } from 'vue'
 import { User } from './entities/User'
 
 const suggestions = [
@@ -69,6 +69,17 @@ const newEntity = new User()
 //newEntity.email = 'test@test.ch'
 //newEntity.firstName = 'John'
 newEntity.lastName = 'Doe'
+
+const params = computed(() => {
+  return {
+    key: 'AIzaSyBfWNEwNY9lQypQvlsW5w7CPdWZSdYLIBA',
+    input: loginForm.value?.data.state.place,
+  }
+})
+
+const suggestionFetchUrl = computed(() => { 
+  return `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?${(new URLSearchParams(params.value)).toString()}`
+})
 </script>
 
 <template>
@@ -78,7 +89,7 @@ newEntity.lastName = 'Doe'
       action="https://httpbin.org/post"
       :model="User"
       :values="newEntity"
-      :layers="['typeorm', 'class-validator', 'form']"
+      :layers="['typeorm', 'class-validator',  'form']"
       :messages="{ submit: 'Register' }"
     />
 
@@ -88,10 +99,25 @@ newEntity.lastName = 'Doe'
       :messages="{ alert: { submitted: 'Vous vous êtes bien connecté' } }"
     >
       <FormInput 
+        name="place"
+        label="Place"
+        :rules="['isNotEmpty']" 
+        :suggestions="{
+          type: 'api',
+          fetchUrl: suggestionFetchUrl,
+          responsePath: 'predictions',
+          responseKey: 'description',
+        }"
+      />
+
+
+      <FormInput 
         name="assurance"
         label="Assurance"
         :rules="['isNotEmpty']" 
-        :suggestions="suggestions"
+        :suggestions="{
+          values: suggestions,
+        }"
       />
 
       <!--
