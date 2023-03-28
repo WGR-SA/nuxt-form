@@ -7,6 +7,7 @@ const props = withDefaults(defineProps<{
   name: string,
   type?: 'list' | 'api' | 'custom',
   fetchUrl?: string,
+  headers?: { [key: string]: string },
   responsePath?: string,
   responseKey?: string,
   values?: string[] | { [key: string]: string } | string
@@ -22,6 +23,7 @@ if ( props.type === 'api' && props.fetchUrl) {
     const { data } = await useFetch(String(props.fetchUrl), {
       key: props.fetchUrl,
       method: 'GET',
+      ...props.headers,
     })
 
     if(data.value) {
