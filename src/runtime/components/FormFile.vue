@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { inject, watch, ref } from 'vue'
+import { inject, ref } from 'vue'
 import { Form } from '#imports'
 
 const props = defineProps<{
@@ -24,7 +24,7 @@ const formInput = ref()
       :required="required"
       :accept="accept"
       :multiple="multiple"
-      @change="form.data.state[props.name] = formInput.files"
+      @change="form.data.state[props.name] = formInput.files[0]"
     >
   </FormInputContainer>
 </template>
