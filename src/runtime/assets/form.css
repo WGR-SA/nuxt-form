@@ -134,7 +134,7 @@ button {
   color: #a94442;
 }
 
-.alert--submitting, .alert--submitted {
+.alert--submitting, .alert--submitted, .alert--validate {
   background-color: #dff0d8;
   color: #3c763d;
 }
