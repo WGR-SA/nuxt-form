@@ -25,6 +25,7 @@ const rows = computed(() => props.rows ?? 3)
       v-model="form.data.state[name]" 
       :required="required" 
       :rows="rows" 
+      :placeholder="placeholder" 
     />
   </FormInputContainer>
 </template>
