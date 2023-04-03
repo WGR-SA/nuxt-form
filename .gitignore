@@ -1,5 +1,6 @@
 # Dependencies
 node_modules
+package-lock.json
 
 # Logs
 *.log*
@@ -12,6 +13,7 @@ node_modules
 # Yarn
 **/.yarn/cache
 **/.yarn/*state*
+yarn.lock
 
 # Generated dirs
 dist
