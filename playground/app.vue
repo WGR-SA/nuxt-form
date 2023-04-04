@@ -73,27 +73,35 @@ newEntity.lastName = 'Doe'
 
 <template>
   <div style="max-width: 1200px;padding: 40px;margin: 0 auto;">
-    <FormGenerator 
+    <!-- <FormGenerator 
       ref="userForm"
       action="https://httpbin.org/post"
       :model="User"
       :values="newEntity"
       :layers="['typeorm', 'class-validator',  'form']"
       :messages="{ submit: 'Register' }"
-    />
+    /> -->
 
     <FormBuilder 
       ref="loginForm" 
       action="https://httpbin.org/post" 
       :messages="{ alert: { submitted: 'Vous vous êtes bien connecté' } }"
     >
-      <FormInput 
+      <!-- <FormInput 
         name="assurance"
         label="Assurance"
         :rules="['isNotEmpty']" 
         :suggestions="{
           values: suggestions,
         }"
+      /> -->
+
+      <FormSelectMultiple
+        name="multiple"
+        label="Assurance"
+        :multiple="true"
+        :rules="['isNotEmpty']" 
+        :options="['yolo', 'yolo2', 'yolo3']"
       />
 
       <!--
@@ -110,7 +118,7 @@ newEntity.lastName = 'Doe'
         :rules="['isNotEmpty']" 
         placeholder="Nom"
       /> -->
-      <FormInput 
+      <!-- <FormInput 
         name="username" 
         label="Email"
         :required="true"
@@ -122,7 +130,7 @@ newEntity.lastName = 'Doe'
         type="password" 
         label="Password" 
         placeholder="password" 
-      /> 
+      />  -->
       <FormSubmit>
         Login
       </FormSubmit>

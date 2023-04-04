@@ -16,6 +16,8 @@ export default class BaseModelLayer implements FormModel.FormatLayer  {
         options: this.getOptions(column),
         required: column.required ?? false,
         mask: column.mask ?? null,
+        accept: column.accept ?? null,
+        multiple: column.multiple ?? null,
         checked: column.checked ?? false,
         value: column.value ?? this.getDefaultValue(column),
         default: this.getDefaultValue(column),

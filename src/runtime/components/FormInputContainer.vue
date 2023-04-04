@@ -22,8 +22,13 @@ form.addField(props as FormInput.Container)
 </script>
 
 <template>
-  <div :class="`form__input form__${type ?? 'default'} ${(rules?.includes('isNotEmpty')) ? 'form--required' : '' }`">
-    <label v-if="type !== 'hidden'" :for="name">{{ label }}</label>
+  <div :class="`form__input form__${type ?? 'default'} ${(rules?.includes('isNotEmpty') || props.required) ? 'form--required' : '' }`">
+    <label 
+      v-if="type !== 'hidden'" 
+      :for="name"
+    >
+      {{ label }}
+    </label>
     <slot />
     <p 
       v-for="(error, i) of errors" 
