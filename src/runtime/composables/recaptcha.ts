@@ -16,6 +16,7 @@ export const useFormRecaptcha = () => {
 
   const recaptchaValidation = async (form: Form) => {
     if (useRuntimeConfig().public.form.recaptcha) {
+      // @ts-ignore
       const recaptcha = window.grecaptcha
       const recaptchaToken = await recaptcha.execute(sitekey, { action: 'contact' })
       if (!recaptchaToken) {
