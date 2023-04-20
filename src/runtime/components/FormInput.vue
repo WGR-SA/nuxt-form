@@ -20,6 +20,7 @@ const props = defineProps<{
   tokens?: {[key: string]: string},
   required?: boolean, 
   checked?: boolean, 
+  disabled?: boolean,
   value?: string, 
   placeholder?: string 
 }>()
@@ -47,6 +48,7 @@ onMounted(() => {
       :data-maska="mask"
       :type="type" 
       :required="required" 
+      :disabled="disabled"
       :placeholder="placeholder" 
       :checked="checked"
     >

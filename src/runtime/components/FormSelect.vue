@@ -11,6 +11,7 @@ const props = defineProps<{
   required?: boolean,
   multiple?: boolean,
   checked?: boolean,
+  disabled?: boolean,
   value?: string,
   placeholder?: string,
 }>()
@@ -24,6 +25,7 @@ const required = computed(() => props.required ?? false)
     <select 
       v-model="form.data.state[name]" 
       :required="required"
+      :disabled="disabled"
       :multiple="multiple"
     >
       <option 
