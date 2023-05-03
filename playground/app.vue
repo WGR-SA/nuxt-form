@@ -87,22 +87,16 @@ newEntity.lastName = 'Doe'
       action="https://httpbin.org/post" 
       :messages="{ alert: { submitted: 'Vous vous êtes bien connecté' } }"
     >
-      <!-- <FormInput 
+      <FormInput 
         name="assurance"
         label="Assurance"
         :rules="['isNotEmpty']" 
         :suggestions="{
           values: suggestions,
         }"
-      /> -->
-
-      <FormSelectMultiple
-        name="multiple"
-        label="Assurance"
-        :multiple="true"
-        :rules="['isNotEmpty']" 
-        :options="['yolo', 'yolo2', 'yolo3']"
       />
+
+
 
       <!--
 
@@ -137,3 +131,14 @@ newEntity.lastName = 'Doe'
     </FormBuilder>
   </div>
 </template>
+
+<style>
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.25px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  color: #333;
+}
+</style>
