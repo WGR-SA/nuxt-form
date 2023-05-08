@@ -2,13 +2,13 @@ export default class BaseModelLayer implements FormModel.FormatLayer  {
 
   columns: FormModel.Column[] = []
 
-  public getColumns = (model: {[key: string]: any}) => {
-    this.columns = Object.entries(model)
+  public getColumns = (model: any[]) => {
+    this.columns = model    
     return this.mapLayer()
   }
 
   public mapLayer = (): FormInput.Container[] => {
-    return this.columns.map((column) => {
+    return this.columns.map((column) => {      
       return {
         name: column.name,
         label: column.label ?? column.name,

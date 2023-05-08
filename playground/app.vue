@@ -69,6 +69,23 @@ const newEntity = new User()
 //newEntity.email = 'test@test.ch'
 //newEntity.firstName = 'John'
 newEntity.lastName = 'Doe'
+
+const model = [
+  {
+    name: 'email',
+    label: 'Email',
+    type: 'email',
+    required: true,
+    rules: ['isEmail']
+  },
+  {
+    name: 'firstName',
+    label: 'First Name',
+    type: 'text',
+    required: true,
+    rules: [{minLength: [3]}]
+  }
+]
 </script>
 
 <template>
@@ -81,6 +98,13 @@ newEntity.lastName = 'Doe'
       :layers="['typeorm', 'class-validator',  'form']"
       :messages="{ submit: 'Register' }"
     /> -->
+
+    <FormGenerator
+      ref="userForm"
+      action="https://httpbin.org/post"
+      :model="model"
+      :layers="[ 'base']"
+    />
 
     <FormBuilder 
       ref="loginForm" 
