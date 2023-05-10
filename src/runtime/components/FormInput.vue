@@ -21,6 +21,7 @@ const props = defineProps<{
   required?: boolean, 
   checked?: boolean, 
   disabled?: boolean,
+  readonly?: boolean,
   value?: string, 
   placeholder?: string 
 }>()
@@ -30,7 +31,7 @@ const formInput = ref()
 const type = computed(() => props.type ?? 'text')
 
 onMounted(() => {  
-  if( useRuntimeConfig().form.mask ) {
+  if( useRuntimeConfig().public.form.mask ) {
     new MaskInput('[data-maska]', {
       tokens: {
         'A': { pattern: /[A-Z -]/,  transform: (str: string) => str.toLocaleUpperCase(), multiple: true },
@@ -49,6 +50,7 @@ onMounted(() => {
       :type="type" 
       :required="required" 
       :disabled="disabled"
+      :readonly="readonly"
       :placeholder="placeholder" 
       :checked="checked"
     >

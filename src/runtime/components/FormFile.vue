@@ -9,6 +9,7 @@ const props = defineProps<{
   type?: string,
   accept?: string,
   required?: boolean,
+  readonly?: boolean,
   multiple?: boolean
 }>()
 
@@ -24,6 +25,7 @@ const formInput = ref()
       :required="required"
       :accept="accept"
       :multiple="multiple"
+      :readonly="readonly"
       @change="form.data.state[props.name] = formInput.files[0]"
     >
   </FormInputContainer>

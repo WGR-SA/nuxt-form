@@ -31,6 +31,10 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+input[readonly] {
+  background-color: #eee;
+}
+
 button {
   display: block;
   margin: 1rem 0 1rem auto;

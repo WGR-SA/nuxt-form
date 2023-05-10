@@ -114,6 +114,8 @@ const model = [
       <FormInput 
         name="assurance"
         label="Assurance"
+        value="yolo"
+        :readonly="true"
         :rules="['isNotEmpty']" 
         :suggestions="{
           values: suggestions,
