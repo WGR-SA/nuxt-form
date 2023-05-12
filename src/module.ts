@@ -7,7 +7,7 @@ export default defineNuxtModule<FormModuleOptions>({
     configKey: 'form'
   },
   defaults: {
-    format_layers: ['base'],
+    format_layers: [],
     actions: undefined,
     recaptcha: true,
     hide_recaptcha: false,
