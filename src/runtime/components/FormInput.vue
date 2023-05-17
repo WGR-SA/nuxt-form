@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, inject, onMounted, ref } from 'vue'
+import { computed, inject, onMounted, onUpdated, ref } from 'vue'
 import { MaskInput } from "maska"
 import { useRuntimeConfig } from '#app'
 import { Form } from '#imports'
@@ -31,12 +31,14 @@ const formInput = ref()
 const type = computed(() => props.type ?? 'text')
 
 onMounted(() => {  
-  if( useRuntimeConfig().public.form.mask ) {
-    new MaskInput('[data-maska]', {
-      tokens: {
-        'A': { pattern: /[A-Z -]/,  transform: (str: string) => str.toLocaleUpperCase(), multiple: true },
-      }
-    })
+  if (useRuntimeConfig().public.form.mask) {
+    setTimeout(() => {      
+      new MaskInput('[data-maska]', {
+        tokens: {
+          'A': { pattern: /[A-Z -]/, transform: (str: string) => str.toLocaleUpperCase(), multiple: true },
+        }
+      })
+    }, 1000)
   }
 })
 </script>

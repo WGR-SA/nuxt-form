@@ -83,6 +83,7 @@ const model = [
     label: 'First Name',
     type: 'text',
     required: true,
+    mask: 'A',
     rules: [{minLength: [3]}]
   }
 ]
@@ -90,14 +91,14 @@ const model = [
 
 <template>
   <div style="max-width: 1200px;padding: 40px;margin: 0 auto;">
-    <!-- <FormGenerator 
+    <FormGenerator 
       ref="userForm"
       action="https://httpbin.org/post"
       :model="User"
       :values="newEntity"
-      :layers="['typeorm', 'class-validator',  'form']"
+      :layers="['typeorm', 'class-validator', 'form']"
       :messages="{ submit: 'Register' }"
-    /> -->
+    />
 
     <FormGenerator
       ref="userForm"
