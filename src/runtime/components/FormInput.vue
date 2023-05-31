@@ -6,7 +6,7 @@ import { Form } from '#imports'
 
 const props = defineProps<{ 
   name: string, 
-  label: string, 
+  label?: string, 
   rules?: Array<string | {[key: string]: string[]}>, 
   type?: string, 
   mask?: string,

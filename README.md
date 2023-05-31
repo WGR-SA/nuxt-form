@@ -69,9 +69,7 @@ The `suggestions` prop adds a list of suggestions when the user is typing into a
 #### `FormBuilder`
 ```
   action: string,
-  process?: FormActionsMethods,
   actions?: FormActions<unknown>,
-  fetchOptions?: UseFetchOptions<unknown>,
   messages?: Partial<FormBuilder.Messages>,
   lang?: string
 ```
@@ -82,6 +80,10 @@ The `suggestions` prop adds a list of suggestions when the user is typing into a
   label?: string,
   rules?: string[],
   type?: string,
+  required?: boolean,
+  checked?: boolean,
+  value?: string,
+  placeholder?: string,
   mask?: string,
   suggestions?: {
     type?: 'list' | 'api' | 'custom',
@@ -89,11 +91,7 @@ The `suggestions` prop adds a list of suggestions when the user is typing into a
     responsePath?: string,
     responseKey?: string,
     values?: string[] | { [key: string]: string } | string
-  },
-  required?: boolean,
-  checked?: boolean,
-  value?: string,
-  placeholder?: string,
+  }
 ```
 
 #### `FormSelect` extends `FormInput`

@@ -22,12 +22,12 @@ form.addField(props as FormInput.Container)
 </script>
 
 <template>
-  <div :class="`form__input form__${type ?? 'default'} ${(rules?.includes('IsNotEmpty') || props.required) ? 'form--required' : '' }`">
+  <div :class="`form__input form__${type ?? 'default'} ${(rules?.includes('isNotEmpty') || props.required) ? 'form--required' : '' }`">
     <label 
       v-if="type !== 'hidden'" 
       :for="name"
     >
-      {{ label }}
+      {{ label ?? name }}
     </label>
     <slot />
     <p 

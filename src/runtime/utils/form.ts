@@ -17,9 +17,8 @@ export interface FormModuleOptions {
 
 export class Form {
   public action: string
-  public process: string
   public state: FormBuilder.State = { status: 'idle' }
-  public shown: boolean = true
+  public isShown: boolean = true
 
   public data: FormDataHandler
   public validator: FormValidator
@@ -28,8 +27,7 @@ export class Form {
   public moduleOptions: FormModuleOptions
 
   constructor(config: FormBuilder.Props, options: FormModuleOptions) {
-    this.action = config.action ?? '.'
-    this.process = config.process ?? 'submit'
+    this.action = config.action ?? '#'
     this.data = new FormDataHandler()
     this.validator = new FormValidator()
     this.messages = new FormMessageStore(options.lang ?? 'en', options.messages ?? {})
@@ -54,7 +52,7 @@ export class Form {
 
   mutateState (status: FormBuilder.Status, errorType?: FormBuilder.ErrorType | string) {
     this.state = { status, errorType }
-    this.shown = !!['idle', 'ready', 'error'].find(s => s === this.state.status)
+    this.isShown = !!['idle', 'ready', 'error'].find(s => s === this.state.status)
   }
 
   ready () {

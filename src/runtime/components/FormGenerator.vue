@@ -40,7 +40,7 @@ provide('form', form)
 <template>
   <form class="form">
     <FormAlert />
-    <fieldset v-if="form.shown">
+    <fieldset v-if="form.isShown">
       <template v-for="field in fields">
         <component 
           :is="field.component ?? 'FormInput'" 

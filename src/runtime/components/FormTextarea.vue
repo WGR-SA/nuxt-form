@@ -4,7 +4,7 @@ import { Form } from '#imports'
 
 const props = defineProps<{
   name: string,
-  label: string,
+  label?: string,
   rules?: string[],
   type?: string,
   required?: boolean,

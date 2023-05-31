@@ -15,6 +15,7 @@ export const useFormValidator = () => {
     form.validator.rules[field].forEach((rule: any) => {      
       const validator = validators[rule.$params.type as keyof typeof validators]      
 
+      // @ts-ignore TODO: import only validation functions
       const result = validator(form.data.state[field], rule.$params.options)      
       
       if (!result && (form.data.state[field].length > 0 || ['error', 'validate'].includes(form.state.status))) {
