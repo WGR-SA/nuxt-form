@@ -4,25 +4,25 @@ import { useFormValidator, useFormRecaptcha, Form } from '#imports'
 
 export const useFormBuilder = () => {
 
-  const { recaptchaInit, recaptchaValidation } = useFormRecaptcha()
-  const { validateAllFields } = useFormValidator()
+  const { init: initRecaptcha, invokeChallenge } = useFormRecaptcha()
+  const { validateFields } = useFormValidator()
 
   const initForm = (config: FormBuilder.Props) => {
 
     const form = reactive(new Form(config, useRuntimeConfig().public.form))
-    recaptchaInit()
+    initRecaptcha()
 
     return form
   }
 
-  const formReady = async (form: Form ) => {
+  const validateForm = async (form: Form ) => {
 
-    if (!await validateAllFields(form)) {
+    if (!await validateFields(form)) {
       form.mutateState('error', 'field_validation')
       return
     }
 
-    if (!await recaptchaValidation(form)) {
+    if (!await invokeChallenge(form)) {
       form.mutateState('error', 'recaptcha')
       return
     }
@@ -32,6 +32,8 @@ export const useFormBuilder = () => {
 
   return {
     initForm,
-    formReady
+    validateForm,
+    // Tmp alias for backwards compatibility
+    formReady: validateForm
   }
 }

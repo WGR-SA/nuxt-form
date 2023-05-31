@@ -18,7 +18,6 @@ export const useFormValidator = () => {
         return
       }
 
-      // @ts-ignore TODO: fix this
       const result = validator(form.data.state[field], rule.$params.options)      
       
       if (!result && (form.data.state[field].length > 0 || ['error', 'validate'].includes(form.state.status))) {
@@ -29,7 +28,7 @@ export const useFormValidator = () => {
     return errors.value
   }
 
-  const validateAllFields = async (form: Form) => {    
+  const validateFields = async (form: Form) => {    
     const fields = Object.keys(form.validator.rules)    
     for (let i = 0; i < fields.length; i++) {
       const field = fields[i]
@@ -44,6 +43,6 @@ export const useFormValidator = () => {
 
   return {
     validateField,
-    validateAllFields,
+    validateFields,
   }
 }

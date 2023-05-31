@@ -3,6 +3,7 @@ import type { ModuleTypes } from '#imports'
 
 export interface FormModuleOptions {
   format_layers?: string[],
+  // TODO: implement custom layers
   // custom_layers?: {
   //   [key: string]: FormModel.FormatLayer
   // },

@@ -4,7 +4,7 @@ import { Form } from '#imports'
 export const useFormRecaptcha = () => {
   const sitekey = useRuntimeConfig().public.recaptchaSitekey
 
-  const recaptchaInit = () => {
+  const init = () => {
     if (useRuntimeConfig().public.form.recaptcha) {
       useHead({
         script: [
@@ -14,9 +14,9 @@ export const useFormRecaptcha = () => {
     }
   }
 
-  const recaptchaValidation = async (form: Form) => {
+  const invokeChallenge = async (form: Form) => {
     if (useRuntimeConfig().public.form.recaptcha) {
-      // @ts-ignore
+      
       const recaptcha = window.grecaptcha
       const recaptchaToken = await recaptcha.execute(sitekey, { action: 'contact' })
       if (!recaptchaToken) {
@@ -28,7 +28,7 @@ export const useFormRecaptcha = () => {
   }
 
   return {
-    recaptchaInit,
-    recaptchaValidation
+    init,
+    invokeChallenge
   }
 }
