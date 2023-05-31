@@ -19,12 +19,11 @@ declare namespace FormBuilder {
     action: string,
     process?: FormActions.methods,
     actions?: FormActions.Actions<unknown>,
-    fetchOptions?: UseFetchOptions<unknown>,
     messages?: Partial<FormBuilder.Messages>,
     lang?: string
   }
 
   type Status = 'idle' | 'ready' | 'validate' | 'submitting' | 'submitted' | 'error'
   type ErrorType = 'field_validation' | 'recaptcha' | 'unknown' | false | undefined | string
-  type State = { status: Status, errorType?: ErrorType | string }
+  type State = { status: Status, errorType?: ErrorType }
 }

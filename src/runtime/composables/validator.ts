@@ -4,7 +4,7 @@ import { Form } from '#imports'
 
 export const useFormValidator = () => {
 
-  const validateField = (form: Form, field: string): string[] => {
+  const getFieldErrors = (form: Form, field: string): string[] => {
     
     const errors = ref<string[]>([]) 
 
@@ -14,9 +14,6 @@ export const useFormValidator = () => {
 
     form.validator.rules[field].forEach((rule: any) => {      
       const validator = validators[rule.$params.type as keyof typeof validators]      
-      if (!validator || typeof validator !== 'function') {
-        return
-      }
 
       const result = validator(form.data.state[field], rule.$params.options)      
       
@@ -28,21 +25,17 @@ export const useFormValidator = () => {
     return errors.value
   }
 
-  const validateFields = async (form: Form) => {    
-    const fields = Object.keys(form.validator.rules)    
-    for (let i = 0; i < fields.length; i++) {
-      const field = fields[i]
-      const errors = validateField(form, field)
-      
-      if (errors.length > 0) {        
+  const validateFields = async (form: Form): Promise<boolean> => {    
+    Object.keys(form.validator.rules).forEach((field: string) => {
+      if (getFieldErrors(form, field).length > 0) {
         return false
       }
-    }
+    })
     return true
   }
 
   return {
-    validateField,
+    getFieldErrors,
     validateFields,
   }
 }

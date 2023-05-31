@@ -14,9 +14,9 @@ const props = defineProps<{
   type?: string,
   [key: string]: any
 }>()
-const { validateField } = useFormValidator()
+const { getFieldErrors } = useFormValidator()
 const form = inject('form') as Form
-const errors = computed(() => validateField(form, props.name))
+const errors = computed(() => getFieldErrors(form, props.name))
 
 form.addField(props as FormInput.Container)
 </script>

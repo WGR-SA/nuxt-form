@@ -3,14 +3,14 @@ import { inject, computed } from 'vue'
 import { Form } from '#imports'
 
 const form = inject('form') as Form
-const alertShown = computed(() => {
+const isShown = computed(() => {
   return form.state.status !== 'idle' && form.state.status !== 'ready'
 })
 </script>
 
 <template>
   <div 
-    v-if="alertShown" 
+    v-if="isShown" 
     :class="`alert alert--${form.state.status}`"
   >
     <strong>{{ form.messages.get(`alert.${form.state.status}`) }}</strong><br>
