@@ -7,7 +7,7 @@
 - `label` Input label. Defaults use the name prop if empty.
 - `type` Extends HTML type input attribute.
 - `value` Initial value.
-- `rules` List of rules for validation. See [Validation](#)
+- `rules` List of rules for validation. See [Validation](/guide/validation.html)
 - `mask` Mask pattern. See [Mask](#mask)
 - `suggestions` Suggestion object. See [Suggestions](#suggestions)
 - `required` Boolean to set the input as required.

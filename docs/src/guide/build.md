@@ -1,13 +1,13 @@
 # Builder
 
-There are two methods for building a form. The first one uses the [`FormBuilder`](#FormBuilder) component for manual input form setup. The other uses the [`FormGenerator`](#FormGenerator) for automatic input generation from a [Model](#). 
+There are two methods for building a form. The first one uses the [`FormBuilder`](#FormBuilder) component for manual input form setup. The other uses the [`FormGenerator`](#FormGenerator) for automatic input generation from a [Model](/guide/model.html). 
 
 ## `FormBuilder`
 
 ### Props 
 - `action` An optional default callback for the action HTML form attribute.
-- `actions` Optional custom `FormActions`. See [Actions](#) for details.
-- `messages` Optional custom messages options. See [Messages](#) for details.
+- `actions` Optional custom `FormActions`. See [Actions](/guide/actions.html) for details.
+- `messages` Optional custom messages options. See [Messages](#messages) for details.
 
 ### Example
 
@@ -23,16 +23,16 @@ There are two methods for building a form. The first one uses the [`FormBuilder`
 
 ## `FormGenerator`
 
-`FormGenerator` uses a model to automatically generate form inputs. See [Model](#) for details
+`FormGenerator` uses a model to automatically generate form inputs. See [Model](/guide/model.html) for details
 
 ### Props
 - `model` A class model for generating a form. The structure depends on the layers option. See [Model]()
 - `action` An optional default callback for the action HTML form attribute.
-- `actions` Optional custom `FormActions`. See [Actions](#)
+- `actions` Optional custom `FormActions`. See [Actions](/guide/actions.html)
 - `values` Optional key-value object for existing form data.
-- `layers` Optional list of layers. See [Layers](#)
+- `layers` Optional list of layers. See [Layers](/guide/model.html#layers)
 - `exclude` Optional list of keys to exclude from the model for generation.
-- `messages` Optional custom messages options. See [Messages](#)
+- `messages` Optional custom messages options. See [Messages](#messages)
 
 ### Example
 
@@ -47,7 +47,7 @@ There are two methods for building a form. The first one uses the [`FormBuilder`
 
 ## Access Form Methods
 
-`FormBuilder` and `FormGenerator`  expose a form class that provides some methods to handle data or errors, for example.
+`FormBuilder` and `FormGenerator` expose a form class that provides some methods to handle data or errors, for example.
 
 You can access it by adding a ref to the component.
 
@@ -66,11 +66,11 @@ Here's a list of methods you can use from the `Form` class:
 someForm.data.addCustomData(key: string, value: string)
 ``` 
 - `mutateState`:
-Change form state. **This only works if used inside `FormActions`** See [Actions](#) for details.
+Change form state. **This only works if used inside `FormActions`** See [Actions](/guide/actions.html) for details.
 ```TS
 someForm.mutateState(status: FormBuilder.Status, errorType?: FormBuilder.ErrorType | string)
 ``` 
-Sometimes, you'll need the class in other methods like the `validateForm` function. See [Validation](#) for details
+Sometimes, you'll need the class in other methods like the `validateForm` function. See [Validation](/guide/validation.html) for details
 
 ## Form State
 
@@ -88,7 +88,7 @@ When using the `mutateState` method to change the form status, a second paramete
 - `unknown` Automatic unknown error message.
 - `[custom]` Directly type custom error message if needed.
 
-See [Messages](#) section to customize these.
+See [Messages](#messages) section to customize these.
 
 ## Messages
 

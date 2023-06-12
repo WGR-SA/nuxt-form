@@ -59,4 +59,4 @@ watchEffect(() => {
 </template>
 ```
 
-Refer to the [Actions](#) section to learn about using the provided actions methods for sending data.
+Refer to the [Actions](/guide/actions.html) section to learn about using the provided actions methods for sending data.
