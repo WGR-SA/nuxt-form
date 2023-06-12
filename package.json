@@ -45,7 +45,7 @@
     "changelogen": "^0.5.0",
     "eslint": "^8.32.0",
     "nuxt": "^3.5.2",
-    "vitest": "^0.31.1",
+    "vitest": "^0.32.0",
     "vuepress": "^2.0.0-beta.63"
   }
 }
