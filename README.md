@@ -1,115 +1,17 @@
-# Nuxt-Form
+<p align="center">
+<img width="150" src="https://wgr.ch/img/home/tortue.svg" alt="Nuxt-Form">
+</p>
 
-Nuxt module to create and post forms with integrated builder, inputs components and optional Recaptcha validation. Automatic field validation included with [class-validator](https://github.com/typestack/class-validator). Input data mask also included with [maska](https://beholdr.github.io/maska)
+<h1 align="center">Nuxt-form</h1>
 
-## Install
-Run `npm i @wgr-sa/nuxt-form`
+Nuxt-form module is a toolset for creating and managing forms. The plugin streamlines form creation, offering features like **form inputs, data validation, masking, suggestions, dynamic form generation, and form state management**. 
 
-### Add Module in NuxtConfig
-```
-export default defineNuxtConfig({
-  modules: [
-    '@wgr-sa/nuxt-form',
-  ],
-})	
-```
-
-### Add Recaptcha siteKey in .env if using recaptcha
-`NUXT_PUBLIC_RECAPTCHA_SITEKEY=KEY`
-
-## Config
-```
-export default defineNuxtConfig({
-  runtimeConfig: {
-    public: {
-      recaptchaSitekey: '' // will automatically return key located in .env
-    }
-  },
-  form: {
-    recaptcha?: boolean, // Use recaptcha | default: TRUE
-    hide_recaptcha?: boolean, // Hide recaptcha badge | default: FALSE
-    mask: Add maska with default values | default TRUE
-    default_styles?: boolean, // Add default module style from form.css | default: TRUE
-    messages?: object, // overwrite default messages | default: see message folder
-    lang?: string // lang 'fr' && 'en' available  
-    format_layers?: string[], | default 'base' for typeorm use ['typeorm', 'class-validator', 'form']
-  }
-}
-```
-
-## Use 
-
-Add `FormBuilder` Component in template and include inputs components (`FormInput`, `FormSelect`, etc...) inside.
-
-Exemple:
-```
-<FormBuilder action="http://locahost:8888">
-  <FormInput name="name_key" label="Name" :rules="['isNotEmpty']" placeholder="Name" />
-  <FormInput name="email_key" label="Email" :rules="['isNotEmpty', 'isEmail']" />
-  <FormSelect name="select_key" label="Select" :options="select_options" />
-  <FormTextarea name="message_key" label="Message" :rules="['isNotEmpty']" /> 
-</FormBuilder>  
-```
-
-### Input types Component list 
-
-- `FormInput` use input html tag and all his types (text, date, hidden, email, checkbox, etc...) exept radio buttons who use `FormRadio`
-- `FormSelect` use select html tag
-- `FormTextarea` use select textarea tag
-- `FormRadio` special component for radio options
-
-`rules` prop is used for field validation see [Validation decorators](https://github.com/typestack/class-validator#validation-decorators) or [Validator](https://github.com/validatorjs/validator.js) for details
-
-`mask` prop is used for masking input content see [Maska docs](https://beholdr.github.io/) for details. For custom tokens use disable mask module options and init a `new MaskInput("[data-maska]")` in `onMounted`.
-
-The `suggestions` prop adds a list of suggestions when the user is typing into an input field. It has three types list, api or custom for self matching check. 
-
-### Component props 
-
-#### `FormBuilder`
-```
-  action: string,
-  actions?: FormActions<unknown>,
-  messages?: Partial<FormBuilder.Messages>,
-  lang?: string
-```
-
-#### `FormInput`
-```
-  name: string,
-  label?: string,
-  rules?: string[],
-  type?: string,
-  required?: boolean,
-  checked?: boolean,
-  value?: string,
-  placeholder?: string,
-  mask?: string,
-  suggestions?: {
-    type?: 'list' | 'api' | 'custom',
-    fetchUrl?: string,
-    responsePath?: string,
-    responseKey?: string,
-    values?: string[] | { [key: string]: string } | string
-  }
-```
-
-#### `FormSelect` extends `FormInput`
-```
-  options: { [key: string | number]: string }
-```
-
-#### `FormTextarea` extends `FormInput`
-```
-  rows?: number
-```
-
-#### `FormRadio` extends `FormInput`
-```
-  options: { [key: string | number]: string }
-  default?: string
-```
-
+It's meticulously designed for seamless integration, scalability, and enhanced user experience, with a keen focus on accessibility. Dive into our documentation to explore features of the module.
+## Documentation
+[wgr-sa.github.io/nuxt-form](https://wgr-sa.github.io/nuxt-form)
+### Dependencies
+- [class-validator](https://github.com/typestack/class-validator)
+- [maska](https://github.com/beholdr/maska)
 ## Next
 See issue tag for future features.
 ### Dev

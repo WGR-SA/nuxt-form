@@ -1,10 +1,11 @@
-const { description } = require('../../package')
+import { defineUserConfig } from 'vuepress'
 
-module.exports = {
+export default defineUserConfig({
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
   title: 'Nuxt-form',
+  base: '/nuxt-form/',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
@@ -36,10 +37,6 @@ module.exports = {
       {
         text: 'Guide',
         link: '/guide/',
-      },
-      {
-        text: 'Config',
-        link: '/config/'
       }
     ],
     sidebar: {
@@ -69,4 +66,4 @@ module.exports = {
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
   ]
-}
+});
