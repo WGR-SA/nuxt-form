@@ -37,6 +37,6 @@ export const useFormValidator = () => {
 
   return {
     getFieldErrors,
-    validateFields,
+    validateFields
   }
 }

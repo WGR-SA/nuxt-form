@@ -1,7 +1,6 @@
 export const en: FormBuilder.Messages = {
-  submit: 'Submit',
   alert: {
-    idle: 'your form is ready',
+    idle: 'Your form is ready',
     submitting: 'Submitting...',
     submitted: 'Thank you for your submission!',
     error: 'There was an error submitting your form. Please try again.'

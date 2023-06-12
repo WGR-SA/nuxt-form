@@ -1,6 +1,5 @@
 declare namespace FormBuilder {
   interface Messages {
-    submit: string,
     alert: {
       idle: string,
       submitting: string,

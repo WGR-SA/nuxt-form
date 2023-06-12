@@ -39,10 +39,4 @@ export class DefaultFormActions implements ModuleTypes.FormActions {
   public update() {
     return false
   }
-  public delete() {
-    return false
-  }
-  public read() {
-    return false
-  }
 }

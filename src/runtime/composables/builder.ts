@@ -15,25 +15,26 @@ export const useFormBuilder = () => {
     return form
   }
 
-  const validateForm = async (form: Form ) => {
+  const validateForm = async (form: Form): Promise<boolean> => {
 
     if (!await validateFields(form)) {
       form.mutateState('error', 'field_validation')
-      return
+      return false
     }
 
     if (!await invokeChallenge(form)) {
       form.mutateState('error', 'recaptcha')
-      return
+      return false
     }
   
     form.mutateState('ready')
+    return true
   }
 
   return {
     initForm,
     validateForm,
-    // Tmp alias for backwards compatibility
+    // DEPRECATED: Tmp alias for backwards compatibility
     formReady: validateForm
   }
 }

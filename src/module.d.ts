@@ -14,8 +14,6 @@ export interface FormActions {
   submit()
   create()
   update(id: string | null)
-  delete(id: string | null)
-  read(id: string | null)
 }
 
 export interface FormModuleOptions {

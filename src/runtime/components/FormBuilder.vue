@@ -9,7 +9,6 @@ const config = defineProps<{
   action?: string, 
   actions?: ModuleTypes.FormActions,
   messages?: Partial<FormBuilder.Messages>,
-  lang?: string
 }>()
 
 const form = initForm(config as FormBuilder.Props)

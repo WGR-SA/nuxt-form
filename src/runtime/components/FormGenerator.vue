@@ -8,12 +8,11 @@ const { initForm } = useFormBuilder()
 const config = defineProps<{ 
   model: FormModel.Entity,
   action?: string,
+  actions?: ModuleTypes.FormActions,
   values?: any,
   layers?: string[],
   exclude?: string[],
-  actions?: ModuleTypes.FormActions,
   messages?: Partial<FormBuilder.Messages>,
-  lang?: string
 }>()
 
 const model = new FormModelFormatter(config.model, config.layers ?? useRuntimeConfig().public.form.format_layers)

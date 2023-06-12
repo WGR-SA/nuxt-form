@@ -55,7 +55,12 @@ export class Form {
     this.isShown = !!['idle', 'ready', 'error'].find(s => s === this.state.status)
   }
 
-  ready () {
+  isReady () {
     return this.state.status === 'ready'
+  }
+
+  ready () {
+    // DEPRECATED: Tmp alias for backwards compatibility
+    return this.isReady()
   }
 }
