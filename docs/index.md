@@ -12,5 +12,5 @@ features:
   details: Validate form data and protect with recaptcha.
 - title: Send
   details: Optional sending system with FormActions.
-footer: Made by wgr with 📎
+footer: Made by wgr
 ---
