@@ -96,5 +96,4 @@ export class CustomFormActions implements FormActions {
 }
 ```
 
-With this, you can now access all the functionalities of the `Form` class, like `mutateState(status, errorType)` See [Builder](#) for details. 
- 
+With this, you can now access all the functionalities of the `Form` class, like `mutateState(status, errorType)` See [Builder](/guide/build.html) for details. 

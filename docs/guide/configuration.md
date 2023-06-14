@@ -26,4 +26,5 @@ export default defineNuxtConfig({
 - `mask` Enable input mask option. See [Mask](/guide/inputs.html#mask)
 - `default_styles` Loads simple default styles for all components.
 - `messages` Overwrite default form messages. See [Messages](/guide/build.html#messages) 
-- `format_layers` List of layers if using `FormGenerator`. See [Layers](/guide/model.html#layers) 
+- `lang`: `en|fr` Make a pull request with new language if needed
+- `format_layers` List of layers if using `FormGenerator`. See [`ModelFormatter`](/guide/model.html#modelformatter) 

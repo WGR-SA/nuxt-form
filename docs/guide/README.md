@@ -1,4 +1,4 @@
-# Introduction
+# Nuxt-form
 
 This Nuxt module is designed for creating and posting forms with an integrated builder, input components, and optional Recaptcha validation. Automatic field validation is included, thanks to the [class-validator](https://github.com/typestack/class-validator). Input data masking is also included with [maska](https://beholdr.github.io/maska).
 

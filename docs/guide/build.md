@@ -1,6 +1,6 @@
 # Builder
 
-There are two methods for building a form. The first one uses the [`FormBuilder`](#FormBuilder) component for manual input form setup. The other uses the [`FormGenerator`](#FormGenerator) for automatic input generation from a [Model](/guide/model.html). 
+There are two methods for building a form. The first one uses the [`FormBuilder`](#formbuilder) component for manual input form setup. The other uses the [`FormGenerator`](#formgenerator) for automatic input generation from a [Model](/guide/model.html). 
 
 ## `FormBuilder`
 
@@ -11,7 +11,7 @@ There are two methods for building a form. The first one uses the [`FormBuilder`
 
 ### Example
 
-```VUE
+``` VUE
 <FormBuilder action="#" messages="{ submit: 'Envoyer' }">
   <FormInput name="name" label="Name" />
   <FormInput name="email" label="Email" :rules="['isNotEmpty', 'isEmail']" />
@@ -26,11 +26,11 @@ There are two methods for building a form. The first one uses the [`FormBuilder`
 `FormGenerator` uses a model to automatically generate form inputs. See [Model](/guide/model.html) for details
 
 ### Props
-- `model` A class model for generating a form. The structure depends on the layers option. See [Model]()
+- `model` A class model for generating a form. The structure depends on the layers option. See [Model](/guide/model.html)
 - `action` An optional default callback for the action HTML form attribute.
 - `actions` Optional custom `FormActions`. See [Actions](/guide/actions.html)
 - `values` Optional key-value object for existing form data.
-- `layers` Optional list of layers. See [Layers](/guide/model.html#layers)
+- `layers` Optional list of layers. See [`ModeFormatter`](/guide/model.html#modelformatter)
 - `exclude` Optional list of keys to exclude from the model for generation.
 - `messages` Optional custom messages options. See [Messages](#messages)
 
@@ -41,7 +41,6 @@ There are two methods for building a form. The first one uses the [`FormBuilder`
   ref="userForm"
   action="https://httpbin.org/post"
   :model="model"
-  :layers="['base']"
 />
 ```
 
