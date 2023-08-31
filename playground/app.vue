@@ -93,25 +93,37 @@ const model = [
   <div style="max-width: 1200px;padding: 40px;margin: 0 auto;">
     <FormGenerator 
       ref="userForm"
-      action="https://httpbin.org/post"
+      action="https://httpbin.org/post?v=1"
       :model="User"
       :values="newEntity"
       :layers="['typeorm', 'class-validator', 'form']"
-      :messages="{ submit: 'Register' }"
-    />
+    >
+      <FormSubmit>
+        olo
+      </FormSubmit>
+    </FormGenerator>
 
     <FormGenerator
       ref="userForm"
-      action="https://httpbin.org/post"
+      action="https://httpbin.org/post?v=2"
       :model="model"
       :layers="[ 'base']"
-    />
+      :messages="{ alert: { submitted: 'Vous vous êtes bien connecté' } }"
+    >
+      <FormSubmit>
+        Login
+      </FormSubmit>
+    </FormGenerator>
 
     <FormBuilder 
       ref="loginForm" 
-      action="https://httpbin.org/post" 
-      :messages="{ alert: { submitted: 'Vous vous êtes bien connecté' } }"
+      action="https://httpbin.org/post?v=3" 
     >
+      <FormInput 
+        name="assurance2"
+        label="Assurance2"
+        :rules="['isNotEmpty']"
+      />
       <FormInput 
         name="assurance"
         label="Assurance"
@@ -139,13 +151,14 @@ const model = [
         :rules="['isNotEmpty']" 
         placeholder="Nom"
       /> -->
-      <!-- <FormInput 
+      <FormInput 
         name="username" 
         label="Email"
         :required="true"
         :rules="['isEmail', 'isNotEmpty']" 
         placeholder="email" 
       />
+      <!--
       <FormInput 
         name="password" 
         type="password" 

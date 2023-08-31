@@ -19,9 +19,6 @@ const model = new FormModelFormatter(config.model, config.layers ?? useRuntimeCo
 const form = initForm(config as FormBuilder.Props)
 const fields = model.getFormInputs()
 
-// Update messages from builder config
-form.messages.updateFormMessages(useRuntimeConfig().public.form.lang, config.messages ?? {})
-
 onMounted(() => {  
   // Set initial values
   Object.keys(config.values ?? {}).forEach(key => {
@@ -49,9 +46,6 @@ provide('form', form)
         />
       </template>
       <slot />
-      <FormSubmit>
-        {{ form.messages.get('submit') }}
-      </FormSubmit>
     </fieldset>
   </form>
 </template>

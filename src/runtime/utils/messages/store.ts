@@ -1,21 +1,20 @@
+import clone from 'clone'
 import { FormMessages, ValidatorMessages } from '#imports'
 
 export class FormMessageStore {
-  public form: { [lang: string]: FormBuilder.Messages } = FormMessages
-  public validators: { [lang: string]: { [key: string]: string } } = ValidatorMessages
-  public lang: string = 'en'
+  public form: { [lang: string]: FormBuilder.Messages } 
+  public validators: { [lang: string]: { [key: string]: string } } 
+  public lang: string = 'en'  
 
   constructor (lang: string, messages: Partial<FormBuilder.Messages> | null = null) {
     this.setLang(lang)
+    this.form = clone(FormMessages)
+    this.validators = clone(ValidatorMessages)
+    
     if (messages) {
-      this.updateFormMessages(lang, messages)
+      if (messages.error) this.form[lang].error = { ...this.form[lang].error, ...messages.error }
+      if (messages.alert) this.form[lang].alert = { ...this.form[lang].alert, ...messages.alert }    
     }
-  }
-
-  updateFormMessages (lang: string, messages: Partial<FormBuilder.Messages>) {        
-    this.form[lang].submit = messages.submit ?? this.form[lang].submit
-    if (messages.error) this.form[lang].error = { ...this.form[lang].error, ...messages.error }
-    if (messages.alert) this.form[lang].alert = { ...this.form[lang].alert, ...messages.alert }    
   }
 
   updateValidatorMessages (lang: string, messages: { [key: string]: string }) {

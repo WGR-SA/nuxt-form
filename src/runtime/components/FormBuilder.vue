@@ -13,9 +13,6 @@ const config = defineProps<{
 
 const form = initForm(config as FormBuilder.Props)
 
-// Update messages from builder config
-form.messages.updateFormMessages(useRuntimeConfig().public.form.lang, config.messages ?? {})
-
 defineExpose(form)
 provide('form', form)
 </script>

@@ -5,9 +5,9 @@ import { Form, useFormBuilder } from '#imports'
 const { validateForm } = useFormBuilder()
 const form = inject('form') as Form
 
-const submit = () => {
+const submit = async () => {
   form.mutateState('validate')
-  validateForm(form)
+  await validateForm(form)
 }
 </script>
 

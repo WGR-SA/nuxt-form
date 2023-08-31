@@ -31,7 +31,7 @@ export default class BaseModelLayer implements FormModel.FormatLayer  {
   public detectRules = (column: FormModel.Column) => {
     const rules: string[] = column.rules ?? []
     if (column.required) {
-      rules.push('required')
+      rules.push('isNotEmpty')
     }
     return rules
   }

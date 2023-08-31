@@ -3,9 +3,8 @@ import { inject, computed } from 'vue'
 import { Form } from '#imports'
 
 const form = inject('form') as Form
-const isShown = computed(() => {
-  return form.state.status !== 'idle' && form.state.status !== 'ready'
-})
+const errorMessage = computed(() => (['recaptcha', 'field_validation', 'unknown'].includes(form.state.errorType as string)) ? form.messages.get(`error.${form.state.errorType ?? 'unknown'}`) : form.state.errorType)
+const isShown = computed(() => form.state.status !== 'idle' && form.state.status !== 'ready')
 </script>
 
 <template>
@@ -15,7 +14,7 @@ const isShown = computed(() => {
   >
     <strong>{{ form.messages.get(`alert.${form.state.status}`) }}</strong><br>
     <span v-if="form.state.status == 'error'">
-      {{ form.messages.get(`error.${form.state.errorType ?? 'unknown'}`) }}
+      {{ errorMessage }}
     </span>
   </div>
 </template>
