@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { provide } from 'vue'
-import { useRuntimeConfig } from '#app'
 import { useFormBuilder, ModuleTypes } from '#imports'
 
 const { initForm } = useFormBuilder()

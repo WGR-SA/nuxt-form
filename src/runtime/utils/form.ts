@@ -29,17 +29,12 @@ export class Form {
 
 
   constructor(config: FormBuilder.Props, options: FormModuleOptions) {
-
-    console.log({ ...options.messages, ...config.messages })
-
     this.action = config.action ?? '#'
     this.data = new FormDataHandler()
     this.validator = new FormValidator()
     this.messages = new FormMessageStore(options.lang ?? 'en', {...options.messages, ...config.messages} ?? null)
     this.moduleOptions = options
 
-    console.log(this.action);
-    console.log(this.messages.form.fr.alert.submitted);
     this.setActions(config)
   }
 
