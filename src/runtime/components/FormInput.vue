@@ -22,6 +22,8 @@ const props = defineProps<{
   checked?: boolean, 
   disabled?: boolean,
   readonly?: boolean,
+  min?: number,
+  max?: number,
   value?: string, 
   placeholder?: string 
 }>()
@@ -54,6 +56,8 @@ onMounted(() => {
       :disabled="disabled"
       :readonly="readonly"
       :placeholder="placeholder" 
+      :min="min"
+      :max="max"
       :checked="checked"
     >
     <FormSuggest 

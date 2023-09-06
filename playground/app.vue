@@ -53,15 +53,11 @@ const userForm = ref()
 
 watchEffect(async () => {
   if (loginForm.value?.ready()) {
-    console.log('ready');
     const {data, error} = await loginForm.value.actions.submit()
-    console.log(data, error);
   }
 
   if(userForm.value?.ready()){
-    console.log('ready');
     const {data, error} = await userForm.value.actions.submit()
-    console.log(data, error);
   }
 })
 
@@ -107,7 +103,7 @@ const model = [
       ref="userForm"
       action="https://httpbin.org/post?v=2"
       :model="model"
-      :layers="[ 'base']"
+      :layers="['base']"
       :messages="{ alert: { submitted: 'Vous vous êtes bien connecté' } }"
     >
       <FormSubmit>
