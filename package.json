@@ -36,7 +36,6 @@
     "@nuxt/kit": "^3.5.2",
     "@types/clone": "^2.1.1",
     "class-validator": "^0.14.0",
-    "clone": "^2.1.2",
     "maska": "^2.1.7",
     "typeorm": "^0.3.12"
   },

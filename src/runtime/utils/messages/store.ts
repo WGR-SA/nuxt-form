@@ -1,4 +1,3 @@
-import clone from 'clone'
 import { FormMessages, ValidatorMessages } from '#imports'
 
 export class FormMessageStore {
@@ -8,8 +7,8 @@ export class FormMessageStore {
 
   constructor (lang: string, messages: Partial<FormBuilder.Messages> | null = null) {
     this.setLang(lang)
-    this.form = clone(FormMessages)
-    this.validators = clone(ValidatorMessages)
+    this.form = JSON.parse(JSON.stringify(FormMessages))
+    this.validators = JSON.parse(JSON.stringify(ValidatorMessages))
     
     if (messages) {
       if (messages.error) this.form[lang].error = { ...this.form[lang].error, ...messages.error }
