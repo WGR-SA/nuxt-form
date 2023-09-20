@@ -1,12 +1,12 @@
 import { useFetch } from '#app'
 import type { ModuleTypes } from '#imports'
 
-export class DefaultFormActions implements ModuleTypes.FormActions {
+export class DefaultFormSubmitter implements ModuleTypes.FormSubmitter {
 
-  public form: ModuleTypes.FormMappedForActions
+  public form: ModuleTypes.FormForSubmitter
   
-  constructor(form: ModuleTypes.FormMappedForActions) {
-    this.form = form
+  constructor(form: ModuleTypes.FormForSubmitter) {
+    this.form = form    
   }
 
   public async submit(){    

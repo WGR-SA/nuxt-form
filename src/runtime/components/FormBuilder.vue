@@ -6,7 +6,7 @@ const { initForm } = useFormBuilder()
 
 const config = defineProps<{ 
   action?: string, 
-  actions?: ModuleTypes.FormActions,
+  submitter?: ModuleTypes.FormSubmitter,
   messages?: Partial<FormBuilder.Messages>,
 }>()
 

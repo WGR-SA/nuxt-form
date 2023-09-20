@@ -11,7 +11,7 @@ declare namespace FormModel {
     getComponent(column: ModelColumn): string
   }
 
-  interface Column implements P<FormInput.Container> {
+  interface Column { // implements Partial<FormInput.Container>
     [key: string]: any
   }
   

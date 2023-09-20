@@ -1,4 +1,4 @@
-import { FormDataHandler, FormValidator, FormMessageStore, DefaultFormActions } from '#imports'
+import { FormDataHandler, FormValidator, FormMessageStore, DefaultFormSubmitter } from '#imports'
 import type { ModuleTypes } from '#imports'
 
 export interface FormModuleOptions {
@@ -23,7 +23,7 @@ export class Form {
   public data: FormDataHandler
   public validator: FormValidator
   public messages: FormMessageStore 
-  public actions: ModuleTypes.FormActions
+  public submitter: ModuleTypes.FormSubmitter
   public moduleOptions: FormModuleOptions
 
 
@@ -35,15 +35,19 @@ export class Form {
     this.messages = new FormMessageStore(options.lang ?? 'en', {...options.messages, ...config.messages} ?? null)
     this.moduleOptions = options
 
-    this.setActions(config)
+    this.setSubmitter(config)
   }
 
-  setActions(config: FormBuilder.Props) {        
-    if (config.actions) {
-      this.actions = new config.actions(this)
+  setSubmitter(config: FormBuilder.Props) {        
+    if (config.submitter) {
+      this.submitter = new config.submitter(this)
       return
     }
-    this.actions = new DefaultFormActions(this)
+    this.submitter = new DefaultFormSubmitter(this)
+  }
+
+  submit () {
+    this.submitter.submit()
   }
 
   addField (config: FormInput.Container) {

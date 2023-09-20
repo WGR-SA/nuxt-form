@@ -1,4 +1,4 @@
-export interface FormMappedForActions {
+export interface FormForSubmitter {
   action: string
   data: {
     state: { [key: string]: string }
@@ -9,7 +9,7 @@ export interface FormMappedForActions {
 
 export interface FormActions {
 
-  form: FormMappedForActions
+  form: FormForSubmitter
 
   submit()
 }

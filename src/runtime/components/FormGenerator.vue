@@ -8,7 +8,7 @@ const { initForm } = useFormBuilder()
 const config = defineProps<{ 
   model: FormModel.Entity,
   action?: string,
-  actions?: ModuleTypes.FormActions,
+  submitter?: ModuleTypes.FormSubmitter,
   values?: any,
   layers?: string[],
   exclude?: string[],

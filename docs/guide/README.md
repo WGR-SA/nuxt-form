@@ -7,23 +7,15 @@ This Nuxt module is designed for creating and posting forms with an integrated b
 
 ```VUE
 <script lang="ts" setup>
-const loginForm = ref()
-const { validateForm } = useFormBuilder()
 
-const submit = async () => {
-  const form = loginForm.value
-  if (await validateForm(form)) {
-    form.actions.submit()
-  }
-}
 </script>
 <template>
-  <FormBuilder ref="loginForm" action="https://httpbin.org/post">
+  <FormBuilder action="https://httpbin.org/post">
     <FormInput name="username" label="Username" :rules="['isNotEmpty']"/>
     <FormInput name="email" label="Email" :rules="['isNotEmpty', 'isEmail']"/>
-    <button @click.prevent="submit()">
+    <FormSubmit>
       Login
-    </button>  
+    </FormSubmit>  
   </FormBuilder>
 </template>  
 

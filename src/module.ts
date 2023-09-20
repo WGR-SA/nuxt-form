@@ -162,8 +162,8 @@ export default defineNuxtModule<FormModuleOptions>({
      * Form Actions
      */
     addImports({
-      name: 'DefaultFormActions',
-      from: resolve(runtimeDir, 'utils/actions', 'default')
+      name: 'DefaultFormSubmitter',
+      from: resolve(runtimeDir, 'utils/submitter', 'default')
     })
 
     /**

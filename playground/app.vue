@@ -1,5 +1,9 @@
 <script setup lang="ts">
-
+// const testForm = ref()
+// watchEffect(() => {
+//   if testForm.value.isReady()
+//     testForm.value.submit()
+// })
 </script>
 
 <template>
@@ -10,7 +14,7 @@
     >
       <FormInput name="asdf" :rules="['isNotEmpty', 'isEmail']" />
       <FormInput name="safs" :rules="['isNotEmpty']" />
-      <FormSubmit>
+      <FormSubmit validate-only="true">
         Submit 
       </FormSubmit>
     </FormBuilder>

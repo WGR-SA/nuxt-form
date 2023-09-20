@@ -9,7 +9,7 @@ const submit = async () => {
   form.mutateState('validate')
   const isReady = await validateForm(form)
   if(isReady) {
-    form.actions.submit()
+    form.submit()
   }
 }
 </script>
