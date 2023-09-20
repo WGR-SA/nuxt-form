@@ -7,7 +7,10 @@ const form = inject('form') as Form
 
 const submit = async () => {
   form.mutateState('validate')
-  await validateForm(form)
+  const isReady = await validateForm(form)
+  if(isReady) {
+    form.actions.submit()
+  }
 }
 </script>
 

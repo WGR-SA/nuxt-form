@@ -12,8 +12,6 @@ export interface FormActions {
   form: FormMappedForActions
 
   submit()
-  create()
-  update(id: string | null)
 }
 
 export interface FormModuleOptions {

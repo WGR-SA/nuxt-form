@@ -10,7 +10,6 @@ export class DefaultFormActions implements ModuleTypes.FormActions {
   }
 
   public async submit(){    
-
     const { data, error } = await useFetch(this.form.action, {
       key: String(new Date().getTime()),
       method: 'POST',
@@ -18,6 +17,7 @@ export class DefaultFormActions implements ModuleTypes.FormActions {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
+      watch: false,
       body: this.form.data.state,
       onRequest: () => {
         this.form.mutateState('submitting')
@@ -31,12 +31,5 @@ export class DefaultFormActions implements ModuleTypes.FormActions {
     })
 
     return { data, error }
-  }
-
-  public create() {
-    return false
-  }
-  public update() {
-    return false
   }
 }

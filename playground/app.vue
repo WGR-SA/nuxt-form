@@ -1,12 +1,4 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
-
-const testForm = ref()
-watchEffect( async () => {
-  if ( testForm.value?.isReady() ) {
-    testForm.value?.actions.submit()
-  }
-})
 
 </script>
 
@@ -14,7 +6,7 @@ watchEffect( async () => {
   <div style="max-width: 1200px;padding: 40px;margin: 0 auto;">
     <FormBuilder
       ref="testForm"
-      action="https://httpbin.org/post"
+      action="https://httpbin.org/status/403"
     >
       <FormInput name="asdf" :rules="['isNotEmpty', 'isEmail']" />
       <FormInput name="safs" :rules="['isNotEmpty']" />

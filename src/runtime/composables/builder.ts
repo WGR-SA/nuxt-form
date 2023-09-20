@@ -16,7 +16,6 @@ export const useFormBuilder = () => {
   }
 
   const validateForm = async (form: Form): Promise<boolean> => {
-
     if (!await validateFields(form)) {
       form.mutateState('error', 'field_validation')
       return false
