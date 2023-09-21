@@ -12,13 +12,15 @@ There are two methods for building a form. The first one uses the [`FormBuilder`
 ### Example
 
 ``` VUE
-<FormBuilder action="#" messages="{ submit: 'Envoyer' }">
-  <FormInput name="name" label="Name" />
-  <FormInput name="email" label="Email" :rules="['isNotEmpty', 'isEmail']" />
-  <FormSubmit>
-    Send
-  </FormSubmit>
-</FormBuilder>
+<template>
+  <FormBuilder action="#" messages="{ submit: 'Envoyer' }">
+    <FormInput name="name" label="Name" />
+    <FormInput name="email" label="Email" :rules="['isNotEmpty', 'isEmail']" />
+    <FormSubmit>
+      Send
+    </FormSubmit>
+  </FormBuilder>
+</template>
 ```
 
 ## `FormGenerator`

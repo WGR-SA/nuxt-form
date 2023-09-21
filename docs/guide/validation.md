@@ -27,4 +27,4 @@ While some validations are triggered on input changes, others need to be activat
 
 ```
 
-Refer to the [Actions](/guide/actions.html) section to learn about using the provided actions methods for sending data.
+Refer to the [Submit](/guide/submit.html) section to learn about using the provided actions methods for sending data.
