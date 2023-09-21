@@ -47,7 +47,7 @@ export class Form {
   }
 
   submit () {
-    this.submitter.submit()
+    return this.submitter.submit()
   }
 
   addField (config: FormInput.Container) {
