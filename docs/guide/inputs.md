@@ -87,6 +87,19 @@
 />
 ```
 
+## `FormSubmit`
+
+### Props
+- `validate-only` Optional. Only trigger validation.
+
+### Exemple
+```VUE
+<FormSubmit>
+  Submit
+</FormSubmit>
+```
+
+
 ## Suggestions
 
 Suggestions can be applied to `FormInput`. The suggestion object follows this structure:
@@ -117,9 +130,9 @@ Suggestions have two possible types:
 />
 ```
 
-## Mask
+## Masks
 
-Nuxt-form uses [Maska](https://beholdr.github.io/maska) or masking input values. To use it, add a Maska pattern in the `FormInput` mask prop. mask prop. See all mask options in[Maska documentation](https://beholdr.github.io/maska/#/?id=usage)
+Nuxt-form uses [Maska](https://beholdr.github.io/maska) or masking input values. To use it, add a Maska pattern in the `FormInput` mask prop. mask prop. See all mask options in [Maska documentation](https://beholdr.github.io/maska/#/?id=usage)
 
 ### Example 
 

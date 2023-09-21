@@ -15,8 +15,8 @@ features:
   - title: Build
     details: Create forms with integrated builder and inputs components.
   - title: Validate
-    details: alidate form data and protect with Recaptcha.
+    details: Validate form data and protect with Recaptcha.
   - title: Send
-    details: Optional sending system with FormActions.
+    details: Sending method with FormSubmitter.
 ---
 

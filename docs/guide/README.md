@@ -7,7 +7,6 @@ This Nuxt module is designed for creating and posting forms with an integrated b
 
 ```VUE
 <script lang="ts" setup>
-
 </script>
 <template>
   <FormBuilder action="https://httpbin.org/post">
@@ -18,5 +17,4 @@ This Nuxt module is designed for creating and posting forms with an integrated b
     </FormSubmit>  
   </FormBuilder>
 </template>  
-
 ```

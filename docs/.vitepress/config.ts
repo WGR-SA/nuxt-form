@@ -40,8 +40,8 @@ export default defineConfig({
         link: '/guide/validation'
       },
       {
-        text: 'Actions',
-        link: '/guide/actions'
+        text: 'Submit',
+        link: '/guide/submit'
       },
       {
         text: 'Model',

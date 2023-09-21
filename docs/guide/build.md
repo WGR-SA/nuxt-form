@@ -6,7 +6,7 @@ There are two methods for building a form. The first one uses the [`FormBuilder`
 
 ### Props 
 - `action` An optional default callback for the action HTML form attribute.
-- `actions` Optional custom `FormActions`. See [Actions](/guide/actions.html) for details.
+- `submitter` Optional custom `FormSubmitter`. See [Submit](/guide/submit.html) for details.
 - `messages` Optional custom messages options. See [Messages](#messages) for details.
 
 ### Example
@@ -28,7 +28,7 @@ There are two methods for building a form. The first one uses the [`FormBuilder`
 ### Props
 - `model` A class model for generating a form. The structure depends on the layers option. See [Model](/guide/model.html)
 - `action` An optional default callback for the action HTML form attribute.
-- `actions` Optional custom `FormActions`. See [Actions](/guide/actions.html)
+- `submitter` Optional custom `FormSubmitter`. See [Submit](/guide/submit.html) for details.
 - `values` Optional key-value object for existing form data.
 - `layers` Optional list of layers. See [`ModeFormatter`](/guide/model.html#modelformatter)
 - `exclude` Optional list of keys to exclude from the model for generation.
@@ -60,16 +60,38 @@ You can access it by adding a ref to the component.
 ```
 
 Here's a list of methods you can use from the `Form` class:
-- `addCustomData`: Add custom data to the form.
-```TS
-someForm.data.addCustomData(key: string, value: string)
+- `isReady`: Return true or false if the form has passed all validation and is ready to submit
+- `submit`: Form submit method. An exemple of use is if `validate-only` is set on `FormSubmit`
+```VUE
+<script lang="ts" setup>
+  const someForm = ref()
+  watchEffect(() => {
+    if (someForm.value?.isReady()) someForm.value?.submit()
+  })
+</script>
+<template>
+  <FormBuiler ref="someForm">
+    <FormInput ...>
+    <FormSubmit validate-only="true"> Submit </FormSubmit>
+  </FormBuilder>
+</template>
+```
+- `addCustomData(key: string, value: string)`: Add custom data to the form.
+```VUE
+<script lang="ts" setup>
+const someForm = ref()
+someForm.value?.data.addCustomData('key', 'value')
+</script>
 ``` 
-- `mutateState`:
-Change form state. **This only works if used inside `FormActions`** See [Actions](/guide/actions.html) for details.
+- `mutateState(status: FormBuilder.Status, errorType?: FormBuilder.ErrorType | string)`:
+Change form state. **This only works if used inside `FormSubmitter`** See [Submit](/guide/submit.html) for details.
 ```TS
-someForm.mutateState(status: FormBuilder.Status, errorType?: FormBuilder.ErrorType | string)
+...
+onRequest: () => {
+  this.form.mutateState('submitting')
+},
+...
 ``` 
-Sometimes, you'll need the class in other methods like the `validateForm` function. See [Validation](/guide/validation.html) for details
 
 ## Form State
 
