@@ -48,6 +48,7 @@ onMounted(() => {
 <template>
   <FormInputContainer v-bind="props">
     <input 
+      :id="name"
       ref="formInput"
       v-model="form.data.state[name]"
       :data-maska="mask"
@@ -59,6 +60,7 @@ onMounted(() => {
       :min="min"
       :max="max"
       :checked="checked"
+      :list="suggestions ? `${name}-list` : undefined"
     >
     <FormSuggest 
       v-if="suggestions"

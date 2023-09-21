@@ -12,9 +12,12 @@
       ref="testForm"
       action="https://httpbin.org/status/403"
     >
-      <FormInput name="asdf" :rules="['isNotEmpty', 'isEmail']" />
+      <FormInput 
+        name="asdf"
+        :rules="['isNotEmpty', 'isEmail']"
+      />
       <FormInput name="safs" :rules="['isNotEmpty']" />
-      <FormSubmit validate-only="true">
+      <FormSubmit :validate-only="true">
         Submit 
       </FormSubmit>
     </FormBuilder>
