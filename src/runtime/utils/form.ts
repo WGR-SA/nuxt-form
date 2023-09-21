@@ -46,8 +46,8 @@ export class Form {
     this.submitter = new DefaultFormSubmitter(this)
   }
 
-  submit () {
-    return this.submitter.submit()
+  async submit () {
+    return await this.submitter.submit()
   }
 
   addField (config: FormInput.Container) {
