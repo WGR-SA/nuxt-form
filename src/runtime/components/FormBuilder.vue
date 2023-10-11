@@ -19,7 +19,7 @@ provide('form', form)
 <template>
   <form class="form">
     <FormAlert />
-    <fieldset v-if="form.isShown">
+    <fieldset :hidden="!form.isShown">
       <slot />
     </fieldset>
   </form>
