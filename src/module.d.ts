@@ -7,7 +7,7 @@ export interface FormForSubmitter {
   [key: string]: any
 } 
 
-export interface FormActions {
+export interface FormSubmitter {
 
   form: FormForSubmitter
 
