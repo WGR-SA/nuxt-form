@@ -1,7 +1,7 @@
 import { defineNuxtModule, createResolver, addImports, addComponent } from '@nuxt/kit'
-import type { FormModuleOptions } from './module.d'
+//import type { FormModuleOptions } from './module.d'
 
-export default defineNuxtModule<FormModuleOptions>({
+export default defineNuxtModule<any>({
   meta: {
     name: '@wgr-sa/nuxt-form',
     configKey: 'form'
