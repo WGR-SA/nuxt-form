@@ -1,13 +1,12 @@
 <script lang="ts" setup>
 import { provide } from 'vue'
 import { useFormBuilder } from '#imports'
-import type { FormSubmitter } from '../../module.d'
 
 const { initForm } = useFormBuilder()
 
 const config = defineProps<{ 
   action?: string, 
-  submitter?: FormSubmitter,
+  submitter?: FormBuilder.FormSubmitter,
   messages?: Partial<FormBuilder.Messages>,
 }>()
 

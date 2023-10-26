@@ -16,9 +16,23 @@ declare namespace FormBuilder {
 
   interface Props {
     action: string,
-    submitter?: any,
-    messages?: Partial<FormBuilder.Messages>,
+    submitter?: FormSubmitter,
+    messages?: Partial<Messages>,
     lang?: string
+  }
+
+  interface FormForSubmitter {
+    action: string
+    data: {
+      state: { [key: string]: string }
+    }
+    mutateState: (status: string, errorType?: string) => void
+    [key: string]: any
+  } 
+
+  interface FormSubmitter {
+    form: FormForSubmitter
+    submit(): Promise<any>
   }
 
   type Status = 'idle' | 'ready' | 'validate' | 'submitting' | 'submitted' | 'error'

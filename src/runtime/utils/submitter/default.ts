@@ -1,11 +1,10 @@
 import { useFetch } from '#app'
-import type { FormSubmitter, FormForSubmitter } from '../../../module.d'
 
-export class DefaultFormSubmitter implements FormSubmitter {
+export class DefaultFormSubmitter implements FormBuilder.FormSubmitter {
 
-  public form: FormForSubmitter
+  public form: FormBuilder.FormForSubmitter
   
-  constructor(form: FormForSubmitter) {
+  constructor(form: FormBuilder.FormForSubmitter) {
     this.form = form    
   }
 
