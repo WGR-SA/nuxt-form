@@ -184,13 +184,5 @@ export default defineNuxtModule<FormModuleOptions>({
       name: 'NuxtFormField',
       from: resolve(runtimeDir, 'utils/models', 'decorator')
     })
-
-    /**
-     * Form Models
-     */
-    addImports({
-      name: 'ModuleTypes',
-      from: resolve(runtimeDir, '..', 'module.d')
-    })
   }
 })

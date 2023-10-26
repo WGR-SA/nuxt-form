@@ -16,7 +16,7 @@ declare namespace FormBuilder {
 
   interface Props {
     action: string,
-    submitter?: ModuleTypes.FormSubmitter,
+    submitter?: any,
     messages?: Partial<FormBuilder.Messages>,
     lang?: string
   }

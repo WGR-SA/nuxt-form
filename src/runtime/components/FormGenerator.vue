@@ -1,14 +1,15 @@
 <script lang="ts" setup>
 import { provide, onMounted } from 'vue'
 import { useRuntimeConfig } from '#app'
-import { useFormBuilder, FormModelFormatter, ModuleTypes } from '#imports'
+import { useFormBuilder, FormModelFormatter } from '#imports'
+import type { FormSubmitter } from '../../module.d'
 
 const { initForm } = useFormBuilder()
 
 const config = defineProps<{ 
   model: FormModel.Entity,
   action?: string,
-  submitter?: ModuleTypes.FormSubmitter,
+  submitter?: FormSubmitter,
   values?: any,
   layers?: string[],
   exclude?: string[],

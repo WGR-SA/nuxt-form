@@ -10,14 +10,14 @@
   <div style="max-width: 1200px;padding: 40px;margin: 0 auto;">
     <FormBuilder
       ref="testForm"
-      action="https://httpbin.org/status/403"
+      action="https://httpbin.org/post"
     >
       <FormInput 
         name="asdf"
         :rules="['isNotEmpty', 'isEmail']"
       />
       <FormInput name="safs" :rules="['isNotEmpty']" />
-      <FormSubmit :validate-only="true">
+      <FormSubmit>
         Submit 
       </FormSubmit>
     </FormBuilder>

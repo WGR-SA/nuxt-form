@@ -1,5 +1,4 @@
 import { FormDataHandler, FormValidator, FormMessageStore, DefaultFormSubmitter } from '#imports'
-import type { ModuleTypes } from '#imports'
 
 export interface FormModuleOptions {
   format_layers?: string[],
@@ -23,7 +22,7 @@ export class Form {
   public data: FormDataHandler
   public validator: FormValidator
   public messages: FormMessageStore 
-  public submitter: ModuleTypes.FormSubmitter
+  public submitter: any
   public moduleOptions: FormModuleOptions
 
 
