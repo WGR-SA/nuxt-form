@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { inject } from 'vue'
+import { inject, onMounted } from 'vue'
 import { Form, useFormBuilder } from '#imports'
 
 const props = defineProps<{ validateOnly?: boolean }>()
@@ -14,6 +14,15 @@ const submit = async () => {
     form.submit()
   }
 }
+
+onMounted(() => {
+    document.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      submit()
+    }
+  });
+})
+
 </script>
 
 <template>
