@@ -14,7 +14,7 @@
     >
       <FormInput 
         name="asdf"
-        :rules="['isNotEmpty', 'isEmail']"
+        :rules="[ 'isEmail']"
       />
       <FormInput name="safs" :rules="['isNotEmpty']" />
       <FormSubmit>
