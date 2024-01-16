@@ -16,6 +16,8 @@ export const fr: {[key: string]: string} = {
   isAlphanumeric: 'Ce champ doit contenir uniquement des lettres et des chiffres',
   isAlphanumericLocales: 'Ce champ doit contenir uniquement des lettres et des chiffres',
   isNumeric: 'Ce champ doit contenir uniquement des chiffres',
+  isNumber: 'Ce champ doit être un nombre',
+  isNumberString: 'Ce champ doit être un nombre',
   isPassportNumber: 'Ce champ doit être un numéro de passeport valide',
   isPort: 'Ce champ doit être un port valide',
   isLowercase: 'Ce champ doit être en minuscules',
