@@ -17,8 +17,8 @@ const submit = async () => {
 
 onMounted(() => {
   document.addEventListener('keypress', function (event) {
-    event.preventDefault();
     if (event.key === 'Enter') {
+      event.preventDefault();
       submit()
     }
   });
