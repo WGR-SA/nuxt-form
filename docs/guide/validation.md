@@ -10,6 +10,15 @@ Nuxt-form comes with a built-in field validation system. It utilizes [class-vali
 />
 ```
 
+##### Custom validator message 
+```VUE
+<FormInput 
+  name="fieldname"
+  :rules="['isEmail', {minLength: [3], message: 'custom' }]"
+/>
+```
+
+
 ## Triggering Validation
 
 While some validations are triggered on input changes, others need to be activated by a validation method. There are two ways to trigger this:

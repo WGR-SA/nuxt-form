@@ -12,7 +12,13 @@ export const useFormValidator = () => {
       return []
     }
 
-    form.validator.rules[field].forEach((rule: any) => {    
+    console.log(form.validator.rules);
+    
+
+    form.validator.rules[field].forEach((rule: any) => {   
+      
+      console.log(rule);
+      
       const validator = validators[rule.$params.type as keyof typeof validators]
 
       const type_rules = [ 'isEmail', 'isNumber' ]
@@ -24,8 +30,8 @@ export const useFormValidator = () => {
       // @ts-ignore TODO: import only validation functions
       const result = validator(form.data.state[field], rule.$params.options) 
       
-      if (!result && (form.data.state[field].length > 0 || ['error', 'validate'].includes(form.state.status))) {
-        errors.value.push(rule.$message)
+      if (!result && (form.data.state[field].length > 0 && form.data.state[field] !== 'false' || ['error', 'validate'].includes(form.state.status))) {
+        errors.value.push(rule.custom_message ?? rule.$message)
       }
     })
 

@@ -16,6 +16,7 @@
         name="asdf"
         :rules="[ 'isEmail']"
       />
+      <FormInput label="" type="checkbox" name="tosnlpd" :rules="[{ equals: [true], message: 'coucou' }]" />
       <FormInput name="safs" :rules="['isNotEmpty']" />
       <FormSubmit>
         Submit 
