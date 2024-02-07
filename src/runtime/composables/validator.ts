@@ -10,14 +10,9 @@ export const useFormValidator = () => {
 
     if (!form.validator.rules[field]) {
       return []
-    }
-
-    console.log(form.validator.rules);
-    
+    }    
 
     form.validator.rules[field].forEach((rule: any) => {   
-      
-      console.log(rule);
       
       const validator = validators[rule.$params.type as keyof typeof validators]
 
