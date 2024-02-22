@@ -17,11 +17,11 @@ const submit = async () => {
 
 onMounted(() => {
   document.addEventListener('keypress', function (event) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
+    if (event.key === 'Enter' && (event.target as Element)?.tagName !== 'TEXTAREA') {
+      event.preventDefault()
       submit()
     }
-  });
+  })
 })
 
 </script>

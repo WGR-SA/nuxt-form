@@ -18,6 +18,7 @@
       />
       <FormInput label="" type="checkbox" name="tosnlpd" :rules="[{ equals: [true], message: 'coucou' }]" />
       <FormInput name="safs" :rules="['isNotEmpty']" />
+      <FormTextarea name="saffs" :rules="['isNotEmpty']" />
       <FormSubmit>
         Submit 
       </FormSubmit>
