@@ -19,6 +19,8 @@
       <FormInput label="" type="checkbox" name="tosnlpd" :rules="[{ equals: [true], message: 'coucou' }]" />
       <FormInput name="safs" :rules="['isNotEmpty']" />
       <FormTextarea name="saffs" :rules="['isNotEmpty']" />
+      <FormRadio :options="{'O': 'Oui', 'N': 'Non'}" name="yo" laebl="Yo" />
+      <FormRadio :options="{'O': 'Oui', 'N': 'Non'}" name="yos" label="Yos" :rules="['isNotEmpty']" :empty="true" />
       <FormSubmit>
         Submit 
       </FormSubmit>

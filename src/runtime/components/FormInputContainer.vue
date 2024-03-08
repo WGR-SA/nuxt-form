@@ -12,6 +12,7 @@ const props = defineProps<{
   value?: string,
   default?: string,
   type?: string,
+  empty?: boolean,
   [key: string]: any
 }>()
 const { getFieldErrors } = useFormValidator()

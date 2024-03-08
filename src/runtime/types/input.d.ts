@@ -12,6 +12,7 @@ declare namespace FormInput {
     multiple?: boolean,
     default?: string,
     type?: string,
+    empty?: boolean,
     placeholder?: string,
     [key: string]: any
   }

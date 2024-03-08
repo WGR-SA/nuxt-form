@@ -13,11 +13,11 @@ export class FormDataHandler {
     this.state[name] = value
   }
 
-  setDefaultValue (field: any) {
+  setDefaultValue(field: FormInput.Container) {    
     if (field.type === 'checkbox') {
       this.state[field.name] = 'false'
     }
-    if (field.options) {
+    if (field.options && !field.empty) {
       this.state[field.name] = field.value ?? field.default ?? Object.keys(field.options)[0]
     }
     if (field.checked) {

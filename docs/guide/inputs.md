@@ -31,6 +31,7 @@
 `FormSelect` extends `FormInput` props and adds the following options:
 - `options` Key-value object for select options.
 - `multiple` Boolean for multiple select.
+- `empty` Boolean to allow empty value
 
 ### Example
 ```VUE
@@ -62,6 +63,7 @@
 `FormRadio` extends `FormInput` props and adds the following options:
 - `options` Key-value object for select options.
 - `default` Default value.
+- `empty` Boolean to allow empty value
 
 ### Example
 ```VUE
