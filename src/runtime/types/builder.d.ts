@@ -30,7 +30,7 @@ declare namespace FormBuilder {
     [key: string]: any
   } 
 
-  interface FormSubmitter {
+  export interface FormSubmitter {
     form: FormForSubmitter
     submit(): Promise<any>
   }
