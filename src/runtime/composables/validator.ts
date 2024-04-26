@@ -16,6 +16,7 @@ export const useFormValidator = () => {
       
       const validator = validators[rule.$params.type as keyof typeof validators]
 
+
       const type_rules = [ 'isEmail', 'isNumber' ]
       // validate type only if field is not empty
       if (type_rules.includes(rule.$params.type) && (form.data.state[field].length === 0 || form.data.state[field] === null)) {        
@@ -23,7 +24,7 @@ export const useFormValidator = () => {
       }
 
       // @ts-ignore TODO: import only validation functions
-      const result = validator(form.data.state[field], rule.$params.options) 
+      const result = validator(form.data.state[field].toString(), rule.$params.options) 
       
       if (!result && (form.data.state[field].length > 0 && form.data.state[field] !== 'false' || ['error', 'validate'].includes(form.state.status))) {
         errors.value.push(rule.custom_message ?? rule.$message)
