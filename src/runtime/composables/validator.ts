@@ -23,12 +23,15 @@ export const useFormValidator = () => {
         return
       }
 
-      // @ts-ignore TODO: import only validation functions
-      const result = validator(form.data.state[field].toString(), rule.$params.options) 
-      
-      if (!result && (form.data.state[field].length > 0 && form.data.state[field] !== 'false' || ['error', 'validate'].includes(form.state.status))) {
-        errors.value.push(rule.custom_message ?? rule.$message)
+      if (form.data.state[field]) {
+        // @ts-ignore TODO: import only validation functions
+        const result = validator(form.data.state[field].toString(), rule.$params.options)
+
+        if (!result && (form.data.state[field].length > 0 && form.data.state[field] !== 'false' || ['error', 'validate'].includes(form.state.status))) {
+          errors.value.push(rule.custom_message ?? rule.$message)
+        }
       }
+      
     })
 
     return errors.value
