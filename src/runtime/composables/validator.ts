@@ -23,7 +23,7 @@ export const useFormValidator = () => {
         return
       }
 
-      if (form.data.state[field]) {
+      if (field in form.data.state) {
         // @ts-ignore TODO: import only validation functions
         const result = validator(form.data.state[field].toString(), rule.$params.options)
 
