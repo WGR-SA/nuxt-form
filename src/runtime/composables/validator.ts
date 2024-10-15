@@ -39,26 +39,28 @@ export const useFormValidator = () => {
     if (!form.validator.rules[field]) return []
 
     const errors: string[] = []
-    const fieldValue = form.data.state[field]
+    if (field in form.data.state) {
+      const fieldValue = form.data.state[field]
 
-    for (const rule of form.validator.rules[field]) {
-      const validatorName = rule.$params.type as keyof typeof validators      
-      const validator = validators[validatorName]
+      for (const rule of form.validator.rules[field]) {
+        const validatorName = rule.$params.type as keyof typeof validators
+        const validator = validators[validatorName]
 
-      if (!validator) {
-        console.error(`Validator ${validatorName} not found`)
-        continue
-      }
+        if (!validator) {
+          console.error(`Validator ${validatorName} not found`)
+          continue
+        }
 
-      if (['isEmail', 'isNumber'].includes(validatorName) && !fieldValue) continue      
+        if (['isEmail', 'isNumber'].includes(validatorName) && !fieldValue) continue
 
-      if (fieldValue !== undefined) {
-        const expectedType = getExpectedType(validatorName)        
-        const convertedValue = convertValue(fieldValue, expectedType)
+        if (fieldValue !== undefined) {
+          const expectedType = getExpectedType(validatorName)
+          const convertedValue = convertValue(fieldValue, expectedType)
 
-        if (!validator(convertedValue, ...(rule.$params.options || [])) &&
-          (fieldValue.length > 0 && fieldValue !== 'false' || ['error', 'validate'].includes(form.state.status))) {
-          errors.push(rule.custom_message ?? rule.$message)
+          if (!validator(convertedValue, ...(rule.$params.options || [])) &&
+            (fieldValue.length > 0 && fieldValue !== 'false' || ['error', 'validate'].includes(form.state.status))) {
+            errors.push(rule.custom_message ?? rule.$message)
+          }
         }
       }
     }
