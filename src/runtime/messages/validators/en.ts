@@ -2,6 +2,8 @@ export const en: {[key: string]: string} = {
   equals: 'This field must be equal to {0}',
   contains: 'This field must contain {0}',
   matches: 'This field must match the format {0}',
+  max: 'This field must be less than or equal to {0}',
+  min: 'This field must be greater than or equal to {0}',
   isEmail: 'This field must be a valid email address',
   isURL: 'This field must be a valid URL',
   isMACAddress: 'This field must be a valid MAC address',

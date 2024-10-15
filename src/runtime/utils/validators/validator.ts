@@ -9,7 +9,7 @@ export class FormValidator {
         return { $params: { type: r }, $message: r }
       }
       const rule = Object.keys(r)[0]
-      return { $params: { type: rule, options: [...r[rule]] }, $message: r, custom_message: r.message }
+      return { $params: { type: rule, options: [...r[rule]] }, $message: rule, custom_message: r.message }
     })   
 
     this.updateValidatorMessages(options.messages)
