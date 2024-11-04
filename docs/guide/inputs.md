@@ -31,7 +31,7 @@
 `FormSelect` extends `FormInput` props and adds the following options:
 - `options` Key-value object for select options.
 - `multiple` Boolean for multiple select.
-- `empty` Boolean to allow empty value
+- `empty` String with the empty label. Allows empty select 
 
 ### Example
 ```VUE

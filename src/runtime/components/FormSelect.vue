@@ -14,6 +14,7 @@ const props = defineProps<{
   disabled?: boolean,
   value?: string,
   placeholder?: string,
+  empty?: string,
 }>()
 
 const form = inject('form') as Form
@@ -28,6 +29,7 @@ const required = computed(() => props.required ?? false)
       :disabled="disabled"
       :multiple="multiple"
     >
+      <option v-if="empty" disabled selected value="">{{ empty }}</option>
       <option 
         v-for="(option, key) in options" 
         :key="key" 
