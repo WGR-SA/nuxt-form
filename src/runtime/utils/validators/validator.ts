@@ -21,10 +21,14 @@ export class FormValidator {
         rule.$message = messages.get(rule.$params.type, 'validators') ?? rule.$message
 
         if (rule.$params.options) {
-          if (['minDate', 'maxDate'].includes(rule.$params.type))  {
-            rule.$params.options[0] = new Date().toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '')
-          }
-          Object.keys(rule.$params.options).map((param) => rule.$message = rule.$message.replace(`{${param}}`, rule.$params.options[param]))
+          
+          Object.keys(rule.$params.options).map((param) => {
+            let validationLabelValue = rule.$params.options[param]
+            if (['minDate', 'maxDate'].includes(rule.$params.type)) {
+              validationLabelValue = new Date(rule.$params.options[param]).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(',', '')
+            }
+            rule.$message = rule.$message.replace(`{${param}}`, validationLabelValue)
+          })
         }
       })
     })

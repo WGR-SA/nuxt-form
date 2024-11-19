@@ -3,10 +3,8 @@
 // watchEffect(() => {
 //   if testForm.value.isReady()
 //     testForm.value.submit()
-
-import { max } from 'class-validator';
-
 // })
+
 </script>
 
 <template>
@@ -15,21 +13,12 @@ import { max } from 'class-validator';
       ref="testForm"
       action="https://httpbin.org/post"
     >
-      <!-- <FormInput 
+      <FormInput 
         name="asdf"
-        :rules="[ 'isEmail']"
-      /> -->
-      <FormSelect 
-        name="yo"
-        :options="{ 'O': 'Oui', 'N': 'Non'}"
-        :rules="['isNotEmpty']"
-        empty="-- Select an option --"
+        type="date"
+        :rules="[ {minDate: [new Date()]}]"
       />
-      <!-- <FormInput label='yo <a href="#">ok</a>' type="checkbox" name="tosnlpd" :rules="[{ equals: [true], message: 'coucou' }]" />
-      <FormInput name="yo" type="number" :rules="['isNotEmpty', {min: [1]}, {max: [25]}]" /> -->
-      <!-- <FormTextarea  name="saffs" :rules="['isNotEmpty']" /> -->
-      <!-- <FormRadio :options="{'O': 'Oui', 'N': 'Non'}" name="yo" laebl="Yo" />
-      <FormRadio :options="{'O': 'Oui', 'N': 'Non'}" name="yos" label="Yos" :rules="['isNotEmpty']" :empty="true" /> -->
+
       <FormSubmit>
         Submit 
       </FormSubmit>

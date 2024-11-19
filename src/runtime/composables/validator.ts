@@ -1,4 +1,3 @@
-import { ref } from 'vue'
 import * as validators from 'class-validator'
 import { Form } from '#imports'
 
@@ -21,7 +20,7 @@ export const useFormValidator = () => {
     switch (expectedType) {
       case 'number': return Number(value)
       case 'boolean': return value.toLowerCase() === 'true'
-      case 'date': return new Date(value)
+      case 'date': return value !== '' ? new Date(value) : null
       case 'array': return tryParseJSON(value) ?? value.split(',').map(item => item.trim())
       default: return value
     }
@@ -56,6 +55,12 @@ export const useFormValidator = () => {
         if (fieldValue !== undefined) {
           const expectedType = getExpectedType(validatorName)
           const convertedValue = convertValue(fieldValue, expectedType)
+
+          if (expectedType === 'date') {
+            if (!(rule.$params.options[0] instanceof Date)) {
+              rule.$params.options[0] = new Date(rule.$params.options[0])
+            }
+          }
 
           if (!validator(convertedValue, ...(rule.$params.options || [])) &&
             (fieldValue.length > 0 && fieldValue !== 'false' || ['error', 'validate'].includes(form.state.status))) {
