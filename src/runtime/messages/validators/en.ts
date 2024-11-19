@@ -105,6 +105,8 @@ export const en: {[key: string]: string} = {
   minLength: 'This field must contain at least {0} characters',
   maxLength: 'This field must not contain more than {0} characters',
   isNotEmpty: 'This field must not be empty',
+  minDate: 'This field must be later than {0}',
+  maxDate: 'This field must be earlier than {0}',
 }
 
 export default en

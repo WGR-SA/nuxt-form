@@ -105,6 +105,8 @@ export const fr: {[key: string]: string} = {
   minLength: 'Ce champ doit contenir au moins {0} caractères',
   maxLength: 'Ce champ ne doit pas contenir plus de {0} caractères',
   isNotEmpty: 'Ce champ ne doit pas être vide',
+  minDate: 'Ce champ doit être postérieur à {0}',
+  maxDate: 'Ce champ doit être antérieur à {0}',
 };
 
 export default fr;
