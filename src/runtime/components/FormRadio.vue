@@ -32,7 +32,7 @@ const required = computed(() => props.required ?? false)
         v-model="form.data.state[name]" 
         type="radio" 
         :value="key" 
-        :required="required"
+        v-bind:required="required || undefined"
       >
     </div>
   </FormInputContainer>

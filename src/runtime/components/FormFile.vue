@@ -22,10 +22,10 @@ const formInput = ref()
     <input 
       ref="formInput" 
       type="file" 
-      :required="required"
+      v-bind:required="required || undefined"
       :accept="accept"
-      :multiple="multiple"
-      :readonly="readonly"
+      v-bind:multiple="multiple || undefined"
+      v-bind:readonly="readonly || undefined"
       @change="form.data.state[props.name] = formInput.files[0]"
     >
   </FormInputContainer>
