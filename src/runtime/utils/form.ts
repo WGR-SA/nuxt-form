@@ -56,7 +56,10 @@ export class Form {
   }
 
   mutateState (status: FormBuilder.Status, errorType?: FormBuilder.ErrorType | string) {
-    this.state = { status, errorType }
+    this.state.status = status
+    if (errorType !== undefined) {
+      this.state.errorType = errorType
+    }
     this.isShown = !!['idle', 'ready', 'error'].find(s => s === this.state.status)
   }
 

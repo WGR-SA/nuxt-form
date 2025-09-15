@@ -3,7 +3,20 @@ import { inject, computed } from 'vue'
 import { Form } from '#imports'
 
 const form = inject('form') as Form
-const errorMessage = computed(() => (['recaptcha', 'field_validation', 'unknown'].includes(form.state.errorType as string)) ? form.messages.get(`error.${form.state.errorType ?? 'unknown'}`) : form.state.errorType)
+if (!form) {
+  console.warn('FormAlert: No form provided. Make sure FormAlert is used inside FormBuilder.')
+}
+const errorMessage = computed(() => {
+  const errorType = form.state.errorType as string
+  if (['recaptcha', 'field_validation', 'unknown'].includes(errorType)) {
+    try {
+      return form.messages.get(`error.${errorType ?? 'unknown'}`)
+    } catch {
+      return errorType || 'Unknown error'
+    }
+  }
+  return errorType || ''
+})
 const isShown = computed(() => form.state.status !== 'idle' && form.state.status !== 'ready')
 </script>
 
