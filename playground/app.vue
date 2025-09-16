@@ -1,9 +1,19 @@
 <script setup lang="ts">
-// const testForm = ref()
-// watchEffect(() => {
-//   if testForm.value.isReady()
-//     testForm.value.submit()
-// })
+import { ref, onMounted, watch } from 'vue'
+
+const testForm = ref()
+
+// Debug: Check what's exposed
+onMounted(() => {
+  console.log('testForm.value:', testForm.value)
+  console.log('testForm.value.state:', testForm.value?.state)
+  console.log('testForm.value.form:', testForm.value?.form)
+  
+  // Test reactivity
+  watch(() => testForm.value?.state?.status, (status) => {
+    console.log('Status changed:', status)
+  }, { immediate: true })
+})
 
 </script>
 

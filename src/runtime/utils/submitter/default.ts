@@ -25,9 +25,7 @@ export class DefaultFormSubmitter implements FormBuilder.FormSubmitter {
         this.form.mutateState('error', 'unknown')
       },
       onResponse: ({ response }) => {
-        if (response.ok) {
-          this.form.mutateState('submitted')
-        }
+        this.form.mutateState('submitted')
       }
     })
 

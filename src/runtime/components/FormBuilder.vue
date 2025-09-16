@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { provide, nextTick, onMounted } from 'vue'
+import { provide, toRefs } from 'vue'
 import { useFormBuilder } from '#imports'
 
 const { initForm } = useFormBuilder()
@@ -12,18 +12,8 @@ const config = defineProps<{
 
 const form = initForm(config as FormBuilder.Props)
 
-defineExpose(form)
+defineExpose(toRefs(form))
 provide('form', form)
-
-// Ensure form state is properly initialized after dynamic mounting
-onMounted(() => {
-  nextTick(() => {
-    if (form.state.status === 'idle') {
-      // Force reactivity update
-      form.mutateState('idle')
-    }
-  })
-})
 </script>
 
 <template>
