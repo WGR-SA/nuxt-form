@@ -29,6 +29,11 @@ onMounted(() => {
         :rules="[ {minDate: [new Date()]}]"
       />
 
+      <FormInput 
+        name="count"
+        type="number"
+        :rules="[{max: [4]}]"
+      />
       <FormSubmit>
         Submit 
       </FormSubmit>
